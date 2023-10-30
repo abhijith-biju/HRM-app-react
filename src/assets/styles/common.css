@@ -1,0 +1,23 @@
+.display-none {
+    display: none;
+}
+
+.display-hidden {
+    visibility: hidden;
+}
+
+.margin-inline-auto {
+    margin-inline: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.border-1 {
+    border: 1px solid #000;
+}
