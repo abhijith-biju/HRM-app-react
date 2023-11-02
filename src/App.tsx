@@ -8,7 +8,7 @@ function App() {
         <>
             <Header />
             <main>
-                <Button type="button">Add Employee</Button>
+                <Button>Add Employee</Button>
             </main>
             <Footer />
         </>
