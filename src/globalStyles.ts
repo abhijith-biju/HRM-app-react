@@ -22,6 +22,14 @@ const GlobalStyle = createGlobalStyle`
         font-family: var(--primary-font);
     }
 
+    .material-symbols-rounded {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+    }
+
     #root {
         display: flex;
         flex-direction: column;
@@ -31,49 +39,11 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
     }
 
-    header {
-        background-color: #fff;
-        border-bottom: 1px solid var(--gray-clr);
-        position: sticky;
-        top: 0;
-        z-index: 5;
-        display: flex;
-        align-items: center;
-    }
-
-    nav {
-        height: 64px;
-        max-width: var(--max-width);
-        width: 100%;
-        padding-inline: 10px;
-        margin-inline: auto;
-    }
-
-    .brand-logo {
-        color: var(--primary-clr);
-
-        & h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-    }
-
     main {
         max-width: var(--max-width);
         width: 100%;
         margin-inline: auto;
         padding: 20px 10px;
-    }
-
-    footer {
-        margin-top: auto;
-        text-align: center;
-        padding: 15px 10px;
-        border-top: 1px solid var(--gray-clr);
-
-        & .copyright-text {
-            font-size: 0.8em;
-        }
     }
 `;
 
