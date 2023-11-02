@@ -1,6 +1,6 @@
-import Header from './components/header.tsx';
+import Header from './components/Header.tsx';
 import Button from './components/Button/Button.tsx';
-import Footer from './components/footer.tsx';
+import Footer from './components/Footer.tsx';
 import './App.css';
 
 function App() {
