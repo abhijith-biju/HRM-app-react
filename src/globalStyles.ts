@@ -1,6 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+    *, 
+    *:after,
+    *:before {
+        box-sizing: border-box;
+    }
+    
     html {
         height: 100%;
         --max-width: 1440px;
@@ -35,6 +41,30 @@ const GlobalStyle = createGlobalStyle`
         flex-direction: column;
     }
 
+    .display-none {
+        display: none;
+    }
+
+    .display-hidden {
+        visibility: hidden;
+    }
+
+    .margin-inline-auto {
+        margin-inline: auto;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+
+    .border-1 {
+        border: 1px solid #000;
+    }
+
     a {
         text-decoration: none;
     }
@@ -45,6 +75,8 @@ const GlobalStyle = createGlobalStyle`
         margin-inline: auto;
         padding: 20px 10px;
     }
+
+
 `;
 
 export default GlobalStyle;
