@@ -1,5 +1,6 @@
 import { Button, Input, TableFilters, Flex, Table } from '../../components';
 import { employees, tableHeaders } from './constants';
+import { Link } from 'react-router-dom';
 
 const EmployeesListing: React.FC = () => {
     return (
@@ -18,15 +19,16 @@ const EmployeesListing: React.FC = () => {
                             </span>
                         </Button>
                     </TableFilters>
-                    <Button className="primary icon-btn">
-                        <span>Add Employee</span>
-                        <span className="material-symbols-rounded">
-                            person_add
-                        </span>
-                    </Button>
+                    <Link to="/add-employee">
+                        <Button className="primary icon-btn">
+                            <span>Add Employee</span>
+                            <span className="material-symbols-rounded">
+                                person_add
+                            </span>
+                        </Button>
+                    </Link>
                 </Flex>
                 <Table headers={tableHeaders} data={employees} />
-                {/* <Table data={employees} /> */}
             </section>
         </>
     );

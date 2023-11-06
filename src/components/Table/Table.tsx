@@ -1,5 +1,6 @@
 import { Button } from '..';
 import StyledTable from './Table.style';
+import { Link } from 'react-router-dom';
 
 interface IRow {
     empId: number;
@@ -30,29 +31,33 @@ const Table: React.FC<ITable> = ({ headers, data = [] }) => {
                         {data.map((rowData, index) => (
                             <tr key={index}>
                                 {Object.values(rowData).map((cellData) => (
-                                    <td>{cellData}</td>
+                                    <td key={cellData}>{cellData}</td>
                                 ))}
                                 <td>
                                     <ul className="employee-actions flex-container">
                                         <li>
-                                            <Button
-                                                type="button"
-                                                className="view-emp-btn flex-container"
-                                            >
-                                                <span className="material-symbols-rounded">
-                                                    visibility
-                                                </span>
-                                            </Button>
+                                            <Link to="/view-employee">
+                                                <Button
+                                                    type="button"
+                                                    className="view-emp-btn flex-container"
+                                                >
+                                                    <span className="material-symbols-rounded">
+                                                        visibility
+                                                    </span>
+                                                </Button>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <Button
-                                                type="button"
-                                                className="edit-emp-btn flex-container"
-                                            >
-                                                <span className="material-symbols-rounded">
-                                                    edit_square
-                                                </span>
-                                            </Button>
+                                            <Link to="/edit-employee">
+                                                <Button
+                                                    type="button"
+                                                    className="edit-emp-btn flex-container"
+                                                >
+                                                    <span className="material-symbols-rounded">
+                                                        edit_square
+                                                    </span>
+                                                </Button>
+                                            </Link>
                                         </li>
                                         <li>
                                             <Button

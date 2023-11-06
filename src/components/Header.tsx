@@ -6,8 +6,6 @@ const StyledHeader = styled.header`
     position: sticky;
     top: 0;
     z-index: 5;
-    display: flex;
-    align-items: center;
 `;
 
 const Navbar = styled.nav`
@@ -16,6 +14,8 @@ const Navbar = styled.nav`
     width: 100%;
     padding-inline: 10px;
     margin-inline: auto;
+    display: flex;
+    align-items: center;
 
     & .brand-logo {
         color: var(--primary-clr);
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
     return (
         <StyledHeader>
             <Navbar>
-                <a href="">
+                <a href="/">
                     <h1 className="brand-logo">HRM APP</h1>
                 </a>
             </Navbar>

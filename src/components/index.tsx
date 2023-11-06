@@ -5,5 +5,6 @@ import Input from './common/Input/Input';
 import TableFilters from './TableFilters/TableFilters';
 import Flex from './common/Flex/Flex';
 import Table from './Table/Table.tsx';
+import Chip from './Chip/Chip.style.ts';
 
-export { Header, Footer, Button, Input, TableFilters, Flex, Table };
+export { Header, Footer, Button, Input, TableFilters, Flex, Table, Chip };
