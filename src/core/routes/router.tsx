@@ -5,23 +5,26 @@ import ViewEmployeeDetails from '../../pages/ViewEmployeeDetails/ViewEmployeeDet
 import AddEmployeeDetails from '../../pages/AddEmployeeDetails/AddEmployeeDetails';
 import EditEmployeeDetails from '../../pages/EditEmployeeDetails/EditEmployeeDetails';
 
-const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <EmployeesListing />,
-    },
-    {
-        path: '/view-employee',
-        element: <ViewEmployeeDetails />,
-    },
-    {
-        path: '/add-employee',
-        element: <AddEmployeeDetails />,
-    },
-    {
-        path: '/edit-employee',
-        element: <EditEmployeeDetails />,
-    },
-]);
+const router = createBrowserRouter(
+    [
+        {
+            path: '/',
+            element: <EmployeesListing />,
+        },
+        {
+            path: '/view-employee',
+            element: <ViewEmployeeDetails />,
+        },
+        {
+            path: '/add-employee',
+            element: <AddEmployeeDetails />,
+        },
+        {
+            path: '/edit-employee',
+            element: <EditEmployeeDetails />,
+        },
+    ],
+    { basename: import.meta.env.DEV ? '/' : '/HRM-app-react/' }
+);
 
 export default router;
