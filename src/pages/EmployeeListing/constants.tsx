@@ -137,17 +137,17 @@
 const employees = [
     {
         empId: 1059,
-        email: 'akshay.krishna@qburst.com',
-        department: 'Development',
         name: 'Akshay Krishna',
+        email: 'akshay.krishna@qburst.com',
         role: 'Intern',
+        department: 'Development',
     },
     {
         empId: 1037,
-        department: 'QA',
         name: 'Babar Azam',
-        role: 'Engineer',
         email: 'babar.azam@qburst.com',
+        role: 'Engineer',
+        department: 'QA',
     },
 ];
 
