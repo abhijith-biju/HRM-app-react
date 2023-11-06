@@ -49,6 +49,14 @@ const GlobalStyle = createGlobalStyle`
         visibility: hidden;
     }
 
+    .margin-right-auto {
+        margin-right: auto;
+    }
+
+    .margin-left-auto {
+        margin-left: auto;
+    }
+
     .margin-inline-auto {
         margin-inline: auto;
     }
@@ -76,6 +84,9 @@ const GlobalStyle = createGlobalStyle`
         padding: 20px 10px;
     }
 
+    .flex-grow {
+        flex-grow: 1;
+    }
 
 `;
 

@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-const Table = styled.table`
+const StyledTable = styled.table`
     width: 100%;
     border-spacing: 0;
     border-radius: 10px;
     border: 1px solid #000;
     font-size: 1.2em;
+    margin-top: 25px;
 
     & th,
     & td {
@@ -61,4 +62,4 @@ const Table = styled.table`
     }
 `;
 
-export default Table;
+export default StyledTable;

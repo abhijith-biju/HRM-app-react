@@ -1,18 +1,12 @@
 import styled from 'styled-components';
 
-interface IBtn {
-    className?: string;
-}
-
-const StyledButton = styled.button<IBtn>`
+const StyledButton = styled.button`
     background-color: transparent;
     cursor: pointer;
     border: none;
     padding: 7px 15px;
     border-radius: 5px;
     font-weight: bold;
-
-    margin: 0.5rem;
 
     &.primary {
         background-color: var(--primary-clr);

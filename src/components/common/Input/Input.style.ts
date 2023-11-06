@@ -13,11 +13,10 @@ const StyledInput = styled.input<IInput>`
 
     border: 1px solid #7e7e7e;
     border-radius: 3px;
-    padding: 5px;
+    padding: 5px 5px;
     font-size: 1em;
     width: 220px;
     background-color: transparent;
-    margin: 0.5rem 0;
 
     &.w-full {
         display: block;
