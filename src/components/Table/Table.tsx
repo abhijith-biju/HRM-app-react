@@ -2,14 +2,16 @@ import { Button } from '..';
 import StyledTable from './Table.style';
 
 interface IRow {
-    key: string;
-    value: string | number;
+    empId: number;
+    email: string;
+    department: string;
+    name: string;
+    role: string;
 }
 
 interface ITable {
-    //remove ?
     headers: string[];
-    data?: IRow[];
+    data: IRow[];
 }
 
 const Table: React.FC<ITable> = ({ headers, data = [] }) => {

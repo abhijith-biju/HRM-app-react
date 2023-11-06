@@ -25,7 +25,7 @@ const EmployeesListing: React.FC = () => {
                         </span>
                     </Button>
                 </Flex>
-                <Table headers={tableHeaders} />
+                <Table headers={tableHeaders} data={employees} />
                 {/* <Table data={employees} /> */}
             </section>
         </>

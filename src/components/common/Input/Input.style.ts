@@ -15,7 +15,7 @@ const StyledInput = styled.input<IInput>`
     border-radius: 3px;
     padding: 5px 5px;
     font-size: 1em;
-    width: 220px;
+    width: 250px;
     background-color: transparent;
 
     &.w-full {
