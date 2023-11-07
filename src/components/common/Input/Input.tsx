@@ -3,10 +3,10 @@ import StyledInput from './Input.style';
 interface IInput {
     placeholder?: string;
     className?: string;
-    type: string;
+    type?: string;
 }
 
-const Input: React.FC<IInput> = ({ ...props }) => {
+const Input: React.FC<IInput> = ({ type = 'string', ...props }) => {
     return <StyledInput {...props} />;
 };
 
