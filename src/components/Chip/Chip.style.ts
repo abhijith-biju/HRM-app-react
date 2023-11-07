@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Chip = styled.div`
+const StyledChip = styled.div`
     min-height: 25px;
     display: flex;
     align-items: center;
@@ -13,4 +13,4 @@ const Chip = styled.div`
     font-size: 0.8em;
 `;
 
-export default Chip;
+export default StyledChip;

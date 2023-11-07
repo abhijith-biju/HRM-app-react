@@ -1,8 +1,18 @@
-import { Button, Input, TableFilters, Flex, Table } from '../../components';
+import {
+    Button,
+    Input,
+    TableFilters,
+    Flex,
+    Table,
+    Modal,
+} from '../../components';
 import { employees, tableHeaders } from './constants';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const EmployeesListing: React.FC = () => {
+    const [isModalopen, setisModalOpen] = useState(false);
+
     return (
         <>
             <section>
@@ -28,8 +38,28 @@ const EmployeesListing: React.FC = () => {
                         </Button>
                     </Link>
                 </Flex>
-                <Table headers={tableHeaders} data={employees} />
+                <Table
+                    headers={tableHeaders}
+                    data={employees}
+                    deleteBtnOnClick={() => setisModalOpen(true)}
+                />
             </section>
+
+            <Modal $isOpen={isModalopen}>
+                <p className="confirm-dialog-msg">
+                    Are you sure you want to permanently delete the employee
+                    record?
+                </p>
+                <div className="flex-container confirm-dialog-actions">
+                    <Button className="outline confirm-yes-btn">Yes</Button>
+                    <Button
+                        className="primary confirm-no-btn"
+                        onClick={() => setisModalOpen(false)}
+                    >
+                        Cancel
+                    </Button>
+                </div>
+            </Modal>
         </>
     );
 };

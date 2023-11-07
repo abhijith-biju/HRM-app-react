@@ -1,8 +1,7 @@
-import { ReactNode } from 'react';
 import { Flex } from '..';
 
 interface ITableFilters {
-    children: ReactNode;
+    children: React.ReactNode;
     className?: string;
 }
 

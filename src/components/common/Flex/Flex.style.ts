@@ -3,6 +3,10 @@ import styled from 'styled-components';
 const StyledFlex = styled.div`
     display: flex;
 
+    &.column {
+        flex-direction: column;
+    }
+
     &.justify-center {
         justify-content: center;
     }

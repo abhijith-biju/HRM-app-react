@@ -13,9 +13,10 @@ interface IRow {
 interface ITable {
     headers: string[];
     data: IRow[];
+    deleteBtnOnClick: () => void;
 }
 
-const Table: React.FC<ITable> = ({ headers, data = [] }) => {
+const Table: React.FC<ITable> = ({ headers, data = [], deleteBtnOnClick }) => {
     return (
         <StyledTable>
             {
@@ -63,6 +64,7 @@ const Table: React.FC<ITable> = ({ headers, data = [] }) => {
                                             <Button
                                                 type="button"
                                                 className="delete-emp-btn flex-container"
+                                                onClick={deleteBtnOnClick}
                                             >
                                                 <span className="material-symbols-rounded">
                                                     delete

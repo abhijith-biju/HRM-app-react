@@ -1,9 +1,8 @@
-import { ReactNode } from 'react';
 import { ComponentType } from 'react';
 import StyledFlex from './Flex.style';
 
 interface IFlex {
-    children: ReactNode;
+    children: React.ReactNode;
     tag?: keyof JSX.IntrinsicElements | ComponentType;
     className?: string;
 }
