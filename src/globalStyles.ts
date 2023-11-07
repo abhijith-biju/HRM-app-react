@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         margin: 0;
         font-family: var(--primary-font);
+        position: relative;
     }
 
     .material-symbols-rounded {
@@ -88,6 +89,55 @@ const GlobalStyle = createGlobalStyle`
         flex-grow: 1;
     }
 
+    a {
+    text-decoration: none;
+    color: inherit;
+}
+
+    img {
+        display: block;
+    }
+
+    label,
+    input,
+    textarea,
+    select {
+        display: block;
+    }
+
+    input,
+    textarea,
+    select {
+        border: 1px solid #7e7e7e;
+        border-radius: 3px;
+        width: 100%;
+        background-color: transparent;
+
+        &:focus-visible {
+            outline: 1px solid #000;
+            border-color: #000;
+        }
+    }
+
+    select {
+        cursor: pointer;
+
+        &:invalid {
+            color: #7e7e7e;
+        }
+
+        & option {
+            background-color: #fff;
+        }
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    input[type='radio'] {
+        accent-color: #000;
+    }
 `;
 
 export default GlobalStyle;

@@ -5,8 +5,8 @@ const StyledEmpDetailsWrap = styled(Flex)`
     padding: 0;
     width: max-content;
     margin-inline: auto;
-    border: 1px solid var(--primary-clr);
     border-radius: 5px;
+    overflow: hidden;
     box-shadow: 0 6px 20px -5px rgba(0, 0, 0);
 
     & .main-details {

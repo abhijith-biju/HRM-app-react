@@ -6,5 +6,18 @@ import TableFilters from './TableFilters/TableFilters';
 import Flex from './common/Flex/Flex';
 import Table from './Table/Table.tsx';
 import Chip from './Chip/Chip.style.ts';
+import Form from './Form/Form.tsx';
+import ManageEmployeeDetails from './ManageEmployeeDetails/ManageEmployeeDetails.tsx';
 
-export { Header, Footer, Button, Input, TableFilters, Flex, Table, Chip };
+export {
+    Header,
+    Footer,
+    Button,
+    Input,
+    TableFilters,
+    Flex,
+    Table,
+    Chip,
+    Form,
+    ManageEmployeeDetails,
+};

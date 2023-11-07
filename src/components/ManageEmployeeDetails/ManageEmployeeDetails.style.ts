@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledAddEmployeeDetails = styled.section`
+const StyledManageEmployeeDetails = styled.section`
     min-width: 1000px;
     padding: 40px;
     margin: 20px auto;
@@ -33,4 +33,4 @@ const StyledAddEmployeeDetails = styled.section`
     }
 `;
 
-export default StyledAddEmployeeDetails;
+export default StyledManageEmployeeDetails;

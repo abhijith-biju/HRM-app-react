@@ -1,5 +1,7 @@
+import { ManageEmployeeDetails } from '../../components';
+
 const EditEmployeeDetails: React.FC = () => {
-    return <h1>Edit Employee Details</h1>;
+    return <ManageEmployeeDetails></ManageEmployeeDetails>;
 };
 
 export default EditEmployeeDetails;

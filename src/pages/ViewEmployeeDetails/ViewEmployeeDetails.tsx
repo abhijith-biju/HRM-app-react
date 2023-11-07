@@ -48,8 +48,8 @@ const ViewEmployeeDetails = () => {
                         <dd>
                             <ul className="selected-skills-list flex-container">
                                 {employeeDetails.skills.map((skill) => (
-                                    <li>
-                                        <Chip key={skill}>{skill}</Chip>
+                                    <li key={skill}>
+                                        <Chip>{skill}</Chip>
                                     </li>
                                 ))}
                             </ul>
