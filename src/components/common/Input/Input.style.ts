@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 
-interface IInput {
-    placeholder?: string;
-    className?: string;
-}
-
-const StyledInput = styled.input<IInput>`
+const StyledInput = styled.input`
     &:focus-visible {
         outline: 1px solid #000;
         border-color: #000;

@@ -138,6 +138,36 @@ const GlobalStyle = createGlobalStyle`
     input[type='radio'] {
         accent-color: #000;
     }
+
+    .flex {
+        display: flex;
+
+        &.direction {
+        flex-direction: column;
+        }
+
+        &.justify-center {
+            justify-content: center;
+        }
+
+        &.justify-bw {
+            justify-content: space-between;
+        }
+
+        &.justify-start {
+            justify-content: flex-start;
+        }
+
+        &.align-items-center {
+            align-items: center;
+        }
+
+        &.align-items-start {
+            align-items: start;
+        }
+    }
+
+    
 `;
 
 export default GlobalStyle;

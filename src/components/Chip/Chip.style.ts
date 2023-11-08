@@ -11,6 +11,19 @@ const StyledChip = styled.div`
     border: 1px solid var(--primary-clr);
     color: var(--primary-clr);
     font-size: 0.8em;
+
+    & .skill-remove-btn {
+        padding: 0;
+    }
+
+    & .icon {
+        font-size: 1.2em;
+        color: var(--primary-clr);
+
+        &:hover {
+            font-variation-settings: 'FILL' 1;
+        }
+    }
 `;
 
 export default StyledChip;

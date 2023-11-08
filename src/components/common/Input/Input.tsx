@@ -6,8 +6,8 @@ interface IInput {
     type?: string;
 }
 
-const Input: React.FC<IInput> = ({ type = 'string', ...props }) => {
-    return <StyledInput {...props} />;
+const Input: React.FC<IInput> = ({ type = 'text', ...props }) => {
+    return <StyledInput type={type} {...props} />;
 };
 
 export default Input;
