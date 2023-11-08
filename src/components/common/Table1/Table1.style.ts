@@ -22,44 +22,6 @@ const StyledTable = styled.table`
     & tr:not(:last-child) td {
         border-bottom: 1px solid #000;
     }
-
-    .employee-actions {
-        padding-left: 0;
-        margin: 0;
-        list-style: none;
-        align-items: center;
-        gap: 25px;
-
-        & li button {
-            padding: 0;
-            align-items: center;
-        }
-
-        & li span {
-            color: #000;
-
-            &:hover {
-                scale: 1.2;
-                font-variation-settings: 'FILL' 1;
-            }
-        }
-
-        & .view-emp-btn span {
-            color: green;
-        }
-
-        & .edit-emp-btn span {
-            color: orange;
-        }
-
-        & .delete-emp-btn span {
-            color: red;
-        }
-
-        & th {
-            background-color: #d5d5d5;
-        }
-    }
 `;
 
 export default StyledTable;

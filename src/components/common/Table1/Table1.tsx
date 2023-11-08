@@ -5,29 +5,15 @@ interface ITheader {
     value: string;
 }
 
-interface ITable {
+export interface ITable {
     tableHeaders: ITheader[];
     tableData: any[];
+    className?: string;
 }
 
-interface ITableRow {
-    tableHeaders: ITheader[];
-    rowData: any;
-}
-
-// const TableRow: React.FC<ITableRow> = ({ tableHeaders, rowData }) => {
-//     return (
-//         <tr>
-//             {tableHeaders.map((header) => (
-//                 <td key={header.id}>{rowData[header.id]}</td>
-//             ))}
-//         </tr>
-//     );
-// };
-
-const Table1: React.FC<ITable> = ({ tableHeaders, tableData }) => {
+const Table1: React.FC<ITable> = ({ tableHeaders, tableData, className }) => {
     return (
-        <StyledTable>
+        <StyledTable className={className}>
             <thead>
                 <tr>
                     {tableHeaders.map((header) => (

@@ -109,38 +109,13 @@ const employeesList = [
     },
 ];
 
-const employees = [
-    {
-        empId: 1059,
-        name: 'Akshay Krishna',
-        email: 'akshay.krishna@qburst.com',
-        role: 'Intern',
-        department: 'Development',
-    },
-    {
-        empId: 1037,
-        name: 'Babar Azam',
-        email: 'babar.azam@qburst.com',
-        role: 'Engineer',
-        department: 'QA',
-    },
-];
-
-const tableHeaders = [
-    'Employee ID',
-    'Name',
-    'Email',
-    'Role',
-    'Department',
-    'Actions',
-];
-
 const empTableHeaders = [
     { id: 'empId', value: 'Employee ID' },
     { id: 'name', value: 'Name' },
     { id: 'email', value: 'Email' },
     { id: 'role', value: 'Role' },
     { id: 'department', value: 'Department' },
+    { id: 'actions', value: 'Actions' },
 ];
 
 const locations = [
@@ -177,11 +152,4 @@ const skills = [
     { id: 's5', value: 'Project Management' },
 ];
 
-export {
-    employees,
-    tableHeaders,
-    empTableHeaders,
-    employeesList,
-    departments,
-    roles,
-};
+export { empTableHeaders, employeesList, departments, roles, locations };

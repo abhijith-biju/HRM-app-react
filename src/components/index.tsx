@@ -10,6 +10,7 @@ import Chip from './Chip/Chip.tsx';
 import Form from './Form/Form.tsx';
 import ManageEmployeeDetails from './ManageEmployeeDetails/ManageEmployeeDetails.tsx';
 import Modal from './common/Modal/Modal.tsx';
+import EmployeesTable from './EmployeesTable/EmployeesTable.tsx';
 
 export {
     Header,
@@ -24,4 +25,5 @@ export {
     ManageEmployeeDetails,
     Modal,
     Table1,
+    EmployeesTable,
 };
