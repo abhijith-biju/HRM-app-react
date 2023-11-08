@@ -6,7 +6,7 @@ export const mapIdToValue = (
     property: keyof IEmployee
 ) => {
     const newEmployeeData = structuredClone(employeesData);
-
+    console.log('***inside function***');
     employeesData.forEach((employee: any, index: number) => {
         // const deptIndex = refArray.find((dept) => {
         //     return employee[property] === dept.id;
@@ -19,6 +19,17 @@ export const mapIdToValue = (
             refArray.find((dept) => {
                 return employee.department === dept.id;
             })!.value;
+
+        console.log(
+            refArray.find((dept) => {
+                return employee.department === dept.id;
+            })!.value
+        );
+
+        // console.log('inside function');
+        // for (const emp of newEmployeeData) {
+        //     console.log(emp.department);
+        // }
     });
 };
 

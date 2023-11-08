@@ -17,28 +17,33 @@ import {
 } from './constants';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { mapIdToValue } from '../../utils/getEmployeeData';
 
 const EmployeesListing: React.FC = () => {
     const [isModalopen, setisModalOpen] = useState(false);
 
     //remove any
-    const getEmpListingData = (employeesData: any) => {
-        const newEmployeeData = structuredClone(employeesData);
+    // const getEmpListingData = (employeesData: any) => {
+    //     const newEmployeeData = structuredClone(employeesData);
 
-        employeesData.forEach((employee: any, index: number) => {
-            newEmployeeData[index].department = departments.find((dept) => {
-                return employee.department === dept.id;
-            })?.value;
-        });
+    //     employeesData.forEach((employee: any, index: number) => {
+    //         newEmployeeData[index].department = departments.find((dept) => {
+    //             return employee.department === dept.id;
+    //         })?.value;
+    //     });
 
-        return newEmployeeData;
-    };
+    //     return newEmployeeData;
+    // };
 
-    const newEmployeesData = getEmpListingData(employeesList);
-    console.log('after');
-    for (const emp of newEmployeesData) {
-        console.log(emp.department);
-    }
+    // const newEmployeesData = getEmpListingData(employeesList);
+    // console.log('after');
+
+    const newEmployeesData = structuredClone(employeesList);
+    mapIdToValue(newEmployeesData, departments, 'department');
+
+    // for (const emp of newEmployeesData) {
+    //     console.log(emp.department);
+    // }
 
     return (
         <>
