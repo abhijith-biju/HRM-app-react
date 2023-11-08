@@ -5,13 +5,40 @@ import {
     Flex,
     Table,
     Modal,
+    Table1,
 } from '../../components';
-import { employees, tableHeaders } from './constants';
+import {
+    employees,
+    tableHeaders,
+    empTableHeaders,
+    employeesList,
+    departments,
+    roles,
+} from './constants';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 const EmployeesListing: React.FC = () => {
     const [isModalopen, setisModalOpen] = useState(false);
+
+    //remove any
+    const getEmpListingData = (employeesData: any) => {
+        const newEmployeeData = structuredClone(employeesData);
+
+        employeesData.forEach((employee: any, index: number) => {
+            newEmployeeData[index].department = departments.find((dept) => {
+                return employee.department === dept.id;
+            })?.value;
+        });
+
+        return newEmployeeData;
+    };
+
+    const newEmployeesData = getEmpListingData(employeesList);
+    console.log('after');
+    for (const emp of newEmployeesData) {
+        console.log(emp.department);
+    }
 
     return (
         <>
@@ -38,11 +65,15 @@ const EmployeesListing: React.FC = () => {
                         </Button>
                     </Link>
                 </Flex>
-                <Table
+                {/* <Table
                     headers={tableHeaders}
                     data={employees}
                     deleteBtnOnClick={() => setisModalOpen(true)}
-                />
+                /> */}
+                <Table1
+                    tableHeaders={empTableHeaders}
+                    tableData={employeesList}
+                ></Table1>
             </section>
 
             <Modal $isOpen={isModalopen}>
