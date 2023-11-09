@@ -34,7 +34,8 @@ const GlobalStyle = createGlobalStyle`
     'FILL' 0,
     'wght' 400,
     'GRAD' 0,
-    'opsz' 24
+    'opsz' 24;
+    user-select: none;
     }
 
     #root {

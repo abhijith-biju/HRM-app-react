@@ -108,21 +108,14 @@ const EmployeesListing: React.FC = () => {
                 ></EmployeesTable>
             </section>
 
-            <Modal $isOpen={isModalopen}>
-                <p className="confirm-dialog-msg">
-                    Are you sure you want to permanently delete the employee
-                    record?
-                </p>
-                <div className="flex-container confirm-dialog-actions">
-                    <Button className="outline confirm-yes-btn">Yes</Button>
-                    <Button
-                        className="primary confirm-no-btn"
-                        onClick={() => setisModalOpen(false)}
-                    >
-                        Cancel
-                    </Button>
-                </div>
-            </Modal>
+            <Modal
+                $isOpen={isModalopen}
+                text="Are you sure you want to permanently delete the employee
+                    record?"
+                type="yesCancel"
+                confirmClickHandler={() => setisModalOpen(false)}
+                cancelClickHandler={() => setisModalOpen(false)}
+            />
         </>
     );
 };
