@@ -3,15 +3,78 @@ import {
     Input,
     TableFilters,
     Flex,
-    Table,
     Modal,
+    EmployeesTable,
 } from '../../components';
-import { employees, tableHeaders } from './constants';
+import {
+    empTableHeaders,
+    employeesList,
+    departments,
+    roles,
+    locations,
+} from './constants';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { mapIdToValue } from '../../utils/getEmployeeData';
+import { IEmployee } from '../../interfaces/interfaces';
 
 const EmployeesListing: React.FC = () => {
     const [isModalopen, setisModalOpen] = useState(false);
+
+    const getEmployeesTableData = (employeesList: IEmployee[]) => {
+        const newEmployeesList = JSON.parse(JSON.stringify(employeesList));
+
+        for (const employee of newEmployeesList) {
+            employee.department = mapIdToValue(
+                employee.department,
+                departments
+            );
+            employee.role = mapIdToValue(employee.role, roles);
+            employee.location = mapIdToValue(employee.location, locations);
+            employee.actions = (
+                <ul className="employee-actions flex-container">
+                    <li>
+                        <Link to="/view-employee">
+                            <Button
+                                type="button"
+                                className="view-emp-btn flex-container"
+                            >
+                                <span className="material-symbols-rounded">
+                                    visibility
+                                </span>
+                            </Button>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/edit-employee">
+                            <Button
+                                type="button"
+                                className="edit-emp-btn flex-container"
+                            >
+                                <span className="material-symbols-rounded">
+                                    edit_square
+                                </span>
+                            </Button>
+                        </Link>
+                    </li>
+                    <li>
+                        <Button
+                            type="button"
+                            className="delete-emp-btn flex-container"
+                            onClick={() => setisModalOpen(true)}
+                        >
+                            <span className="material-symbols-rounded">
+                                delete
+                            </span>
+                        </Button>
+                    </li>
+                </ul>
+            );
+        }
+        return newEmployeesList;
+    };
+
+    const employeesTableData = getEmployeesTableData(employeesList);
 
     return (
         <>
@@ -38,11 +101,11 @@ const EmployeesListing: React.FC = () => {
                         </Button>
                     </Link>
                 </Flex>
-                <Table
-                    headers={tableHeaders}
-                    data={employees}
-                    deleteBtnOnClick={() => setisModalOpen(true)}
-                />
+                <EmployeesTable
+                    tableHeaders={empTableHeaders}
+                    tableData={employeesTableData}
+                    onClick={() => setisModalOpen(false)}
+                ></EmployeesTable>
             </section>
 
             <Modal $isOpen={isModalopen}>
