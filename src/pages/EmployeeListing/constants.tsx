@@ -152,4 +152,11 @@ const skills = [
     { id: 's5', value: 'Project Management' },
 ];
 
-export { empTableHeaders, employeesList, departments, roles, locations };
+export {
+    empTableHeaders,
+    employeesList,
+    departments,
+    roles,
+    locations,
+    skills,
+};
