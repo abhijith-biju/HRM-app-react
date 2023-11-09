@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const StyledHeader = styled.header`
     background-color: #fff;
@@ -31,9 +32,9 @@ const Header: React.FC = () => {
     return (
         <StyledHeader>
             <Navbar>
-                <a href="/">
+                <Link to="/">
                     <h1 className="brand-logo">HRM APP</h1>
-                </a>
+                </Link>
             </Navbar>
         </StyledHeader>
     );

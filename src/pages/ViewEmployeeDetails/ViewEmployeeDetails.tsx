@@ -1,10 +1,44 @@
 import StyledEmpDetailsWrap from './ViewEmployeeDetails.style';
-import employeeDetails from './constants';
+import {
+    departments,
+    roles,
+    locations,
+    skills,
+} from '../EmployeeListing/constants';
 import { Chip, Button } from '../../components';
 import { Link } from 'react-router-dom';
 import { Flex } from '../../components';
+import { getEmployeeDetails, mapIdToValue } from '../../utils/employees';
+import { useParams } from 'react-router-dom';
 
 const ViewEmployeeDetails = () => {
+    const { employeeId } = useParams();
+
+    if (!employeeId) {
+        throw new Response('Not Found', { status: 404 });
+    }
+
+    const employeeDetails = structuredClone(
+        getEmployeeDetails(parseInt(employeeId))
+    );
+    if (!employeeDetails) {
+        throw new Response('Not Found', { status: 404 });
+    }
+
+    employeeDetails.department = mapIdToValue(
+        employeeDetails.department,
+        departments
+    );
+    employeeDetails.role = mapIdToValue(employeeDetails.role, roles);
+    employeeDetails.location = mapIdToValue(
+        employeeDetails.location,
+        locations
+    );
+
+    employeeDetails.skills = employeeDetails.skills.map((skillId) =>
+        mapIdToValue(skillId, skills)
+    );
+
     return (
         <StyledEmpDetailsWrap
             className="details column align-center"

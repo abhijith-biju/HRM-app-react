@@ -1,15 +1,13 @@
-import React, { ReactNode } from 'react';
 import { Header, Footer } from '../components';
+import { Outlet } from 'react-router-dom';
 
-interface ILayout {
-    children?: ReactNode;
-}
-
-const Layout: React.FC<ILayout> = ({ children }) => {
+const Layout: React.FC = () => {
     return (
         <>
             <Header />
-            <main>{children}</main>
+            <main>
+                <Outlet />
+            </main>
             <Footer />
         </>
     );

@@ -15,7 +15,7 @@ import {
 } from './constants';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { mapIdToValue } from '../../utils/getEmployeeData';
+import { mapIdToValue } from '../../utils/employees';
 import { IEmployee } from '../../interfaces/interfaces';
 
 const EmployeesListing: React.FC = () => {
@@ -34,7 +34,7 @@ const EmployeesListing: React.FC = () => {
             employee.actions = (
                 <ul className="employee-actions flex-container">
                     <li>
-                        <Link to="/view-employee">
+                        <Link to={`/view-employee/${employee.empId}`}>
                             <Button
                                 type="button"
                                 className="view-emp-btn flex-container"
@@ -46,7 +46,7 @@ const EmployeesListing: React.FC = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/edit-employee">
+                        <Link to={`/edit-employee/${employee.empId}`}>
                             <Button
                                 type="button"
                                 className="edit-emp-btn flex-container"
