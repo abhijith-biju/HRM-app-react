@@ -1,4 +1,4 @@
-import StyledTable from './Table1.style';
+import StyledTable from './Table.style';
 
 interface ITheader {
     id: string;

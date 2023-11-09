@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Table1 } from '..';
+import { Table } from '..';
 
-const StyledEmployeesTable = styled(Table1)`
+const StyledEmployeesTable = styled(Table)`
     & .employee-actions {
         padding-left: 0;
         margin: 0;

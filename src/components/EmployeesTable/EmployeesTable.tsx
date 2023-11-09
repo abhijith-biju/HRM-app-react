@@ -1,4 +1,4 @@
-import { ITable } from '../common/Table1/Table1';
+import { ITable } from '../common/Table/Table';
 import StyledEmployeesTable from './EmployeesTable.style';
 
 interface IEmployeesTable extends ITable {
