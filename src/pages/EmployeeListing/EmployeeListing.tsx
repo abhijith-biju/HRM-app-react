@@ -18,7 +18,6 @@ import { useState } from 'react';
 import { mapIdToValue } from '../../utils/employees';
 import { IEmployee } from '../../interfaces/interfaces';
 
-// h1
 const EmployeesListing: React.FC = () => {
     const [isModalopen, setisModalOpen] = useState(false);
 

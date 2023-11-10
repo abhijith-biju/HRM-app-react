@@ -35,6 +35,8 @@ const StyledEmpDetailsWrap = styled(Flex)`
         & .profile-photo {
             height: 200px;
             width: 200px;
+            text-align: center;
+            line-height: 200px;
             border-radius: 50%;
             border: 5px solid #fff;
             margin-inline: auto;
