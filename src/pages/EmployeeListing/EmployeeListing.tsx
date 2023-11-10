@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { mapIdToValue } from '../../utils/employees';
 import { IEmployee } from '../../interfaces/interfaces';
+// import SampleForm from '../../components/SampleForm/SampleForm';
 
 const EmployeesListing: React.FC = () => {
     const [isModalopen, setisModalOpen] = useState(false);
@@ -79,6 +80,7 @@ const EmployeesListing: React.FC = () => {
     return (
         <>
             <section>
+                {/* <SampleForm></SampleForm> */}
                 <Flex className="gap-15p">
                     <TableFilters>
                         <Input placeholder="Search by Employee Name" />
