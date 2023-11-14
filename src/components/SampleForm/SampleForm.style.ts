@@ -9,6 +9,7 @@ const StyledForm = styled.div`
     border-radius: 5px;
 
     --input-field-height: 2em;
+    --input-field-min-height: 38px;
 
     & h3 {
         font-weight: normal;
@@ -89,20 +90,9 @@ const StyledForm = styled.div`
 
     & input:not([type='radio'], [type='file']).error-border,
     & select.error-border,
-    & textarea.error-border,
-    & .skills-input-container.error-border {
+    & textarea.error-border {
         outline: 1px solid #b70000;
         border-color: #b70000;
-    }
-
-    & .skills-input-container {
-        border: 1px solid #d5d5d5;
-        border-radius: 3px;
-        padding: 10px;
-
-        & select {
-            width: 150px;
-        }
     }
 
     & .form-controls-container {

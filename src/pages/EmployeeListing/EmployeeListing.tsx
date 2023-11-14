@@ -12,11 +12,13 @@ import {
     departments,
     roles,
     locations,
+    skills,
 } from './constants';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { mapValueToLabel } from '../../utils/employees';
 import { IEmployee } from '../../interfaces/interfaces';
+import Select from 'react-select';
 
 const EmployeesListing: React.FC = () => {
     const [isModalopen, setisModalOpen] = useState(false);
@@ -82,9 +84,12 @@ const EmployeesListing: React.FC = () => {
                 <Flex className="gap-15p">
                     <TableFilters>
                         <Input placeholder="Search by Employee Name" />
-                        <Flex>
-                            <Input placeholder="Filter By skills" />
-                        </Flex>
+                        <Select
+                            options={skills}
+                            name="searchSkills"
+                            isMulti
+                            closeMenuOnSelect={false}
+                        />
                         <Button className="outline icon-btn margin-left-auto">
                             <span>Clear Filters</span>
                             <span className="material-symbols-rounded">

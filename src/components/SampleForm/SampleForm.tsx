@@ -1,9 +1,18 @@
 import { Formik, Form, Field } from 'formik';
 import { Button, CustomInput, Textarea, RadioGroup } from '..';
-import Select from '../common/Select/Select';
 import StyledForm from './SampleForm.style';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import CustomSelect from '../common/CustomSelect/CustomSelect';
+import {
+    roles,
+    departments,
+    locations,
+    skills,
+} from '../../pages/EmployeeListing/constants';
+
+import validate from './validation';
 
 const SampleForm = () => {
     const [profilePicture, setProfilePicture] = useState(
@@ -30,12 +39,14 @@ const SampleForm = () => {
         department: '',
         doj: '',
         location: '',
+        skills: '',
     };
 
     return (
         <StyledForm>
             <Formik
                 initialValues={initialValues}
+                validationSchema={validate}
                 onSubmit={(values) => {
                     alert(JSON.stringify(values, null, 2));
                 }}
@@ -80,6 +91,7 @@ const SampleForm = () => {
                                 id="email"
                                 type="email"
                                 className="form-entry"
+                                placeholder="user@qburst.com"
                             />
                         </div>
                     </div>
@@ -131,28 +143,20 @@ const SampleForm = () => {
                     </div>
                     <div className="flex form-row">
                         <div className="form-entry">
-                            <Select
-                                label="Role"
+                            <CustomSelect
                                 name="role"
-                                className="form-entry"
-                            >
-                                <option value="" hidden>
-                                    Select a Role
-                                </option>
-                                <option value="engineer">Engineer</option>
-                            </Select>
+                                label="Role"
+                                options={roles}
+                                placeholder="Select a Role"
+                            />
                         </div>
                         <div className="form-entry">
-                            <Select
+                            <CustomSelect
+                                name="department"
                                 label="Department"
-                                name="departement"
-                                className="form-entry"
-                            >
-                                <option value="" hidden>
-                                    Select a Department
-                                </option>
-                                <option value="development">Development</option>
-                            </Select>
+                                options={departments}
+                                placeholder="Select a Department"
+                            />
                         </div>
                     </div>
                     <div className="flex form-row">
@@ -165,30 +169,24 @@ const SampleForm = () => {
                             />
                         </div>
                         <div className="form-entry">
-                            <Select
-                                label="Location"
+                            <CustomSelect
                                 name="location"
-                                className="form-entry"
-                            >
-                                <option value="" hidden>
-                                    Select a Location
-                                </option>
-                                <option value="development">Development</option>
-                            </Select>
+                                label="Location"
+                                options={locations}
+                                placeholder="Select a Location"
+                            />
                         </div>
                     </div>
                     <div className="flex form-row">
                         <div className="form-entry skills-input-container">
-                            <Select
-                                label="Location"
-                                name="location"
-                                className="form-entry"
-                            >
-                                <option value="" hidden>
-                                    Select a Location
-                                </option>
-                                <option value="development">Development</option>
-                            </Select>
+                            <CustomSelect
+                                name="skills"
+                                label="Skills"
+                                options={skills}
+                                placeholder="Select one or more skills"
+                                isMulti
+                                closeMenuOnSelect={false}
+                            />
                         </div>
                     </div>
 
