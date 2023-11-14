@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledAddEmployeeDetails = styled.section`
+const StyledEditEmployeeDetails = styled.section`
     & .skills-input-container {
         border: 1px solid #d5d5d5;
         border-radius: 3px;
@@ -12,4 +12,4 @@ const StyledAddEmployeeDetails = styled.section`
     }
 `;
 
-export default StyledAddEmployeeDetails;
+export default StyledEditEmployeeDetails;

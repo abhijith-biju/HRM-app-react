@@ -1,12 +1,12 @@
 import { employeesList } from '../pages/EmployeeListing/constants';
 
-export const mapIdToValue = (
-    refId: string,
-    refArray: { id: string; value: string }[]
+export const mapValueToLabel = (
+    refValue: string,
+    refArray: { value: string; label: string }[]
 ) => {
     for (const obj of refArray) {
-        if (obj.id === refId) {
-            return obj.value;
+        if (obj.value === refValue) {
+            return obj.label;
         }
     }
     return 'N/A';

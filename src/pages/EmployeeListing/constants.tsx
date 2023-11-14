@@ -110,46 +110,46 @@ const employeesList = [
 ];
 
 const empTableHeaders = [
-    { id: 'empId', value: 'Employee ID' },
-    { id: 'name', value: 'Name' },
-    { id: 'email', value: 'Email' },
-    { id: 'role', value: 'Role' },
-    { id: 'department', value: 'Department' },
-    { id: 'actions', value: 'Actions' },
+    { value: 'empId', label: 'Employee ID' },
+    { value: 'name', label: 'Name' },
+    { value: 'email', label: 'Email' },
+    { value: 'role', label: 'Role' },
+    { value: 'department', label: 'Department' },
+    { value: 'actions', label: 'Actions' },
 ];
 
 const locations = [
-    { id: 'l1', value: 'Trivandrum' },
-    { id: 'l2', value: 'Kochi' },
-    { id: 'l3', value: 'Chennai' },
-    { id: 'l4', value: 'Noida' },
-    { id: 'l5', value: 'USA' },
-    { id: 'l6', value: 'UAE' },
-    { id: 'l7', value: 'Canada' },
-    { id: 'l8', value: 'Japan' },
+    { value: 'l1', label: 'Trivandrum' },
+    { value: 'l2', label: 'Kochi' },
+    { value: 'l3', label: 'Chennai' },
+    { value: 'l4', label: 'Noida' },
+    { value: 'l5', label: 'USA' },
+    { value: 'l6', label: 'UAE' },
+    { value: 'l7', label: 'Canada' },
+    { value: 'l8', label: 'Japan' },
 ];
 
 const departments = [
-    { id: 'd1', value: 'Development' },
-    { id: 'd2', value: 'Quality Assurance' },
-    { id: 'd3', value: 'DevOps' },
-    { id: 'd4', value: 'Executive' },
+    { value: 'd1', label: 'Development' },
+    { value: 'd2', label: 'Quality Assurance' },
+    { value: 'd3', label: 'DevOps' },
+    { value: 'd4', label: 'Executive' },
 ];
 
 const roles = [
-    { id: 'r1', value: 'Engineer' },
-    { id: 'r2', value: 'Senior Engineer' },
-    { id: 'r3', value: 'CEO' },
-    { id: 'r4', value: 'Director' },
-    { id: 'r5', value: 'Intern' },
+    { value: 'r1', label: 'Engineer' },
+    { value: 'r2', label: 'Senior Engineer' },
+    { value: 'r3', label: 'CEO' },
+    { value: 'r4', label: 'Director' },
+    { value: 'r5', label: 'Intern' },
 ];
 
 const skills = [
-    { id: 's1', value: 'HTML' },
-    { id: 's2', value: 'CSS' },
-    { id: 's3', value: 'JavaScript' },
-    { id: 's4', value: 'Selenium' },
-    { id: 's5', value: 'Project Management' },
+    { value: 's1', label: 'HTML' },
+    { value: 's2', label: 'CSS' },
+    { value: 's3', label: 'JavaScript' },
+    { value: 's4', label: 'Selenium' },
+    { value: 's5', label: 'Project Management' },
 ];
 
 export {

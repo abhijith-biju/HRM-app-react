@@ -15,7 +15,7 @@ import {
 } from './constants';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { mapIdToValue } from '../../utils/employees';
+import { mapValueToLabel } from '../../utils/employees';
 import { IEmployee } from '../../interfaces/interfaces';
 
 const EmployeesListing: React.FC = () => {
@@ -25,12 +25,12 @@ const EmployeesListing: React.FC = () => {
         const newEmployeesList = JSON.parse(JSON.stringify(employeesList));
 
         for (const employee of newEmployeesList) {
-            employee.department = mapIdToValue(
+            employee.department = mapValueToLabel(
                 employee.department,
                 departments
             );
-            employee.role = mapIdToValue(employee.role, roles);
-            employee.location = mapIdToValue(employee.location, locations);
+            employee.role = mapValueToLabel(employee.role, roles);
+            employee.location = mapValueToLabel(employee.location, locations);
             employee.actions = (
                 <ul className="employee-actions flex-container">
                     <li>

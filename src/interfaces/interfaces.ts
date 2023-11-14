@@ -15,16 +15,16 @@ export interface IEmployee {
 }
 
 export interface IDepartment {
-    id: string;
+    label: string;
     value: string;
 }
 
 export interface IRole {
-    id: string;
+    label: string;
     value: string;
 }
 
 export interface ILocation {
-    id: string;
+    label: string;
     value: string;
 }

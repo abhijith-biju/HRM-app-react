@@ -1,8 +1,8 @@
 import StyledTable from './Table.style';
 
 interface ITheader {
-    id: string;
     value: string;
+    label: string;
 }
 
 export interface ITable {
@@ -17,7 +17,7 @@ const Table1: React.FC<ITable> = ({ tableHeaders, tableData, className }) => {
             <thead>
                 <tr>
                     {tableHeaders.map((header) => (
-                        <th key={header.id}>{header.value}</th>
+                        <th key={header.value}>{header.label}</th>
                     ))}
                 </tr>
             </thead>
@@ -25,7 +25,7 @@ const Table1: React.FC<ITable> = ({ tableHeaders, tableData, className }) => {
                 {tableData.map((rowData) => (
                     <tr key={rowData.id}>
                         {tableHeaders.map((header) => (
-                            <td key={header.id}>{rowData[header.id]}</td>
+                            <td key={header.value}>{rowData[header.value]}</td>
                         ))}
                     </tr>
                 ))}

@@ -1,11 +1,12 @@
-import { ManageEmployeeDetails } from '../../components';
+import StyledEditEmployeeDetails from './EditEmployeeDetails.style';
+import SampleForm from '../../components/SampleForm/SampleForm';
 
 const EditEmployeeDetails: React.FC = () => {
     return (
-        <>
+        <StyledEditEmployeeDetails>
             <h2 className="text-center">Edit Employee Details</h2>
-            <ManageEmployeeDetails></ManageEmployeeDetails>
-        </>
+            <SampleForm />
+        </StyledEditEmployeeDetails>
     );
 };
 

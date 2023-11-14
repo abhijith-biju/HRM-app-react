@@ -7,9 +7,11 @@ import Flex from './common/Flex/Flex';
 import Table from './common/Table/Table.tsx';
 import Chip from './Chip/Chip.tsx';
 import Form from './Form/Form.tsx';
-import ManageEmployeeDetails from './ManageEmployeeDetails/ManageEmployeeDetails.tsx';
 import Modal from './common/Modal/Modal.tsx';
 import EmployeesTable from './EmployeesTable/EmployeesTable.tsx';
+import Textarea from './common/Textarea/Textarea.tsx';
+import RadioGroup from './common/RadioGroup/RadioGroup.tsx';
+import CustomInput from './common/CustomInput/CustomInput.tsx';
 
 export {
     Header,
@@ -20,8 +22,10 @@ export {
     Flex,
     Chip,
     Form,
-    ManageEmployeeDetails,
     Modal,
     Table,
     EmployeesTable,
+    Textarea,
+    RadioGroup,
+    CustomInput,
 };
