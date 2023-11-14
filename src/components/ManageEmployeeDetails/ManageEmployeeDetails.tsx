@@ -1,247 +1,152 @@
-import StyledManageEmployeeDetails from './ManageEmployeeDetails.style';
-import avatarPhoto from '../../assets/images/employee-avatar.svg';
-import { Form, Input } from '..';
+import { Formik, Form } from 'formik';
+import CustomInput from '../common/CustomInput/CustomInput';
+import { Button } from '..';
+import RadioGroup from '../common/RadioGroup/RadioGroup';
+import { Field } from 'formik';
+// import Select from '../common/Select/Select';
+import StyledSection from './ManageEmployeeDetails.style';
 
-const ManageEmployeeDetails: React.FC = () => {
+const SampleForm = () => {
+    const initialValues = {
+        firstName: '',
+        email: 'add@qburst.com',
+        dob: '',
+        gender: '',
+        role: '',
+        department: '',
+        doj: '',
+        location: '',
+        address: '',
+    };
+
     return (
-        <StyledManageEmployeeDetails>
-            <Form className="margin-inline-auto">
-                <div className="form-entry form section">
-                    <label
-                        htmlFor="profile-photo-input"
-                        className="display-block margin-inline-auto"
-                        id="profile-photo-label"
-                    >
-                        <img
-                            src={avatarPhoto}
-                            alt="employee image"
-                            draggable="false"
-                            className="profile-photo"
-                            title="Add a profile photo"
-                        />
-                        <input
-                            type="file"
-                            id="profile-photo-input"
-                            accept="image/*"
-                            className="display-none"
-                            required
-                        />
-                    </label>
-                    <p className="error-msg text-center display-hidden"></p>
-                </div>
-
-                <div className="form section">
-                    <div className="form-row flex-container">
+        <StyledSection>
+            <Formik
+                initialValues={initialValues}
+                onSubmit={(values) => {
+                    alert(JSON.stringify(values, null, 2));
+                }}
+            >
+                <Form autoComplete="off">
+                    <div className="flex form-row">
                         <div className="form-entry">
-                            <label
-                                htmlFor="full-name"
-                                className="required-field"
-                            >
-                                Name
-                            </label>
-                            <input
+                            <CustomInput
+                                label="First Name"
+                                name="firstName"
                                 type="text"
-                                id="full-name"
-                                name="name"
-                                minLength={3}
-                                maxLength={100}
-                                required
+                                className="form-entry"
                             />
-                            <p className="error-msg display-hidden"></p>
                         </div>
                         <div className="form-entry">
-                            <label
-                                htmlFor="company-email"
-                                className="required-field"
-                            >
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                id="company-email"
+                            <CustomInput
+                                label="Email"
                                 name="email"
-                                required
-                                defaultValue="@qburst.com"
+                                type="email"
+                                className="form-entry"
                             />
-                            <p className="error-msg display-hidden"></p>
                         </div>
                     </div>
-
-                    <div className="form-row flex-container">
+                    <div className="flex form-row">
                         <div className="form-entry">
-                            <label
-                                htmlFor="date-of-birth"
-                                className="required-field"
-                            >
-                                Date Of Birth
-                            </label>
-                            <input
-                                type="date"
-                                id="date-of-birth"
+                            <CustomInput
+                                label="Date of Birth"
                                 name="dob"
-                                required
-                            />
-                            <p className="error-msg display-hidden"></p>
-                        </div>
-                        <div className="form-entry">
-                            <h3 className="required-field">Gender</h3>
-                            <div className="flex-container checkbox-container">
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="gender"
-                                        value="male"
-                                        required
-                                    />
-                                    Male
-                                </label>
-
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="gender"
-                                        value="female"
-                                        required
-                                    />
-                                    Female
-                                </label>
-
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="gender"
-                                        value="other"
-                                        required
-                                    />
-                                    Other
-                                </label>
-                            </div>
-                            <p className="error-msg display-hidden"></p>
-                        </div>
-                    </div>
-                    <div className="form-row flex-container">
-                        <div className="form-entry">
-                            <label htmlFor="address" className="required-field">
-                                Address
-                            </label>
-                            <textarea
-                                name="address"
-                                id="address"
-                                minLength={3}
-                                maxLength={250}
-                                rows={4}
-                                required
-                                spellCheck="false"
-                            ></textarea>
-                            <p className="error-msg display-hidden"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="form-section">
-                    <div className="form-row flex-container">
-                        <div className="form-entry">
-                            <label
-                                htmlFor="company-role"
-                                className="required-field"
-                            >
-                                Role
-                            </label>
-                            <select
-                                name="role"
-                                id="company-role"
-                                className="role-select"
-                                required
-                                defaultValue=""
-                            >
-                                <option value="" disabled>
-                                    Select a role
-                                </option>
-                            </select>
-                            <p className="error-msg display-hidden"></p>
-                        </div>
-
-                        <div className="form-entry">
-                            <label
-                                htmlFor="company-dept"
-                                className="required-field"
-                            >
-                                Department
-                            </label>
-                            <select
-                                name="department"
-                                id="company-dept"
-                                className="dept-select"
-                                required
-                                defaultValue=""
-                            >
-                                <option value="" disabled>
-                                    Select a department
-                                </option>
-                            </select>
-                            <p className="error-msg display-hidden"></p>
-                        </div>
-                    </div>
-                    <div className="form-row flex-container">
-                        <div className="form-entry">
-                            <label
-                                htmlFor="date-of-joining"
-                                className="required-field"
-                            >
-                                Date Of Joining
-                            </label>
-                            <input
                                 type="date"
-                                id="date-of-joining"
-                                name="doj"
-                                required
+                                className="form-entry"
                             />
-                            <p className="error-msg display-hidden"></p>
                         </div>
-
-                        <div className="form-entry">
-                            <label
-                                htmlFor="company-location"
-                                className="required-field"
-                            >
-                                Location
+                        <RadioGroup
+                            id="gender"
+                            label="Gender"
+                            className="form-entry"
+                        >
+                            <label>
+                                <Field
+                                    type="radio"
+                                    name="gender"
+                                    value="male"
+                                />
+                                Male
                             </label>
-                            <select
-                                name="location"
-                                id="company-location"
-                                className="location-select"
-                                required
-                                defaultValue=""
+                            <label>
+                                <Field
+                                    type="radio"
+                                    name="gender"
+                                    value="female"
+                                />
+                                Female
+                            </label>
+                            <label>
+                                <Field
+                                    type="radio"
+                                    name="gender"
+                                    value="others"
+                                />
+                                Others
+                            </label>
+                        </RadioGroup>
+                    </div>
+                    <div className="flex form-row">
+                        <div className="form-entry">
+                            {/* <Select
+                                label="Role"
+                                name="role"
+                                className="form-entry"
                             >
-                                <option value="" disabled>
-                                    Select a location
+                                <option value="" hidden>
+                                    Select a Role
                                 </option>
-                            </select>
-                            <p className="error-msg display-hidden"></p>
+                                <option value="engineer">Engineer</option>
+                            </Select> */}
+                        </div>
+                        <div className="form-entry">
+                            {/* <Select
+                                label="Department"
+                                name="departement"
+                                className="form-entry"
+                            >
+                                <option value="" hidden>
+                                    Select a Department
+                                </option>
+                                <option value="development">Development</option>
+                            </Select> */}
+                        </div>
+                    </div>
+                    <div className="flex form-row">
+                        <div className="form-entry">
+                            <CustomInput
+                                label="Date of Joining"
+                                name="doj"
+                                type="date"
+                                className="form-entry"
+                            />
+                        </div>
+                        <div className="form-entry">
+                            {/* <Select
+                                label="Location"
+                                name="location"
+                                className="form-entry"
+                            >
+                                <option value="" hidden>
+                                    Select a Location
+                                </option>
+                                <option value="development">Development</option>
+                            </Select> */}
                         </div>
                     </div>
 
-                    <div className="form-row">
-                        <h3 className="required-field">Skills</h3>
-                        <div className="form-entry">
-                            <div className="skills-input-container">
-                                <div className="custom-select-wrap margin-inline-auto">
-                                    <Input
-                                        type="text"
-                                        placeholder="Add one or more skills"
-                                        className="skill-search-input margin-inline-auto"
-                                    />
-                                    <ul className="select-options display-none"></ul>
-                                </div>
-                                <ul className="selected-skills-list flex-container"></ul>
-                            </div>
-                            <p className="error-msg display-hidden"></p>
-                        </div>
+                    <div className="flex form-row form-controls-container ">
+                        <Button className="outline" type="button">
+                            cancel
+                        </Button>
+                        <Button className="primary" type="submit">
+                            Submit
+                        </Button>
                     </div>
-                </div>
-            </Form>
-        </StyledManageEmployeeDetails>
+                </Form>
+            </Formik>
+        </StyledSection>
     );
 };
 
-export default ManageEmployeeDetails;
+export default SampleForm;

@@ -68,6 +68,7 @@ const SampleForm = () => {
                             <CustomInput
                                 label="First Name"
                                 name="firstName"
+                                id="firstName"
                                 type="text"
                                 className="form-entry"
                             />
@@ -76,6 +77,7 @@ const SampleForm = () => {
                             <CustomInput
                                 label="Email"
                                 name="email"
+                                id="email"
                                 type="email"
                                 className="form-entry"
                             />
@@ -86,6 +88,7 @@ const SampleForm = () => {
                             <CustomInput
                                 label="Date of Birth"
                                 name="dob"
+                                id="dob"
                                 type="date"
                                 className="form-entry"
                             />
