@@ -1,4 +1,4 @@
-import { useField } from 'formik';
+import { useField, Field } from 'formik';
 
 interface ICustomInput {
     label: string;
@@ -14,7 +14,7 @@ const CustomInput: React.FC<ICustomInput> = ({ label, ...props }) => {
     return (
         <>
             <label htmlFor={props.id || props.name}>{label}</label>
-            <input {...field} {...props} />
+            <Field {...field} {...props} />
             {meta.touched && meta.error ? <div>{meta.error}</div> : null}
         </>
     );

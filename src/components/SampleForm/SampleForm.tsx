@@ -1,5 +1,5 @@
-import { Formik, Form, Field } from 'formik';
-import { Button, CustomInput, Textarea, RadioGroup } from '..';
+import { Formik, Form } from 'formik';
+import { Button, CustomInput, Textarea, CustomRadioGroup } from '..';
 import StyledForm from './SampleForm.style';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ import {
     departments,
     locations,
     skills,
+    genders,
 } from '../../pages/EmployeeListing/constants';
 
 import validate from './validation';
@@ -30,11 +31,11 @@ const SampleForm = () => {
 
     const initialValues = {
         profilePicture: '',
-        firstName: '',
+        firstName: 'abhijith',
         email: 'add@qburst.com',
         dob: '',
-        gender: '',
-        address: '',
+        gender: 'male',
+        address: 'asdfghjkl;zxcvbnm,',
         role: '',
         department: '',
         doj: '',
@@ -73,7 +74,6 @@ const SampleForm = () => {
                             />
                         </label>
                     </div>
-
                     <div className="flex form-row">
                         <div className="form-entry">
                             <CustomInput
@@ -105,36 +105,13 @@ const SampleForm = () => {
                                 className="form-entry"
                             />
                         </div>
-                        <RadioGroup
+                        <CustomRadioGroup
                             id="gender"
                             label="Gender"
+                            name="gender"
+                            options={genders}
                             className="form-entry"
-                        >
-                            <label>
-                                <Field
-                                    type="radio"
-                                    name="gender"
-                                    value="male"
-                                />
-                                Male
-                            </label>
-                            <label>
-                                <Field
-                                    type="radio"
-                                    name="gender"
-                                    value="female"
-                                />
-                                Female
-                            </label>
-                            <label>
-                                <Field
-                                    type="radio"
-                                    name="gender"
-                                    value="others"
-                                />
-                                Others
-                            </label>
-                        </RadioGroup>
+                        />
                     </div>
                     <div className="flex form-row">
                         <div className="form-entry">

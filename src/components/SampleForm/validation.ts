@@ -1,8 +1,13 @@
 import * as Yup from 'yup';
 
+const singleSelectType = Yup.object().shape({
+    label: Yup.string().required('Select atleast one skill'),
+    value: Yup.string().required('Select atleast one skill'),
+});
+
 const validate = Yup.object().shape({
-    profilePicture: Yup.string(),
     firstName: Yup.string()
+        .trim()
         .required('First name is required')
         .min(2, 'First name must be at least 2 characters')
         .max(50, 'First name cannot exceed 50 characters'),
@@ -13,17 +18,21 @@ const validate = Yup.object().shape({
     dob: Yup.date()
         .max(new Date(), 'Date of birth cannot be in the future')
         .required(),
-    gender: Yup.string().required('Invalid gender'),
+    gender: Yup.string().required('Gender is required.'),
     address: Yup.string()
         .min(10, 'Address must be at least 10 characters')
-        .max(200, 'Address cannot exceed 200 characters'),
-    role: Yup.string().required(),
-    department: Yup.string().required(),
+        .max(200, 'Address cannot exceed 200 characters')
+        .required('Address is required'),
+    // role: singleSelectType.required(),
+    // department: singleSelectType.required(),
     doj: Yup.date()
         .max(new Date(), 'Date of joining cannot be in the future')
         .required(),
-    location: Yup.object().required(),
-    skills: Yup.object().required(),
+    // location: singleSelectType.required(),
+    // skills: Yup.object().shape({
+    //     label: Yup.string().required('Select atleast one skill'),
+    //     value: Yup.string().required('Select atleast one skill'),
+    // }),
 });
 
 export default validate;

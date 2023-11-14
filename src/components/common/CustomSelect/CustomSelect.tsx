@@ -15,6 +15,7 @@ interface ICustomSelect {
     options: IOption[];
     isMulti?: boolean;
     closeMenuOnSelect?: false;
+    required?: boolean;
 }
 
 const CustomSelect: React.FC<ICustomSelect> = ({

@@ -18,7 +18,7 @@ const StyledForm = styled.div`
 
     & label,
     & .checkbox-label {
-        font-size: 0.8em;
+        font-size: 1em;
         position: relative;
         display: inline-block;
         margin-bottom: 3px;

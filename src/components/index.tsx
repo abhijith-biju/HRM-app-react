@@ -10,7 +10,7 @@ import Form from './Form/Form.tsx';
 import Modal from './common/Modal/Modal.tsx';
 import EmployeesTable from './EmployeesTable/EmployeesTable.tsx';
 import Textarea from './common/Textarea/Textarea.tsx';
-import RadioGroup from './common/RadioGroup/RadioGroup.tsx';
+import CustomRadioGroup from './common/CustomRadioGroup/CustomRadioGroup.tsx';
 import CustomInput from './common/CustomInput/CustomInput.tsx';
 
 export {
@@ -26,6 +26,6 @@ export {
     Table,
     EmployeesTable,
     Textarea,
-    RadioGroup,
+    CustomRadioGroup,
     CustomInput,
 };

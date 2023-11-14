@@ -14,6 +14,11 @@ const StyledRadioGrup = styled.div`
             display: flex;
             align-items: center;
             gap: 5px;
+            cursor: pointer;
+        }
+
+        & input {
+            cursor: pointer;
         }
     }
 `;

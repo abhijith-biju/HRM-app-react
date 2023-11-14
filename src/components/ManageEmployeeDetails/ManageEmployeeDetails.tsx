@@ -1,7 +1,7 @@
 import { Formik, Form } from 'formik';
 import CustomInput from '../common/CustomInput/CustomInput';
 import { Button } from '..';
-import RadioGroup from '../common/RadioGroup/RadioGroup';
+import RadioGroup from '../common/CustomRadioGroup/RadioGroup';
 import { Field } from 'formik';
 // import Select from '../common/Select/Select';
 import StyledSection from './ManageEmployeeDetails.style';

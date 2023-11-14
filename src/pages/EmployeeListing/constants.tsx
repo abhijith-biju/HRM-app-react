@@ -152,6 +152,12 @@ const skills = [
     { value: 's5', label: 'Project Management' },
 ];
 
+const genders = [
+    { value: 'male', label: 'Male' },
+    { value: 'female', label: 'Female' },
+    { value: 'others', label: 'Others' },
+];
+
 export {
     empTableHeaders,
     employeesList,
@@ -159,4 +165,5 @@ export {
     roles,
     locations,
     skills,
+    genders,
 };
