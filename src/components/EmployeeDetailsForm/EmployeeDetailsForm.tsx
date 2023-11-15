@@ -1,10 +1,15 @@
-import { Formik, Form, useFormikContext } from 'formik';
-import { Button, CustomInput, Textarea, CustomRadioGroup } from '..';
-import StyledForm from './SampleForm.style';
+import { Formik } from 'formik';
+import {
+    Button,
+    CustomInput,
+    CustomTextarea,
+    CustomRadioGroup,
+    CustomSelect,
+} from '..';
+import StyledFormWrap from './EmployeeDetailsForm.style';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import CustomSelect from '../common/CustomSelect/CustomSelect';
 import {
     roles,
     departments,
@@ -15,7 +20,7 @@ import {
 
 import validate from './validation';
 
-const SampleForm = () => {
+const EmployeeDetailsForm = () => {
     const [profilePicture, setProfilePicture] = useState(
         '/src/assets/images/employee-avatar.svg'
     );
@@ -29,13 +34,27 @@ const SampleForm = () => {
         }
     };
 
+    // const initialValues = {
+    //     profilePicture: '',
+    //     firstName: 'abhijith',
+    //     email: 'add@qburst.com',
+    //     dob: '',
+    //     gender: 'male',
+    //     address: 'asdfghjkl;zxcvbnm,',
+    //     role: null,
+    //     department: null,
+    //     doj: '',
+    //     location: null,
+    //     skills: [],
+    // };
+
     const initialValues = {
         profilePicture: '',
-        firstName: 'abhijith',
-        email: 'add@qburst.com',
+        firstName: '',
+        email: '@qburst.com',
         dob: '',
-        gender: 'male',
-        address: 'asdfghjkl;zxcvbnm,',
+        gender: '',
+        address: '',
         role: null,
         department: null,
         doj: '',
@@ -44,7 +63,7 @@ const SampleForm = () => {
     };
 
     return (
-        <StyledForm>
+        <StyledFormWrap>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validate}
@@ -54,11 +73,15 @@ const SampleForm = () => {
             >
                 {(props) => {
                     return (
-                        <form autoComplete="off" onSubmit={props.handleSubmit}>
+                        <form
+                            autoComplete="off"
+                            onSubmit={props.handleSubmit}
+                            noValidate
+                        >
                             {/* <div className="flex">
                                 <pre>
                                     {JSON.stringify(props.values, null, 2)}
-                                    {JSON.stringify(props.errors, null, 2)}
+                                    {JSON.stringify(props.touched, null, 2)}
                                 </pre>
                             </div> */}
                             <div className="flex form-row">
@@ -97,9 +120,9 @@ const SampleForm = () => {
                                         label="Email"
                                         name="email"
                                         id="email"
-                                        type="email"
                                         className="form-entry"
                                         placeholder="user@qburst.com"
+                                        type="email"
                                     />
                                 </div>
                             </div>
@@ -123,7 +146,7 @@ const SampleForm = () => {
                             </div>
                             <div className="flex form-row">
                                 <div className="form-entry">
-                                    <Textarea
+                                    <CustomTextarea
                                         label="Address"
                                         name="address"
                                         rows="3"
@@ -192,8 +215,8 @@ const SampleForm = () => {
                     );
                 }}
             </Formik>
-        </StyledForm>
+        </StyledFormWrap>
     );
 };
 
-export default SampleForm;
+export default EmployeeDetailsForm;

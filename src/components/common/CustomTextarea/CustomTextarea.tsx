@@ -1,20 +1,20 @@
-import { useField, Field } from 'formik';
+import { Field, useField } from 'formik';
 
-interface ICustomInput {
+interface ITextarea {
     label: string;
     name: string;
     id?: string;
-    type: string;
     placeholder?: string;
     className?: string;
+    rows?: string;
 }
 
-const CustomInput: React.FC<ICustomInput> = ({ label, ...props }) => {
+const CustomTextarea: React.FC<ITextarea> = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <>
             <label htmlFor={props.id || props.name}>{label}</label>
-            <Field {...field} {...props} />
+            <Field as="textarea" {...field} {...props} />
             {meta.touched && meta.error ? (
                 <div className="error-msg">{meta.error}</div>
             ) : null}
@@ -22,4 +22,4 @@ const CustomInput: React.FC<ICustomInput> = ({ label, ...props }) => {
     );
 };
 
-export default CustomInput;
+export default CustomTextarea;

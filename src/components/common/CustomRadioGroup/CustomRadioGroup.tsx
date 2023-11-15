@@ -40,7 +40,9 @@ const CustomRadioGroup: React.FC<IRadioGroup> = ({
                     </label>
                 ))}
             </div>
-            {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+            {meta.touched && meta.error ? (
+                <div className="error-msg">{meta.error}</div>
+            ) : null}
         </StyledRadioGrup>
     );
 };

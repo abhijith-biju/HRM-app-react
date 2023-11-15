@@ -19,6 +19,7 @@ import { useState } from 'react';
 import { mapValueToLabel } from '../../utils/employees';
 import { IEmployee } from '../../interfaces/interfaces';
 import Select from 'react-select';
+import { CustomSelectStyles } from './EmployeeListing.style';
 
 const EmployeesListing: React.FC = () => {
     const [isModalopen, setisModalOpen] = useState(false);
@@ -89,6 +90,8 @@ const EmployeesListing: React.FC = () => {
                             name="searchSkills"
                             isMulti
                             closeMenuOnSelect={false}
+                            styles={CustomSelectStyles}
+                            placeholder="Filter by skills"
                         />
                         <Button className="outline icon-btn margin-left-auto">
                             <span>Clear Filters</span>

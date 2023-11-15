@@ -1,11 +1,11 @@
 import StyledAddEmployeeDetails from './AddEmployeeDetails.style';
-import SampleForm from '../../components/SampleForm/SampleForm';
+import { EmployeeDetailsForm } from '../../components';
 
 const AddEmployeeDetails: React.FC = () => {
     return (
         <StyledAddEmployeeDetails>
             <h2 className="text-center">Add Employee Details</h2>
-            <SampleForm />
+            <EmployeeDetailsForm />
         </StyledAddEmployeeDetails>
     );
 };
