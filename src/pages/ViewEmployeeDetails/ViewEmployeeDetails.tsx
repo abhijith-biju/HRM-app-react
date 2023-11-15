@@ -1,14 +1,8 @@
 import StyledEmpDetailsWrap from './ViewEmployeeDetails.style';
-import {
-    departments,
-    roles,
-    locations,
-    skills,
-} from '../EmployeeListing/constants';
 import { Chip, Button } from '../../components';
 import { Link } from 'react-router-dom';
 import { Flex } from '../../components';
-import { getEmployeeDetails, mapValueToLabel } from '../../utils/employees';
+import { getEmployeeDetails } from '../../utils/employees';
 import { useParams } from 'react-router-dom';
 
 const ViewEmployeeDetails = () => {
@@ -18,26 +12,10 @@ const ViewEmployeeDetails = () => {
         throw new Response('Not Found', { status: 404 });
     }
 
-    const employeeDetails = structuredClone(
-        getEmployeeDetails(parseInt(employeeId))
-    );
+    const employeeDetails = getEmployeeDetails(parseInt(employeeId));
     if (!employeeDetails) {
         throw new Response('Not Found', { status: 404 });
     }
-
-    employeeDetails.department = mapValueToLabel(
-        employeeDetails.department,
-        departments
-    );
-    employeeDetails.role = mapValueToLabel(employeeDetails.role, roles);
-    employeeDetails.location = mapValueToLabel(
-        employeeDetails.location,
-        locations
-    );
-
-    employeeDetails.skills = employeeDetails.skills.map((skillId) =>
-        mapValueToLabel(skillId, skills)
-    );
 
     return (
         <StyledEmpDetailsWrap
@@ -53,9 +31,11 @@ const ViewEmployeeDetails = () => {
                         draggable="false"
                     />
                     <p className="full-name">{employeeDetails.name}</p>
-                    <p className="role">{employeeDetails.role}</p>
-                    <p className="department">{employeeDetails.department}</p>
-                    <p className="location">{employeeDetails.location}</p>
+                    <p className="role">{employeeDetails.role.label}</p>
+                    <p className="department">
+                        {employeeDetails.department.label}
+                    </p>
+                    <p className="location">{employeeDetails.location.label}</p>
                 </div>
                 <div className="extended-details">
                     <dl>
@@ -90,8 +70,8 @@ const ViewEmployeeDetails = () => {
                             <dd>
                                 <ul className="selected-skills-list flex-container">
                                     {employeeDetails.skills.map((skill) => (
-                                        <li key={skill}>
-                                            <Chip>{skill}</Chip>
+                                        <li key={skill.value}>
+                                            <Chip>{skill.label}</Chip>
                                         </li>
                                     ))}
                                 </ul>

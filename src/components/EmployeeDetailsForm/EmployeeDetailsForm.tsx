@@ -1,4 +1,6 @@
 import { Formik } from 'formik';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import {
     Button,
     CustomInput,
@@ -7,9 +9,6 @@ import {
     CustomSelect,
 } from '..';
 import StyledFormWrap from './EmployeeDetailsForm.style';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
 import {
     roles,
     departments,
@@ -17,20 +16,36 @@ import {
     skills,
     genders,
 } from '../../pages/EmployeeListing/constants';
-
 import validate from './validation';
+import { IEmployee } from '../../interfaces/interfaces';
 
-const EmployeeDetailsForm = () => {
-    const [profilePicture, setProfilePicture] = useState(
-        '/src/assets/images/employee-avatar.svg'
+interface IEmployeeDetailsForm {
+    prefillData: IEmployee;
+}
+
+const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
+    prefillData = {
+        profilePhoto: '',
+        name: '',
+        email: '@qburst.com',
+        dob: '',
+        gender: '',
+        address: '',
+        role: null,
+        department: null,
+        doj: '',
+        location: null,
+        skills: [],
+    },
+}) => {
+    const [profilePhoto, setProfilePhoto] = useState(
+        prefillData.profilePhoto || '/src/assets/images/employee-avatar.svg'
     );
 
-    const profilePictureInputHandler = (
-        e: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const photoUploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const imgFile = e.target.files[0];
-            setProfilePicture(URL.createObjectURL(imgFile));
+            setProfilePhoto(URL.createObjectURL(imgFile));
         }
     };
 
@@ -48,19 +63,7 @@ const EmployeeDetailsForm = () => {
     //     skills: [],
     // };
 
-    const initialValues = {
-        profilePicture: '',
-        firstName: '',
-        email: '@qburst.com',
-        dob: '',
-        gender: '',
-        address: '',
-        role: null,
-        department: null,
-        doj: '',
-        location: null,
-        skills: [],
-    };
+    const initialValues = prefillData;
 
     return (
         <StyledFormWrap>
@@ -86,22 +89,22 @@ const EmployeeDetailsForm = () => {
                             </div> */}
                             <div className="flex form-row">
                                 <label
-                                    htmlFor="profilePicture"
+                                    htmlFor="profilePhoto"
                                     className="profile-picture-wrap"
                                 >
                                     <img
-                                        src={profilePicture}
-                                        alt="employee profile picture"
+                                        src={profilePhoto}
+                                        alt="employee profile photo"
                                         title="Add a profile photo"
                                         draggable="false"
                                     />
                                     <input
                                         type="file"
                                         className="display-none"
-                                        name="profilePicture"
-                                        id="profilePicture"
+                                        name="profilePhoto"
+                                        id="profilePhoto"
                                         accept="image/*"
-                                        onChange={profilePictureInputHandler}
+                                        onChange={photoUploadHandler}
                                     />
                                 </label>
                             </div>
@@ -109,8 +112,8 @@ const EmployeeDetailsForm = () => {
                                 <div className="form-entry">
                                     <CustomInput
                                         label="First Name"
-                                        name="firstName"
-                                        id="firstName"
+                                        name="name"
+                                        id="name"
                                         type="text"
                                         className="form-entry"
                                     />

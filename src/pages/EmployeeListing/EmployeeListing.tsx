@@ -6,17 +6,9 @@ import {
     Modal,
     EmployeesTable,
 } from '../../components';
-import {
-    empTableHeaders,
-    employeesList,
-    departments,
-    roles,
-    locations,
-    skills,
-} from './constants';
+import { empTableHeaders, employeesList, skills } from './constants';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { mapValueToLabel } from '../../utils/employees';
 import { IEmployee } from '../../interfaces/interfaces';
 import Select from 'react-select';
 import { CustomSelectStyles } from './EmployeeListing.style';
@@ -28,12 +20,8 @@ const EmployeesListing: React.FC = () => {
         const newEmployeesList = JSON.parse(JSON.stringify(employeesList));
 
         for (const employee of newEmployeesList) {
-            employee.department = mapValueToLabel(
-                employee.department,
-                departments
-            );
-            employee.role = mapValueToLabel(employee.role, roles);
-            employee.location = mapValueToLabel(employee.location, locations);
+            employee.department = employee.department.label;
+            employee.role = employee.role.label;
             employee.actions = (
                 <ul className="employee-actions flex-container">
                     <li>

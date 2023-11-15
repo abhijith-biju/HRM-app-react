@@ -33,7 +33,9 @@ const StyledFormWrap = styled.div`
     & input,
     & select,
     & textarea {
+        font-size: 1em;
         padding-inline: 7px;
+        font-family: inherit;
     }
 
     & .form-row {
@@ -65,8 +67,8 @@ const StyledFormWrap = styled.div`
     }
 
     .profile-picture-wrap {
-        height: 130px;
-        width: 130px;
+        height: 150px;
+        width: 150px;
         cursor: pointer;
         margin: 0 auto 40px;
         border-radius: 50%;
@@ -77,6 +79,7 @@ const StyledFormWrap = styled.div`
         & > img {
             height: 100%;
             width: 100%;
+            object-fit: cover;
         }
     }
 
