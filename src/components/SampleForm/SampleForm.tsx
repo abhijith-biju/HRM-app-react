@@ -1,4 +1,4 @@
-import { Formik, Form } from 'formik';
+import { Formik, Form, useFormikContext } from 'formik';
 import { Button, CustomInput, Textarea, CustomRadioGroup } from '..';
 import StyledForm from './SampleForm.style';
 import { useState } from 'react';
@@ -36,11 +36,11 @@ const SampleForm = () => {
         dob: '',
         gender: 'male',
         address: 'asdfghjkl;zxcvbnm,',
-        role: '',
-        department: '',
+        role: null,
+        department: null,
         doj: '',
-        location: '',
-        skills: '',
+        location: null,
+        skills: [],
     };
 
     return (
@@ -52,132 +52,145 @@ const SampleForm = () => {
                     alert(JSON.stringify(values, null, 2));
                 }}
             >
-                <Form autoComplete="off">
-                    <div className="flex form-row">
-                        <label
-                            htmlFor="profilePicture"
-                            className="profile-picture-wrap"
-                        >
-                            <img
-                                src={profilePicture}
-                                alt="employee profile picture"
-                                title="Add a profile photo"
-                                draggable="false"
-                            />
-                            <input
-                                type="file"
-                                className="display-none"
-                                name="profilePicture"
-                                id="profilePicture"
-                                accept="image/*"
-                                onChange={profilePictureInputHandler}
-                            />
-                        </label>
-                    </div>
-                    <div className="flex form-row">
-                        <div className="form-entry">
-                            <CustomInput
-                                label="First Name"
-                                name="firstName"
-                                id="firstName"
-                                type="text"
-                                className="form-entry"
-                            />
-                        </div>
-                        <div className="form-entry">
-                            <CustomInput
-                                label="Email"
-                                name="email"
-                                id="email"
-                                type="email"
-                                className="form-entry"
-                                placeholder="user@qburst.com"
-                            />
-                        </div>
-                    </div>
-                    <div className="flex form-row">
-                        <div className="form-entry">
-                            <CustomInput
-                                label="Date of Birth"
-                                name="dob"
-                                id="dob"
-                                type="date"
-                                className="form-entry"
-                            />
-                        </div>
-                        <CustomRadioGroup
-                            id="gender"
-                            label="Gender"
-                            name="gender"
-                            options={genders}
-                            className="form-entry"
-                        />
-                    </div>
-                    <div className="flex form-row">
-                        <div className="form-entry">
-                            <Textarea label="Address" name="address" rows="3" />
-                        </div>
-                    </div>
-                    <div className="flex form-row">
-                        <div className="form-entry">
-                            <CustomSelect
-                                name="role"
-                                label="Role"
-                                options={roles}
-                                placeholder="Select a Role"
-                            />
-                        </div>
-                        <div className="form-entry">
-                            <CustomSelect
-                                name="department"
-                                label="Department"
-                                options={departments}
-                                placeholder="Select a Department"
-                            />
-                        </div>
-                    </div>
-                    <div className="flex form-row">
-                        <div className="form-entry">
-                            <CustomInput
-                                label="Date of Joining"
-                                name="doj"
-                                type="date"
-                                className="form-entry"
-                            />
-                        </div>
-                        <div className="form-entry">
-                            <CustomSelect
-                                name="location"
-                                label="Location"
-                                options={locations}
-                                placeholder="Select a Location"
-                            />
-                        </div>
-                    </div>
-                    <div className="flex form-row">
-                        <div className="form-entry skills-input-container">
-                            <CustomSelect
-                                name="skills"
-                                label="Skills"
-                                options={skills}
-                                placeholder="Select one or more skills"
-                                isMulti
-                                closeMenuOnSelect={false}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="form-controls-container flex">
-                        <Link to="/">
-                            <Button className="outline" type="button">
-                                CANCEL
-                            </Button>
-                        </Link>
-                        <Button className="primary" type="submit">
-                            SUBMIT
-                        </Button>
-                    </div>
-                </Form>
+                {(props) => {
+                    return (
+                        <form autoComplete="off" onSubmit={props.handleSubmit}>
+                            {/* <div className="flex">
+                                <pre>
+                                    {JSON.stringify(props.values, null, 2)}
+                                    {JSON.stringify(props.errors, null, 2)}
+                                </pre>
+                            </div> */}
+                            <div className="flex form-row">
+                                <label
+                                    htmlFor="profilePicture"
+                                    className="profile-picture-wrap"
+                                >
+                                    <img
+                                        src={profilePicture}
+                                        alt="employee profile picture"
+                                        title="Add a profile photo"
+                                        draggable="false"
+                                    />
+                                    <input
+                                        type="file"
+                                        className="display-none"
+                                        name="profilePicture"
+                                        id="profilePicture"
+                                        accept="image/*"
+                                        onChange={profilePictureInputHandler}
+                                    />
+                                </label>
+                            </div>
+                            <div className="flex form-row">
+                                <div className="form-entry">
+                                    <CustomInput
+                                        label="First Name"
+                                        name="firstName"
+                                        id="firstName"
+                                        type="text"
+                                        className="form-entry"
+                                    />
+                                </div>
+                                <div className="form-entry">
+                                    <CustomInput
+                                        label="Email"
+                                        name="email"
+                                        id="email"
+                                        type="email"
+                                        className="form-entry"
+                                        placeholder="user@qburst.com"
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex form-row">
+                                <div className="form-entry">
+                                    <CustomInput
+                                        label="Date of Birth"
+                                        name="dob"
+                                        id="dob"
+                                        type="date"
+                                        className="form-entry"
+                                    />
+                                </div>
+                                <CustomRadioGroup
+                                    id="gender"
+                                    label="Gender"
+                                    name="gender"
+                                    options={genders}
+                                    className="form-entry"
+                                />
+                            </div>
+                            <div className="flex form-row">
+                                <div className="form-entry">
+                                    <Textarea
+                                        label="Address"
+                                        name="address"
+                                        rows="3"
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex form-row">
+                                <div className="form-entry">
+                                    <CustomSelect
+                                        name="role"
+                                        label="Role"
+                                        options={roles}
+                                        placeholder="Select a Role"
+                                    />
+                                </div>
+                                <div className="form-entry">
+                                    <CustomSelect
+                                        name="department"
+                                        label="Department"
+                                        options={departments}
+                                        placeholder="Select a Department"
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex form-row">
+                                <div className="form-entry">
+                                    <CustomInput
+                                        label="Date of Joining"
+                                        name="doj"
+                                        type="date"
+                                        className="form-entry"
+                                    />
+                                </div>
+                                <div className="form-entry">
+                                    <CustomSelect
+                                        name="location"
+                                        label="Location"
+                                        options={locations}
+                                        placeholder="Select a Location"
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex form-row">
+                                <div className="form-entry skills-input-container">
+                                    <CustomSelect
+                                        name="skills"
+                                        label="Skills"
+                                        options={skills}
+                                        placeholder="Select one or more skills"
+                                        isMulti
+                                        closeMenuOnSelect={false}
+                                    />
+                                </div>
+                            </div>
+                            <div className="form-controls-container flex">
+                                <Link to="/">
+                                    <Button className="outline" type="button">
+                                        CANCEL
+                                    </Button>
+                                </Link>
+                                <Button className="primary" type="submit">
+                                    SUBMIT
+                                </Button>
+                            </div>
+                        </form>
+                    );
+                }}
             </Formik>
         </StyledForm>
     );

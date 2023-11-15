@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
 
-const singleSelectType = Yup.object().shape({
-    label: Yup.string().required('Select atleast one skill'),
-    value: Yup.string().required('Select atleast one skill'),
+const selectShape = Yup.object().shape({
+    label: Yup.string().required(),
+    value: Yup.string().required(),
 });
 
 const validate = Yup.object().shape({
@@ -23,16 +23,15 @@ const validate = Yup.object().shape({
         .min(10, 'Address must be at least 10 characters')
         .max(200, 'Address cannot exceed 200 characters')
         .required('Address is required'),
-    // role: singleSelectType.required(),
-    // department: singleSelectType.required(),
+    role: selectShape.required('Role is required.'),
+    department: selectShape.required('Department is required.'),
     doj: Yup.date()
-        .max(new Date(), 'Date of joining cannot be in the future')
+        .max(new Date(), 'Date of joining cannot be in the future.')
         .required(),
-    // location: singleSelectType.required(),
-    // skills: Yup.object().shape({
-    //     label: Yup.string().required('Select atleast one skill'),
-    //     value: Yup.string().required('Select atleast one skill'),
-    // }),
+    location: selectShape.required('Location is required.'),
+    skills: Yup.array()
+        .of(selectShape)
+        .min(1, 'Atleast one skill is required.'),
 });
 
 export default validate;

@@ -13,7 +13,6 @@ const CustomSelectStyles: StylesConfig<IOption, boolean> = {
             borderColor: state.isFocused ? '#000' : '#7e7e7e',
         },
         outline: state.isFocused ? '1px solid #000' : 'none',
-        // borderColor: state.selectProps.
     }),
     clearIndicator: (provided) => ({
         ...provided,
@@ -28,6 +27,10 @@ const CustomSelectStyles: StylesConfig<IOption, boolean> = {
     multiValueRemove: (provided) => ({
         ...provided,
         cursor: 'pointer',
+    }),
+    singleValue: (provided) => ({
+        ...provided,
+        color: 'black',
     }),
 };
 
