@@ -20,7 +20,7 @@ import validate from './validation';
 import { IEmployee } from '../../interfaces/interfaces';
 
 interface IEmployeeDetailsForm {
-    prefillData: IEmployee;
+    prefillData?: IEmployee;
 }
 
 const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
