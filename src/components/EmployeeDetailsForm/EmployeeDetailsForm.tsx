@@ -81,12 +81,12 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                             onSubmit={props.handleSubmit}
                             noValidate
                         >
-                            <div className="flex">
+                            {/* <div className="flex">
                                 <pre>
                                     {JSON.stringify(props.values, null, 2)}
                                     {JSON.stringify(props.touched, null, 2)}
                                 </pre>
-                            </div>
+                            </div> */}
                             <div className="flex form-row">
                                 <label
                                     htmlFor="profilePhoto"

@@ -12,6 +12,7 @@ export interface IEmployee {
     doj: string;
     role: IRole;
     id: string;
+    updatedAt?: { seconds: number; nanoseconds: number };
 }
 
 export interface IDepartment {

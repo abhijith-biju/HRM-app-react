@@ -9,7 +9,7 @@ const StyledFormWrap = styled.div`
     border-radius: 5px;
 
     --input-field-height: 2em;
-    --input-field-min-height: 38px;
+    /* --input-field-min-height: 38px; */
 
     & h3 {
         font-weight: normal;
@@ -24,8 +24,7 @@ const StyledFormWrap = styled.div`
         margin-bottom: 3px;
     }
 
-    & input,
-    & select {
+    & input {
         font-size: 1em;
         height: var(--input-field-height);
     }

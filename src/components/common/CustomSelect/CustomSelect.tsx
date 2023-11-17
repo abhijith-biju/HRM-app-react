@@ -1,6 +1,7 @@
 import Select from 'react-select';
 import { useField } from 'formik';
 import CustomSelectStyles from './CustomSelect.style';
+import makeAnimated from 'react-select/animated';
 
 export interface IOption {
     value: string;
@@ -17,6 +18,8 @@ interface ICustomSelect {
     closeMenuOnSelect?: false;
     required?: boolean;
 }
+
+const animatedComponents = makeAnimated();
 
 const CustomSelect: React.FC<ICustomSelect> = ({
     label,
@@ -39,6 +42,7 @@ const CustomSelect: React.FC<ICustomSelect> = ({
                         setValue(option);
                     }
                 }}
+                components={animatedComponents}
                 {...props}
             />
             {meta.touched && meta.error ? (
