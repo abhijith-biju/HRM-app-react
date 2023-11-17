@@ -115,7 +115,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         name="name"
                                         id="name"
                                         type="text"
-                                        className="form-entry"
+                                        // className="form-entry"
                                     />
                                 </div>
                                 <div className="form-entry">
@@ -123,7 +123,6 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         label="Email"
                                         name="email"
                                         id="email"
-                                        className="form-entry"
                                         placeholder="user@qburst.com"
                                         type="email"
                                     />
@@ -136,7 +135,6 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         name="dob"
                                         id="dob"
                                         type="date"
-                                        className="form-entry"
                                     />
                                 </div>
                                 <CustomRadioGroup
@@ -180,7 +178,6 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         label="Date of Joining"
                                         name="doj"
                                         type="date"
-                                        className="form-entry"
                                     />
                                 </div>
                                 <div className="form-entry">
