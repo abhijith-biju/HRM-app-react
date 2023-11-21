@@ -85,7 +85,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                 <pre>
                                     {JSON.stringify(props.values, null, 2)}
                                     {JSON.stringify(props.touched, null, 2)}
-                                </pre>
+                                </pre>  
                             </div> */}
                             <div className="flex form-row">
                                 <label
@@ -115,7 +115,6 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         name="name"
                                         id="name"
                                         type="text"
-                                        // className="form-entry"
                                     />
                                 </div>
                                 <div className="form-entry">
