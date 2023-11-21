@@ -1,76 +1,75 @@
-import * as React from 'react';
-import { useReducer } from 'react';
+// import * as React from 'react';
+// import { useReducer } from 'react';
 
-import {
-    employeesList,
-    departments,
-    locations,
-    roles,
-    skills,
-} from '../../pages/EmployeeListing/constants';
+// import {
+//     employeesList,
+//     departments,
+//     locations,
+//     roles,
+//     skills,
+// } from '../../pages/EmployeeListing/constants';
 
-import {
-    IEmployee,
-    IDepartment,
-    ILocation,
-    IRole,
-    ISkill,
-} from '../../interfaces/interfaces';
+// import {
+//     IEmployee,
+//     IDepartment,
+//     ILocation,
+//     IRole,
+//     ISkill,
+// } from '../../interfaces/interfaces';
 
-interface IAction {
-    type: string;
-    payload: IEmployee | string;
-}
+// interface IAction {
+//     type: string;
+//     payload: IEmployee | string;
+// }
 
-interface IState {
-    employeesList: IEmployee[];
-    departments: IDepartment[];
-    roles: IRole[];
-    locations: ILocation[];
-    skills: ISkill[];
-}
+// interface IState {
+//     employeesList: IEmployee[];
+//     departments: IDepartment[];
+//     roles: IRole[];
+//     locations: ILocation[];
+//     skills: ISkill[];
+// }
 
-interface IDispatch {
-    dispatch: () => void;
-}
+// interface IDispatch {
+//     dispatch: () => void;
+// }
 
-interface IAppContext {
-    state: IState;
-    dispatch: (action: IAction) => void;
-}
+// interface IAppContext {
+//     state: IState;
+//     dispatch: (action: IAction) => void;
+// }
 
-interface IAppProvider {
-    children: React.ReactNode;
-}
+// interface IAppProvider {
+//     children: React.ReactNode;
+// }
 
-const initialValue = {
-    employeesList,
-    departments,
-    locations,
-    skills,
-    roles,
-};
+// const initialValue = {
+//     employeesList,
+//     departments,
+//     locations,
+//     skills,
+//     roles,
+// };
 
-const AppContext = React.createContext<IAppContext | null>(null);
+// const AppContext = React.createContext<IAppContext | null>(null);
 
-const AppReducer = (state: IState, action: IAction) => {
-    switch (action.type) {
-        case 'addEmployee': {
-            return state;
-        }
-        default: {
-            throw new Error(`Undefined Action type : ${action.type}`);
-        }
-    }
-};
+// const AppReducer = (state: IState, action: IAction) => {
+//     switch (action.type) {
+//         case 'addEmployee': {
+//             return state;
+//         }
+//         default: {
+//             throw new Error(`Undefined Action type : ${action.type}`);
+//         }
+//     }
+// };
 
-const AppProvider: React.FC<IAppProvider> = ({ children }) => {
-    const [state, dispatch] = useReducer(AppReducer, initialValue);
-    const value = { state, dispatch };
-    console.log(initialValue);
-    // return <></>;
+// const AppProvider: React.FC<IAppProvider> = ({ children }) => {
+//     const [state, dispatch] = useReducer(AppReducer, initialValue);
+//     const value = { state, dispatch };
+//     console.log(initialValue);
 
-    return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
-};
+//     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+// };
 
-export default AppProvider;
+// export default AppProvider;
