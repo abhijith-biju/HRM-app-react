@@ -12,12 +12,8 @@ import { useState } from 'react';
 import { IEmployee } from '../../interfaces/interfaces';
 import Select from 'react-select';
 import { CustomSelectStyles } from './EmployeeListing.style';
-// import { useAppContext } from '../../core/contexts/AppContext';
 
 const EmployeesListing: React.FC = () => {
-    // const appContext = useAppContext();
-    // const state = appContext;
-    // console.log(state);
     const [isModalopen, setisModalOpen] = useState(false);
 
     const getEmployeesTableData = (employeesList: IEmployee[]) => {

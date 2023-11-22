@@ -15,6 +15,35 @@ export interface IEmployee {
     updatedAt?: { seconds: number; nanoseconds: number };
 }
 
+export interface IFetchEmployee {
+    id: number;
+    firstName: string;
+    lastName: string;
+    isActive: boolean;
+    dob: String;
+    email: string;
+    phone: string;
+    designation: string;
+    salary: string;
+    dateOfJoining: string;
+    address: string;
+    moreDetails: null;
+    role: {
+        id: string;
+        role: string;
+    };
+    department: {
+        id: string;
+        department: string;
+    };
+    skills: [
+        {
+            id: string;
+            skill: string;
+        }
+    ];
+}
+
 export interface IDepartment {
     label: string;
     value: string;
@@ -23,6 +52,11 @@ export interface IDepartment {
 export interface ISkill {
     label: string;
     value: string;
+}
+
+export interface IFetchSkill {
+    id: number;
+    skill: string;
 }
 
 export interface IRole {

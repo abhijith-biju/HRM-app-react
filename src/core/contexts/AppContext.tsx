@@ -1,71 +1,43 @@
-// import { employeesList } from '../../pages/EmployeeListing/constants';
-// import { IEmployee, IDepartment } from '../../interfaces/interfaces';
-// import React, { useState } from 'react';
-// import {
-//     departments,
-//     roles,
-//     locations,
-//     skills,
-// } from '../../pages/EmployeeListing/constants';
+import { IFetchSkill } from '../../interfaces/interfaces';
+import React, { useEffect, useState } from 'react';
+import useApi from '../api/axios';
 
-// interface IAppContext {
-//     employees: IEmployee[];
-//     departments: IDepartment[];
-// }
+interface IAppContext {
+    skills: { id: number; skill: string }[];
+}
 
-// interface IAppProvider {
-//     children: React.ReactNode;
-// }
+interface IAppContextProvider {
+    children: React.ReactNode;
+}
 
-// const AppContext = React.createContext<IAppContext | undefined>(undefined);
+const AppContext = React.createContext<IAppContext>({} as IAppContext);
 
-// const AppProvider: React.FC<IAppProvider> = ({ children }) => {
-//     const [employees, setEmployees] = useState<IEmployee[]>(employeesList);
+const AppProvider: React.FC<IAppContextProvider> = ({ children }) => {
+    useEffect(() => {
+        const { response } = useApi('/skills', {
+            timeout: 5000,
+        });
+        console.log(response);
+    });
 
-//     const value = { employees: [employees, setEmployees], departments };
-//     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
-// };
+    const [skills, setSkills] = useState('HTML');
 
-// const useAppContext = () => {
-//     const context = React.useContext(AppContext);
-//     if (context === undefined) {
-//         throw new Error('useAppContext must be used inside AppProvider');
-//     }
-//     return context;
-// };
+    const value = { skills };
+    // return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+    return <></>;
+};
 
-// export { AppProvider, useAppContext };
+const useAppContext = () => {
+    const context = React.useContext(AppContext);
+    if (context === undefined) {
+        throw new Error('useAppContext must be used inside AppProvider');
+    }
+    return context;
+};
+
+export { AppProvider, useAppContext };
 
 // import useApi from '../api/axios';
-
-// interface IEmployee {
-//     id: number;
-//     firstName: string;
-//     lastName: string;
-//     isActive: boolean;
-//     dob: String;
-//     email: string;
-//     phone: string;
-//     designation: string;
-//     salary: string;
-//     dateOfJoining: string;
-//     address: string;
-//     moreDetails: null;
-//     role: {
-//         id: string;
-//         role: string;
-//     };
-//     department: {
-//         id: string;
-//         department: string;
-//     };
-//     skills: [
-//         {
-//             id: string;
-//             skill: string;
-//         }
-//     ];
-// }
 
 // interface IResponse {
 //     message: string;
