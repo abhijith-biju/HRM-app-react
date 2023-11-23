@@ -1,12 +1,15 @@
-import Header from './components/Header.js';
-import Footer from './components/Footer.js';
-import './App.css';
+import GlobalStyle from './globalStyles.ts';
+import Layout from './layout/Layout.tsx';
+import { RouterProvider } from 'react-router-dom';
+import router from './core/routes/router.tsx';
 
 function App() {
     return (
         <>
-            <Header />
-            <Footer />
+            <GlobalStyle />
+            <Layout>
+                <RouterProvider router={router}></RouterProvider>
+            </Layout>
         </>
     );
 }
