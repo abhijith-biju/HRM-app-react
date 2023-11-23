@@ -9,7 +9,7 @@ import {
 import { empTableHeaders, employeesList, skills } from './constants';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { IEmployee } from '../../interfaces/interfaces';
+import { IEmployee } from '../../interfaces/common';
 import Select from 'react-select';
 import { CustomSelectStyles } from './EmployeeListing.style';
 

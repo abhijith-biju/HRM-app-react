@@ -1,14 +1,14 @@
 import GlobalStyle from './globalStyles.ts';
-import { AppProvider } from './core/contexts/AppContext.tsx';
+import { AppContextProvider } from './core/contexts/AppContext.tsx';
 import { RouterProvider } from 'react-router-dom';
 import router from './core/routes/router.tsx';
 
 function App() {
     return (
-        <AppProvider>
+        <AppContextProvider>
             <GlobalStyle />
             <RouterProvider router={router} />
-        </AppProvider>
+        </AppContextProvider>
     );
 }
 
