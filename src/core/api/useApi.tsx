@@ -28,7 +28,7 @@ const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
                 setLoading(false);
             }
         };
-        fetchData();
+        // fetchData();
 
         return () => {
             cancelled = true;

@@ -1,5 +1,5 @@
 import {
-    IApiEmployee,
+    // IApiEmployee,
     // IApiLocation,
     IApiRole,
     IApiSkill,
@@ -8,15 +8,15 @@ import {
 import { Dispatch, SetStateAction, ReactNode } from 'react';
 
 export interface IAppContextState {
-    employees: IApiEmployee[];
-    skills: IApiSkill[];
+    // employees: IApiEmployee[];
+    skills: { id: number; skill: string }[];
     roles: IApiRole[];
     departments: IApiDepartment[];
 }
 
 export interface IAppContext {
     appState: IAppContextState;
-    setAppState: Dispatch<SetStateAction<IAppContextState>>;
+    // setAppState: Dispatch<SetStateAction<IAppContextState>>;
 }
 
 export interface IAppContextProvider {

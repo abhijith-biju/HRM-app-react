@@ -17,8 +17,11 @@ export interface IApiEmployee {
 }
 
 export interface IApiSkill {
-    id: number;
-    skill: string;
+    message: string;
+    data: {
+        id: number;
+        skill: string;
+    }[];
 }
 
 export interface IApiDepartment {
