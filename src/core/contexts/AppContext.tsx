@@ -9,27 +9,34 @@ import { IApiSkill } from '../../interfaces/ApiDataInterface';
 
 const initialState: IAppContextState = {
     // employees: [],
-    roles: [],
+    // roles: [],
     skills: [],
-    departments: [],
+    // departments: [],
 };
 
-const AppContext = createContext<IAppContext>({
-    appState: initialState,
-    // setAppState: () => {},
+const AppContext = createContext<IAppContextState>({
+    skills: [],
 });
 
 const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const [appState, setAppState] = useState(initialState);
-    const value = { appState, setAppState };
+    const contextValue = appState;
 
     const { response } = useApi<IApiSkill>('/skills');
-    // console.log(response?.data);
-    if (response) {
-        setAppState({ ...appState, skills: response.data });
-    }
-
-    return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+    console.log(contextValue.skills);
+    useEffect(() => {
+        if (response !== null) {
+            // console.log('Obtained data');
+            setAppState({ ...appState, skills: response.data });
+            // console.log('set new data');
+        }
+    }, [response]);
+    // debugger;
+    return (
+        <AppContext.Provider value={contextValue}>
+            {children}
+        </AppContext.Provider>
+    );
 };
 
 const useAppContext = () => {

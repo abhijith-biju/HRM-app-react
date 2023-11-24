@@ -13,16 +13,16 @@ import { IEmployee } from '../../interfaces/common';
 import Select from 'react-select';
 import { CustomSelectStyles } from './EmployeeListing.style';
 // import useApi from '../../core/api/useApi';
-// import { useAppContext } from '../../core/contexts/AppContext';
+import { useAppContext } from '../../core/contexts/AppContext';
 
 const EmployeesListing: React.FC = () => {
-    // const { appState, setAppState } = useAppContext();
+    // const { appState } = useAppContext();
     // useEffect(() => {
     //     console.log(appState);
     //     // appState.skills = [{ id: 1, skill: 'HTML' }];
-    //     setAppState({ ...appState, skills: [{ id: 1, skill: 'HTML' }] });
-    //     console.log(appState);
-    // }, []);
+    //     // setAppState({ ...appState, skills: [{ id: 1, skill: 'HTML' }] });
+    //     // console.log(appState);
+    // }, [apps]);
 
     const [isModalopen, setisModalOpen] = useState(false);
 
