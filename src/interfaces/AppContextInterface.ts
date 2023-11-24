@@ -1,23 +1,20 @@
-import // IApiEmployee,
-// IApiLocation,
-// IApiRole,
-// IApiSkill,
-// IApiDepartment,
-'./ApiDataInterface';
-import { Dispatch, SetStateAction, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { IOption } from '../components/common/CustomSelect/CustomSelect';
 
 export interface IAppContextState {
-    // employees: IApiEmployee[];
-    skills: { id: number; skill: string }[];
-    // roles: IApiRole[];
-    // departments: IApiDepartment[];
+    skills: IOption[];
+    roles: IOption[];
+    departments: IOption[];
 }
 
 export interface IAppContext {
     appState: IAppContextState;
-    // setAppState: Dispatch<SetStateAction<IAppContextState>>;
 }
 
 export interface IAppContextProvider {
     children: ReactNode;
+}
+
+export interface IAppSetState {
+    setAppState: React.Dispatch<React.SetStateAction<IAppContextState>>;
 }

@@ -19,6 +19,9 @@ const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
             try {
                 setLoading(true);
                 const response: AxiosResponse<T> = await API.get(url, params);
+
+                console.log(url, response.data);
+
                 if (!cancelled) {
                     setResponse(response.data);
                     setLoading(false);

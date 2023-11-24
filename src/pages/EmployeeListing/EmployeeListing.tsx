@@ -6,25 +6,85 @@ import {
     Modal,
     EmployeesTable,
 } from '../../components';
-import { empTableHeaders, employeesList, skills } from './constants';
+import { empTableHeaders, employeesList } from './constants';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { IEmployee } from '../../interfaces/common';
 import Select from 'react-select';
 import { CustomSelectStyles } from './EmployeeListing.style';
-// import useApi from '../../core/api/useApi';
 import { useAppContext } from '../../core/contexts/AppContext';
+import useApi from '../../core/api/useApi';
+import { IEmployee } from '../../interfaces/common';
+import {
+    IApiFetchEmployees,
+    IApiEmployee,
+} from '../../interfaces/ApiDataInterface';
 
 const EmployeesListing: React.FC = () => {
-    // const { appState } = useAppContext();
-    // useEffect(() => {
-    //     console.log(appState);
-    //     // appState.skills = [{ id: 1, skill: 'HTML' }];
-    //     // setAppState({ ...appState, skills: [{ id: 1, skill: 'HTML' }] });
-    //     // console.log(appState);
-    // }, [apps]);
-
+    const { appState } = useAppContext();
     const [isModalopen, setisModalOpen] = useState(false);
+    const [employees, setEmployees] = useState<IApiEmployee[]>([]);
+
+    const employeesFetchResponse = useApi<IApiFetchEmployees>(
+        '/employee?sortBy=firstName&sortDir=asc'
+    );
+    useEffect(() => {
+        if (employeesFetchResponse.response) {
+            const employeeData = employeesFetchResponse.response.data.employees;
+
+            setEmployees(employeesFetchResponse.response.data.employees);
+            // console.log(employeesFetchResponse.response.data.employees);
+            console.log(appState);
+        }
+    }, [appState]);
+
+    // const getEmployeesTableData = (employeesList: IEmployee[]) => {
+    //     const newEmployeesList = JSON.parse(JSON.stringify(employeesList));
+
+    //     for (const employee of newEmployeesList) {
+    //         employee.department = employee.department.label;
+    //         employee.role = employee.role.label;
+    //         employee.actions = (
+    //             <ul className="employee-actions flex-container">
+    //                 <li>
+    //                     <Link to={`/view-employee/${employee.empId}`}>
+    //                         <Button
+    //                             type="button"
+    //                             className="view-emp-btn flex-container"
+    //                         >
+    //                             <span className="material-symbols-rounded">
+    //                                 visibility
+    //                             </span>
+    //                         </Button>
+    //                     </Link>
+    //                 </li>
+    //                 <li>
+    //                     <Link to={`/edit-employee/${employee.empId}`}>
+    //                         <Button
+    //                             type="button"
+    //                             className="edit-emp-btn flex-container"
+    //                         >
+    //                             <span className="material-symbols-rounded">
+    //                                 edit_square
+    //                             </span>
+    //                         </Button>
+    //                     </Link>
+    //                 </li>
+    //                 <li>
+    //                     <Button
+    //                         type="button"
+    //                         className="delete-emp-btn flex-container"
+    //                         onClick={() => setisModalOpen(true)}
+    //                     >
+    //                         <span className="material-symbols-rounded">
+    //                             delete
+    //                         </span>
+    //                     </Button>
+    //                 </li>
+    //             </ul>
+    //         );
+    //     }
+    //     return newEmployeesList;
+    // };
 
     const getEmployeesTableData = (employeesList: IEmployee[]) => {
         const newEmployeesList = JSON.parse(JSON.stringify(employeesList));
@@ -75,7 +135,7 @@ const EmployeesListing: React.FC = () => {
         return newEmployeesList;
     };
 
-    const employeesTableData = getEmployeesTableData(employeesList);
+    // const employeesTableData = getEmployeesTableData(employeesList);
 
     return (
         <>
@@ -84,7 +144,7 @@ const EmployeesListing: React.FC = () => {
                     <TableFilters>
                         <Input placeholder="Search by Employee Name" />
                         <Select
-                            options={skills}
+                            options={appState.skills}
                             name="searchSkills"
                             isMulti
                             closeMenuOnSelect={false}
@@ -109,7 +169,7 @@ const EmployeesListing: React.FC = () => {
                 </Flex>
                 <EmployeesTable
                     tableHeaders={empTableHeaders}
-                    tableData={employeesTableData}
+                    tableData={employees}
                     onClick={() => setisModalOpen(false)}
                 />
             </section>

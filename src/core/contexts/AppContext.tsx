@@ -5,38 +5,64 @@ import {
     IAppContextProvider,
 } from '../../interfaces/AppContextInterface';
 import useApi from '../api/useApi';
-import { IApiSkill } from '../../interfaces/ApiDataInterface';
+import {
+    IApiDepartment,
+    IApiRole,
+    IApiSkill,
+} from '../../interfaces/ApiDataInterface';
+import { modifySelectOptionsData } from '../../utils/employees';
 
 const initialState: IAppContextState = {
-    // employees: [],
-    // roles: [],
+    roles: [],
     skills: [],
-    // departments: [],
+    departments: [],
 };
 
-const AppContext = createContext<IAppContextState>({
-    skills: [],
+const AppContext = createContext<IAppContext>({
+    appState: initialState,
 });
 
 const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const [appState, setAppState] = useState(initialState);
-    const contextValue = appState;
+    const value = { appState };
 
-    const { response } = useApi<IApiSkill>('/skills');
-    console.log(contextValue.skills);
+    const skillsFetchResponse = useApi<IApiSkill>('/skills');
     useEffect(() => {
-        if (response !== null) {
-            // console.log('Obtained data');
-            setAppState({ ...appState, skills: response.data });
-            // console.log('set new data');
+        if (skillsFetchResponse.response) {
+            const skillOptions = skillsFetchResponse.response.data;
+            setAppState((appState) => ({
+                ...appState,
+                skills: modifySelectOptionsData(skillOptions, 'skill'),
+            }));
         }
-    }, [response]);
-    // debugger;
-    return (
-        <AppContext.Provider value={contextValue}>
-            {children}
-        </AppContext.Provider>
-    );
+    }, [skillsFetchResponse.response]);
+
+    const rolesFetchResponse = useApi<IApiRole>('/roles');
+    useEffect(() => {
+        if (rolesFetchResponse.response) {
+            const roleOptions = rolesFetchResponse.response;
+            setAppState((appState) => ({
+                ...appState,
+                roles: modifySelectOptionsData(roleOptions, 'role'),
+            }));
+        }
+    }, [rolesFetchResponse.response]);
+
+    const departmentsFetchResponse = useApi<IApiDepartment>('/departments');
+    useEffect(() => {
+        if (departmentsFetchResponse.response) {
+            const departmentOptions = departmentsFetchResponse.response;
+            setAppState((appState) => ({
+                ...appState,
+                departments: modifySelectOptionsData(
+                    departmentOptions,
+                    'department'
+                ),
+            }));
+        }
+    }, [departmentsFetchResponse.response]);
+
+    return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 const useAppContext = () => {

@@ -16,6 +16,14 @@ export interface IApiEmployee {
     skills: IApiSkill[];
 }
 
+export interface IApiFetchEmployees {
+    message: string;
+    data: {
+        employees: IApiEmployee[];
+        count: number;
+    };
+}
+
 export interface IApiSkill {
     message: string;
     data: {

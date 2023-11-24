@@ -10,14 +10,13 @@ import {
 } from '..';
 import StyledFormWrap from './EmployeeDetailsForm.style';
 import {
-    roles,
-    departments,
     locations,
     skills,
     genders,
 } from '../../pages/EmployeeListing/constants';
 import validate from './validation';
-import { IEmployee } from '../../interfaces/interfaces';
+import { IEmployee } from '../../interfaces/common';
+import { useAppContext } from '../../core/contexts/AppContext';
 
 interface IEmployeeDetailsForm {
     prefillData?: IEmployee;
@@ -26,18 +25,20 @@ interface IEmployeeDetailsForm {
 const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     prefillData = {
         profilePhoto: '',
-        name: '',
+        firstName: '',
         email: '@qburst.com',
         dob: '',
         gender: '',
         address: '',
         role: null,
         department: null,
-        doj: '',
+        dateOfJoining: '',
         location: null,
         skills: [],
     },
 }) => {
+    const { appState } = useAppContext();
+
     const [profilePhoto, setProfilePhoto] = useState(
         prefillData.profilePhoto || '/src/assets/images/employee-avatar.svg'
     );
@@ -85,7 +86,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                 <pre>
                                     {JSON.stringify(props.values, null, 2)}
                                     {JSON.stringify(props.touched, null, 2)}
-                                </pre>  
+                                </pre>
                             </div> */}
                             <div className="flex form-row">
                                 <label
@@ -112,7 +113,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                 <div className="form-entry">
                                     <CustomInput
                                         label="First Name"
-                                        name="name"
+                                        name="firstName"
                                         id="name"
                                         type="text"
                                     />
@@ -158,7 +159,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                     <CustomSelect
                                         name="role"
                                         label="Role"
-                                        options={roles}
+                                        options={appState.roles}
                                         placeholder="Select a Role"
                                     />
                                 </div>
@@ -166,7 +167,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                     <CustomSelect
                                         name="department"
                                         label="Department"
-                                        options={departments}
+                                        options={appState.departments}
                                         placeholder="Select a Department"
                                     />
                                 </div>
@@ -175,7 +176,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                 <div className="form-entry">
                                     <CustomInput
                                         label="Date of Joining"
-                                        name="doj"
+                                        name="dateOfJoining"
                                         type="date"
                                     />
                                 </div>
@@ -193,7 +194,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                     <CustomSelect
                                         name="skills"
                                         label="Skills"
-                                        options={skills}
+                                        options={appState.skills}
                                         placeholder="Select one or more skills"
                                         isMulti
                                         closeMenuOnSelect={false}

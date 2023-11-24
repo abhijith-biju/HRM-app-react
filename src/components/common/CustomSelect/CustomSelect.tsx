@@ -27,7 +27,7 @@ const CustomSelect: React.FC<ICustomSelect> = ({
     ...props
 }) => {
     const [field, meta, helpers] = useField(props);
-    const { setValue, setTouched } = helpers;
+    const { setValue } = helpers;
 
     return (
         <>
@@ -35,7 +35,13 @@ const CustomSelect: React.FC<ICustomSelect> = ({
             <Select
                 options={options}
                 styles={CustomSelectStyles}
-                onBlur={() => setTouched(true)}
+                onBlur={() =>
+                    field.onBlur({
+                        target: {
+                            name: field.name,
+                        },
+                    })
+                }
                 value={field.value}
                 onChange={(option: IOption) => {
                     if (option) {
