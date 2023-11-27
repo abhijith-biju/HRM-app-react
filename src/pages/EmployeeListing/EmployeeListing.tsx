@@ -32,7 +32,7 @@ const EmployeesListing: React.FC = () => {
         if (employeesFetchResponse.response) {
             setEmployees(employeesFetchResponse.response.data.employees);
         }
-    }, [employeesFetchResponse.response]);
+    }, [employeesFetchResponse.loading]);
 
     const createEmployeeLisitingData = (employeesList: IApiEmployee[]) => {
         const newEmployeesList: IEmployeeListing[] =
@@ -116,6 +116,7 @@ const EmployeesListing: React.FC = () => {
                     tableHeaders={empTableHeaders}
                     tableData={createEmployeeLisitingData(employees)}
                     onClick={() => setisModalOpen(false)}
+                    loading={employeesFetchResponse.loading}
                 />
             </section>
 

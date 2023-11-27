@@ -13,6 +13,7 @@ import CustomRadioGroup from './common/CustomRadioGroup/CustomRadioGroup.tsx';
 import CustomInput from './common/CustomInput/CustomInput.tsx';
 import CustomSelect from './common/CustomSelect/CustomSelect.tsx';
 import EmployeeDetailsForm from './EmployeeDetailsForm/EmployeeDetailsForm.tsx';
+import Loader from './common/Loader/Loader.tsx';
 
 export {
     Header,
@@ -30,4 +31,5 @@ export {
     CustomInput,
     CustomSelect,
     EmployeeDetailsForm,
+    Loader,
 };

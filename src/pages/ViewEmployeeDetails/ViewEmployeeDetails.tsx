@@ -1,5 +1,5 @@
 import StyledEmpDetailsWrap from './ViewEmployeeDetails.style';
-import { Button } from '../../components';
+import { Button, Loader, Chip } from '../../components';
 import { Link } from 'react-router-dom';
 import { Flex } from '../../components';
 import { useParams } from 'react-router-dom';
@@ -33,7 +33,7 @@ const ViewEmployeeDetails = () => {
     return (
         <>
             {loading ? (
-                <div>Loading...</div>
+                <Loader className="full-screen-loader"></Loader>
             ) : (
                 <StyledEmpDetailsWrap
                     className="details column align-center"
@@ -50,10 +50,10 @@ const ViewEmployeeDetails = () => {
                             <p className="full-name">
                                 {employeeDetails.firstName}
                             </p>
-                            {/* <p className="role">{employeeDetails.role.role}</p> */}
-                            {/* <p className="department">
-                                {employeeDetails.department.department}
-                            </p> */}
+                            <p className="role">{employeeDetails.role?.role}</p>
+                            <p className="department">
+                                {employeeDetails.department?.department}
+                            </p>
                             {/* <p className="location">{employeeDetails.location.label}</p> */}
                         </div>
                         <div className="extended-details">
@@ -92,11 +92,11 @@ const ViewEmployeeDetails = () => {
                                         {employeeDetails.address}
                                     </dd>
                                 </div>
-                                {/* <div className="data-entry">
+                                <div className="data-entry">
                                     <dt>Skills</dt>
                                     <dd>
                                         <ul className="selected-skills-list flex-container">
-                                            {employeeDetails.skills.map(
+                                            {employeeDetails.skills?.map(
                                                 (skill) => (
                                                     <li key={skill.id}>
                                                         <Chip>
@@ -107,7 +107,7 @@ const ViewEmployeeDetails = () => {
                                             )}
                                         </ul>
                                     </dd>
-                                </div> */}
+                                </div>
                             </dl>
                         </div>
                     </Flex>
