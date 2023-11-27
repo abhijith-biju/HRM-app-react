@@ -37,30 +37,30 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
         }
     }, [skillsFetchResponse.response]);
 
-    const rolesFetchResponse = useApi<IApiRole>('/roles');
-    useEffect(() => {
-        if (rolesFetchResponse.response) {
-            const roleOptions = rolesFetchResponse.response;
-            setAppState((appState) => ({
-                ...appState,
-                roles: modifySelectOptionsData(roleOptions, 'role'),
-            }));
-        }
-    }, [rolesFetchResponse.response]);
+    // const rolesFetchResponse = useApi<IApiRole>('/roles');
+    // useEffect(() => {
+    //     if (rolesFetchResponse.response) {
+    //         const roleOptions = rolesFetchResponse.response;
+    //         setAppState((appState) => ({
+    //             ...appState,
+    //             roles: modifySelectOptionsData(roleOptions, 'role'),
+    //         }));
+    //     }
+    // }, [rolesFetchResponse.response]);
 
-    const departmentsFetchResponse = useApi<IApiDepartment>('/departments');
-    useEffect(() => {
-        if (departmentsFetchResponse.response) {
-            const departmentOptions = departmentsFetchResponse.response;
-            setAppState((appState) => ({
-                ...appState,
-                departments: modifySelectOptionsData(
-                    departmentOptions,
-                    'department'
-                ),
-            }));
-        }
-    }, [departmentsFetchResponse.response]);
+    // const departmentsFetchResponse = useApi<IApiDepartment>('/departments');
+    // useEffect(() => {
+    //     if (departmentsFetchResponse.response) {
+    //         const departmentOptions = departmentsFetchResponse.response;
+    //         setAppState((appState) => ({
+    //             ...appState,
+    //             departments: modifySelectOptionsData(
+    //                 departmentOptions,
+    //                 'department'
+    //             ),
+    //         }));
+    //     }
+    // }, [departmentsFetchResponse.response]);
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

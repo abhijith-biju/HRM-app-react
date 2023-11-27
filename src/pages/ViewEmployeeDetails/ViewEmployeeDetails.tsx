@@ -25,7 +25,6 @@ const ViewEmployeeDetails = () => {
 
     useEffect(() => {
         if (response && response.data) {
-            console.log(response);
             setEmployeeDetails(response.data);
         }
     }, [response]);

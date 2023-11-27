@@ -19,18 +19,18 @@ interface IEmployeeDetailsForm {
 
 const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     prefillData = {
-        firstName: '',
-        lastName: '',
+        firstName: 'abhib',
+        lastName: 'abhib',
         isActive: true,
-        dob: '',
-        email: '',
-        phone: '',
+        dob: '2017-06-01',
+        email: 'abhib@qburst.com',
+        phone: '1234567890',
         designation: '',
         salary: '',
-        dateOfJoining: '',
-        address: '',
-        role: {},
-        department: {},
+        dateOfJoining: '2001-06-01',
+        address: 'abc street, pqr',
+        role: null,
+        department: null,
         skills: [],
         moreDetails: '',
     },
@@ -65,6 +65,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     // };
 
     const initialValues = prefillData;
+    // console.log(initialValues);
 
     return (
         <StyledFormWrap>
@@ -140,13 +141,13 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         type="date"
                                     />
                                 </div>
-                                <CustomRadioGroup
+                                {/* <CustomRadioGroup
                                     id="gender"
                                     label="Gender"
                                     name="gender"
                                     options={genders}
                                     className="form-entry"
-                                />
+                                /> */}
                             </div>
                             <div className="flex form-row">
                                 <div className="form-entry">
@@ -183,14 +184,14 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         type="date"
                                     />
                                 </div>
-                                <div className="form-entry">
+                                {/* <div className="form-entry">
                                     <CustomSelect
                                         name="location"
                                         label="Location"
                                         options={locations}
                                         placeholder="Select a Location"
                                     />
-                                </div>
+                                </div> */}
                             </div>
                             <div className="flex form-row">
                                 <div className="form-entry skills-input-container">

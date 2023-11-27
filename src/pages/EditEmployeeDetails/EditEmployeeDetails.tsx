@@ -1,5 +1,5 @@
 import StyledEditEmployeeDetails from './EditEmployeeDetails.style';
-import { EmployeeDetailsForm } from '../../components';
+import { EmployeeDetailsForm, Loader } from '../../components';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useApi from '../../core/api/useApi';
@@ -28,14 +28,20 @@ const EditEmployeeDetails: React.FC = () => {
     }, [response]);
 
     return (
-        <StyledEditEmployeeDetails>
-            <h2 className="text-center">Edit Employee Details</h2>
+        <>
             {loading ? (
-                <div>Loading...</div>
+                <Loader className="full-screen-loader" />
             ) : (
-                <EmployeeDetailsForm prefillData={employeeDetails} />
+                <StyledEditEmployeeDetails>
+                    <h2 className="text-center">Edit Employee Details</h2>
+                    {loading ? (
+                        <div>Loading...</div>
+                    ) : (
+                        <EmployeeDetailsForm prefillData={employeeDetails} />
+                    )}
+                </StyledEditEmployeeDetails>
             )}
-        </StyledEditEmployeeDetails>
+        </>
     );
 };
 

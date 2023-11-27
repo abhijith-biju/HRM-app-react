@@ -18,17 +18,17 @@ const validate = Yup.object().shape({
     dob: Yup.date()
         .max(new Date(), 'Date of birth cannot be in the future')
         .required('Date of Birth is required'),
-    gender: Yup.string().required('Gender is required.'),
+    // gender: Yup.string().required('Gender is required.'),
     address: Yup.string()
         .min(10, 'Address must be at least 10 characters')
         .max(200, 'Address cannot exceed 200 characters')
         .required('Address is required'),
     role: selectShape.required('Role is required.'),
     department: selectShape.required('Department is required.'),
-    doj: Yup.date()
+    dateOfJoining: Yup.date()
         .max(new Date(), 'Date of joining cannot be in the future.')
         .required('Date of Joining is required'),
-    location: selectShape.required('Location is required.'),
+    // location: selectShape.required('Location is required.'),
     skills: Yup.array()
         .of(selectShape)
         .min(1, 'Atleast one skill is required.'),

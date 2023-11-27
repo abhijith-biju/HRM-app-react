@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 
-const API = axios.create({ baseURL: 'https://vipinms.cloud/' });
+const API = axios.create({ baseURL: 'https://vipinms.cloud/', timeout: 10000 });
 
 const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
     const [response, setResponse] = useState<T | null>(null);
@@ -12,17 +12,14 @@ const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
     const refresh = () => {
         setRefreshIndex(refreshIndex + 1);
     };
-
-    // console.log('inside useAPI', url);
+    console.log('inside useAPI', url);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                // console.log('inside useEffect', url);
-
+                console.log('inside useEffect', url);
                 const response: AxiosResponse<T> = await API.get(url, params);
-
                 // console.log(url, response.data);
 
                 if (!cancelled) {
@@ -42,7 +39,7 @@ const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
         return () => {
             cancelled = true;
         };
-    }, [url]);
+    }, []);
 
     return { response, loading, error, refresh };
 };
