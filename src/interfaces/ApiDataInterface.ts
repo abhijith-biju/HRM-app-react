@@ -10,10 +10,10 @@ export interface IApiEmployee {
     salary: string; //
     dateOfJoining: string;
     address: string;
-    moreDetails: string;
     role: IApiRole;
     department: IApiDepartment;
     skills: IApiSkill[];
+    moreDetails: string;
 }
 
 export interface IApiFetchEmployees {
@@ -24,12 +24,22 @@ export interface IApiFetchEmployees {
     };
 }
 
-export interface IApiSkill {
+export interface IApiFetchEmployee {
+    message: string;
+    data: IApiEmployee;
+}
+
+export interface IApiFetchSkill {
     message: string;
     data: {
         id: number;
         skill: string;
     }[];
+}
+
+export interface IApiSkill {
+    id: number;
+    skill: string;
 }
 
 export interface IApiDepartment {

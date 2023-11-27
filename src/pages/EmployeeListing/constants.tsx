@@ -230,8 +230,8 @@ const empTableHeaders = [
     { value: 'id', label: 'Employee ID' },
     { value: 'firstName', label: 'Name' },
     { value: 'email', label: 'Email' },
-    // { value: 'role', label: 'Role' },
-    // { value: 'department', label: 'Department' },
+    { value: 'role', label: 'Role' },
+    { value: 'department', label: 'Department' },
     { value: 'actions', label: 'Actions' },
 ];
 

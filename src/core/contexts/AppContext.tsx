@@ -8,7 +8,7 @@ import useApi from '../api/useApi';
 import {
     IApiDepartment,
     IApiRole,
-    IApiSkill,
+    IApiFetchSkill,
 } from '../../interfaces/ApiDataInterface';
 import { modifySelectOptionsData } from '../../utils/employees';
 
@@ -26,7 +26,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const [appState, setAppState] = useState(initialState);
     const value = { appState };
 
-    const skillsFetchResponse = useApi<IApiSkill>('/skills');
+    const skillsFetchResponse = useApi<IApiFetchSkill>('/skills');
     useEffect(() => {
         if (skillsFetchResponse.response) {
             const skillOptions = skillsFetchResponse.response.data;

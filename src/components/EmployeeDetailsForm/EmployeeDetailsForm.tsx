@@ -1,6 +1,5 @@
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import {
     Button,
     CustomInput,
@@ -9,46 +8,47 @@ import {
     CustomSelect,
 } from '..';
 import StyledFormWrap from './EmployeeDetailsForm.style';
-import {
-    locations,
-    skills,
-    genders,
-} from '../../pages/EmployeeListing/constants';
+import { locations, genders } from '../../pages/EmployeeListing/constants';
 import validate from './validation';
-import { IEmployee } from '../../interfaces/common';
 import { useAppContext } from '../../core/contexts/AppContext';
+import { IApiEmployee } from '../../interfaces/ApiDataInterface';
 
 interface IEmployeeDetailsForm {
-    prefillData?: IEmployee;
+    prefillData?: IApiEmployee;
 }
 
 const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     prefillData = {
-        profilePhoto: '',
         firstName: '',
-        email: '@qburst.com',
+        lastName: '',
+        isActive: true,
         dob: '',
-        gender: '',
-        address: '',
-        role: null,
-        department: null,
+        email: '',
+        phone: '',
+        designation: '',
+        salary: '',
         dateOfJoining: '',
-        location: null,
+        address: '',
+        role: {},
+        department: {},
         skills: [],
+        moreDetails: '',
     },
 }) => {
     const { appState } = useAppContext();
 
-    const [profilePhoto, setProfilePhoto] = useState(
-        prefillData.profilePhoto || '/src/assets/images/employee-avatar.svg'
-    );
+    // code to handle profile picture
 
-    const photoUploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            const imgFile = e.target.files[0];
-            setProfilePhoto(URL.createObjectURL(imgFile));
-        }
-    };
+    // const [profilePhoto, setProfilePhoto] = useState(
+    //     prefillData.profilePhoto || '/src/assets/images/employee-avatar.svg'
+    // );
+
+    // const photoUploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     if (e.target.files) {
+    //         const imgFile = e.target.files[0];
+    //         setProfilePhoto(URL.createObjectURL(imgFile));
+    //     }
+    // };
 
     // const initialValues = {
     //     profilePicture: '',
@@ -88,7 +88,10 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                     {JSON.stringify(props.touched, null, 2)}
                                 </pre>
                             </div> */}
-                            <div className="flex form-row">
+
+                            {/* code to handle profile picture  */}
+
+                            {/* <div className="flex form-row">
                                 <label
                                     htmlFor="profilePhoto"
                                     className="profile-picture-wrap"
@@ -108,7 +111,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         onChange={photoUploadHandler}
                                     />
                                 </label>
-                            </div>
+                            </div> */}
                             <div className="flex form-row">
                                 <div className="form-entry">
                                     <CustomInput

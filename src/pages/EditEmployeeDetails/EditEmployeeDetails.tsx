@@ -1,7 +1,12 @@
 import StyledEditEmployeeDetails from './EditEmployeeDetails.style';
 import { EmployeeDetailsForm } from '../../components';
 import { useParams } from 'react-router-dom';
-import { getEmployeeDetails } from '../../utils/employees';
+import { useEffect, useState } from 'react';
+import useApi from '../../core/api/useApi';
+import {
+    IApiEmployee,
+    IApiFetchEmployee,
+} from '../../interfaces/ApiDataInterface';
 
 const EditEmployeeDetails: React.FC = () => {
     const { employeeId } = useParams();
@@ -9,16 +14,27 @@ const EditEmployeeDetails: React.FC = () => {
     if (!employeeId) {
         throw new Response('Not Found', { status: 404 });
     }
+    const [employeeDetails, setEmployeeDetails] = useState({} as IApiEmployee);
 
-    const employeeDetails = getEmployeeDetails(parseInt(employeeId));
-    if (!employeeDetails) {
-        throw new Response('Not Found', { status: 404 });
-    }
+    const { response, loading } = useApi<IApiFetchEmployee>(
+        `/employee/${employeeId}`
+    );
+
+    useEffect(() => {
+        if (response && response.data) {
+            console.log(response);
+            setEmployeeDetails(response.data);
+        }
+    }, [response]);
 
     return (
         <StyledEditEmployeeDetails>
             <h2 className="text-center">Edit Employee Details</h2>
-            <EmployeeDetailsForm prefillData={employeeDetails} />
+            {loading ? (
+                <div>Loading...</div>
+            ) : (
+                <EmployeeDetailsForm prefillData={employeeDetails} />
+            )}
         </StyledEditEmployeeDetails>
     );
 };

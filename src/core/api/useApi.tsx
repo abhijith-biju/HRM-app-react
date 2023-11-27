@@ -13,14 +13,18 @@ const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
         setRefreshIndex(refreshIndex + 1);
     };
 
+    // console.log('inside useAPI', url);
+
     useEffect(() => {
         let cancelled = false;
         const fetchData = async () => {
             try {
+                // console.log('inside useEffect', url);
+
                 setLoading(true);
                 const response: AxiosResponse<T> = await API.get(url, params);
 
-                console.log(url, response.data);
+                // console.log(url, response.data);
 
                 if (!cancelled) {
                     setResponse(response.data);
