@@ -6,7 +6,11 @@ export const API = axios.create({
     timeout: 10000,
 });
 
-const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
+const useApi = <T,>(
+    method: string,
+    url: string,
+    params?: AxiosRequestConfig
+) => {
     const [response, setResponse] = useState<T | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -16,14 +20,16 @@ const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
         setRefreshIndex((prev) => prev + 1);
     };
 
-    // console.log('inside useAPI', url);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
                 console.log('inside useApi useEffect', url);
-                const response: AxiosResponse<T> = await API.get(url, params);
-                // console.log(url, response.data);
+                const response: AxiosResponse<T> = await API({
+                    method,
+                    url,
+                    ...params,
+                });
 
                 if (!cancelled) {
                     setResponse(response.data);

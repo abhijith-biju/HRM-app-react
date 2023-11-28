@@ -48,6 +48,8 @@ export interface IEmployeeSubmission {
     department: IDepartment | null;
     skills: ISkill[] | [];
     moreDetails: string;
+    // location: IRole
+    // gender: string;
 }
 
 export interface IEmployeeListing {
@@ -56,7 +58,7 @@ export interface IEmployeeListing {
     email: string;
     role: string;
     department: string;
-    actions: any;
+    actions: JSX.Element;
 }
 
 export interface IDepartment {

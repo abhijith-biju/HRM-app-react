@@ -2,11 +2,10 @@ import { IEmployeeSubmission } from '../../interfaces/common';
 import { IApiEmployeeSubmission } from '../../interfaces/ApiDataInterface';
 import { API } from '../../core/api/useApi';
 
-interface IHandleSubmit {
-    (submitData: IEmployeeSubmission, empId: string | null): void;
-}
-
-const handleFormSubmit: IHandleSubmit = (submitData, empId) => {
+const handleFormSubmit = async (
+    submitData: IEmployeeSubmission,
+    empId: string | null
+) => {
     const submissionData: IApiEmployeeSubmission = {
         ...submitData,
         department: Number(submitData.department?.value),
@@ -15,31 +14,27 @@ const handleFormSubmit: IHandleSubmit = (submitData, empId) => {
     };
 
     if (empId) {
-        API({
-            method: 'PATCH',
-            url: `/employee/${empId}`,
-            data: submissionData,
-        })
-            .then(function (res) {
-                console.log(res);
-                alert('Successfully submitted!');
-            })
-            .catch(function (res) {
-                console.log(res);
+        try {
+            const respose = await API({
+                method: 'PATCH',
+                url: `/employee/${empId}`,
+                data: submissionData,
             });
+            console.log('edit success : ', respose);
+        } catch (error) {
+            console.log('edit failed : ', error);
+        }
     } else {
-        API({
-            method: 'POST',
-            url: '/employee',
-            data: submissionData,
-        })
-            .then(function (res) {
-                console.log(res);
-                alert('Successfully submitted!');
-            })
-            .catch(function (res) {
-                console.log(res);
+        try {
+            const respose = await API({
+                method: 'POST',
+                url: '/employee',
+                data: submissionData,
             });
+            console.log('edit success : ', respose);
+        } catch (error) {
+            console.log('edit failed : ', error);
+        }
     }
 };
 

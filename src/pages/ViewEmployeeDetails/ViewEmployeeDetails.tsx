@@ -1,8 +1,7 @@
 import StyledEmpDetailsWrap from './ViewEmployeeDetails.style';
 import { Button, Loader, Chip } from '../../components';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Flex } from '../../components';
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useApi from '../../core/api/useApi';
 import {
@@ -20,6 +19,7 @@ const ViewEmployeeDetails = () => {
     const [employeeDetails, setEmployeeDetails] = useState({} as IApiEmployee);
 
     const { response, loading } = useApi<IApiFetchEmployee>(
+        'GET',
         `/employee/${employeeId}`
     );
 
@@ -32,7 +32,7 @@ const ViewEmployeeDetails = () => {
     return (
         <>
             {loading ? (
-                <Loader className="full-screen-loader"></Loader>
+                <Loader className="full-screen-loader" />
             ) : (
                 <StyledEmpDetailsWrap
                     className="details column align-center"
@@ -111,7 +111,9 @@ const ViewEmployeeDetails = () => {
                         </div>
                     </Flex>
                     <Link to="/">
-                        <Button className="primary back-btn">Go Back</Button>
+                        <Button className="primary back-btn">
+                            Go to Home Page
+                        </Button>
                     </Link>
                 </StyledEmpDetailsWrap>
             )}

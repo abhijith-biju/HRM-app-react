@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import useApi from '../api/useApi';
 import {
     IAppContext,
     IAppContextState,
     IAppContextProvider,
 } from '../../interfaces/AppContextInterface';
-import useApi from '../api/useApi';
 import {
     IApiDepartment,
     IApiRole,
@@ -26,7 +26,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const [appState, setAppState] = useState(initialState);
     const value = { appState };
 
-    const skillsFetchResponse = useApi<IApiFetchSkill>('/skills');
+    const skillsFetchResponse = useApi<IApiFetchSkill>('GET', '/skills');
     useEffect(() => {
         if (skillsFetchResponse.response) {
             const skillOptions = skillsFetchResponse.response.data;
@@ -37,7 +37,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
         }
     }, [skillsFetchResponse.response]);
 
-    const rolesFetchResponse = useApi<IApiRole>('/roles');
+    const rolesFetchResponse = useApi<IApiRole>('GET', '/roles');
     useEffect(() => {
         if (rolesFetchResponse.response) {
             const roleOptions = rolesFetchResponse.response;
@@ -48,7 +48,10 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
         }
     }, [rolesFetchResponse.response]);
 
-    const departmentsFetchResponse = useApi<IApiDepartment>('/departments');
+    const departmentsFetchResponse = useApi<IApiDepartment>(
+        'GET',
+        '/departments'
+    );
     useEffect(() => {
         if (departmentsFetchResponse.response) {
             const departmentOptions = departmentsFetchResponse.response;

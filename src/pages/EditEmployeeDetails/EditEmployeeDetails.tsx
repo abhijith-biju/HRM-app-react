@@ -12,6 +12,7 @@ const EditEmployeeDetails: React.FC = () => {
     }
 
     const { response, loading } = useApi<IApiFetchEmployee>(
+        'GET',
         `/employee/${employeeId}`
     );
 

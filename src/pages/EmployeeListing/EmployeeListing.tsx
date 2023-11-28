@@ -12,28 +12,31 @@ import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { CustomSelectStyles } from './EmployeeListing.style';
 import { useAppContext } from '../../core/contexts/AppContext';
-import useApi from '../../core/api/useApi';
+import useApi, { API } from '../../core/api/useApi';
 import {
     IApiFetchEmployees,
     IApiEmployee,
 } from '../../interfaces/ApiDataInterface';
 import { getEmployeesListingData } from '../../utils/employees';
 import { IEmployeeListing } from '../../interfaces/common';
-import { API } from '../../core/api/useApi';
 
 const EmployeesListing: React.FC = () => {
     const { appState } = useAppContext();
-    const [isModalopen, setisModalOpen] = useState(false);
+    const [isModalopen, setIsModalOpen] = useState(false);
     const [employees, setEmployees] = useState<IApiEmployee[]>([]);
     const [empIdtoDelete, setEmpIdToDelete] = useState<number | undefined>(
         undefined
     );
 
     const employeesFetchResponse = useApi<IApiFetchEmployees>(
+        'GET',
         '/employee?sortBy=firstName&sortDir=asc'
     );
     useEffect(() => {
-        console.log('Inside useEffect');
+        console.log(
+            'Inside employeeListing useEffect',
+            employeesFetchResponse.loading
+        );
         if (employeesFetchResponse.response) {
             console.log(
                 'updating employee list',
@@ -44,70 +47,26 @@ const EmployeesListing: React.FC = () => {
     }, [employeesFetchResponse.loading]);
 
     const createEmployeeLisitingData = (employeesList: IApiEmployee[]) => {
-        const newEmployeesList: IEmployeeListing[] =
-            getEmployeesListingData(employeesList);
-        newEmployeesList.map(
-            (employee) =>
-                (employee.actions = (
-                    <ul className="employee-actions flex-container">
-                        <li>
-                            <Link to={`/view-employee/${employee.id}`}>
-                                <Button
-                                    type="button"
-                                    className="view-emp-btn flex-container"
-                                >
-                                    <span className="material-symbols-rounded">
-                                        visibility
-                                    </span>
-                                </Button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to={`/edit-employee/${employee.id}`}>
-                                <Button
-                                    type="button"
-                                    className="edit-emp-btn flex-container"
-                                >
-                                    <span className="material-symbols-rounded">
-                                        edit_square
-                                    </span>
-                                </Button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Button
-                                type="button"
-                                className="delete-emp-btn flex-container"
-                                onClick={() => {
-                                    setEmpIdToDelete(employee.id);
-                                    setisModalOpen(true);
-                                }}
-                            >
-                                <span className="material-symbols-rounded">
-                                    delete
-                                </span>
-                            </Button>
-                        </li>
-                    </ul>
-                ))
+        const newEmployeesList: IEmployeeListing[] = getEmployeesListingData(
+            employeesList,
+            setIsModalOpen,
+            setEmpIdToDelete
         );
         return newEmployeesList;
     };
 
     const deleteConfirmHandler = () => {
-        setisModalOpen(false);
+        setIsModalOpen(false);
         API({
             method: 'DELETE',
             url: `/employee/${empIdtoDelete}`,
         })
             .then(function (res) {
-                console.log(res);
+                console.log('Successfully deleted!', res);
                 employeesFetchResponse.refresh();
-                alert('Successfully deleted!');
             })
             .catch(function (res) {
-                console.log(res);
-                alert('delete Failed!');
+                console.log('delete Failed!', res);
             });
     };
 
@@ -154,7 +113,7 @@ const EmployeesListing: React.FC = () => {
                     record?"
                 type="yesCancel"
                 confirmClickHandler={deleteConfirmHandler}
-                cancelClickHandler={() => setisModalOpen(false)}
+                cancelClickHandler={() => setIsModalOpen(false)}
             />
         </>
     );
