@@ -25,22 +25,20 @@ export const modifySelectOptionsData = (
     for (const obj of optionsArr) {
         newOptionsArr.push({ value: String(obj.id), label: obj[curLabelKey] });
     }
-
     return newOptionsArr;
 };
 
 export const getEmployeesListingData = (employeesList: IApiEmployee[]) => {
     const newEmpList: IEmployeeListing[] = [];
     for (const emp of employeesList) {
-        const newEmp = {
+        const newEmp: IEmployeeListing = {
             id: emp.id,
             firstName: emp.firstName,
             email: emp.email,
-            phone: emp.phone,
-        } as IEmployeeListing;
-        newEmp.department = emp.department ? emp.department.department : 'N/A';
-        newEmp.role = emp.role ? emp.role.role : 'N/A';
-
+            department: emp.department ? emp.department.department : 'N/A',
+            role: emp.role ? emp.role.role : 'N/A',
+            actions: '',
+        };
         newEmpList.push(newEmp);
     }
     return newEmpList;
