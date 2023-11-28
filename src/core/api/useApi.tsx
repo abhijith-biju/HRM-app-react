@@ -13,10 +13,10 @@ const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
     const [refreshIndex, setRefreshIndex] = useState(0);
 
     const refresh = () => {
-        setRefreshIndex(refreshIndex + 1);
+        setRefreshIndex((prev) => prev + 1);
     };
-    // console.log('inside useAPI', url);
 
+    // console.log('inside useAPI', url);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -42,7 +42,7 @@ const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
         return () => {
             cancelled = true;
         };
-    }, [url]);
+    }, [url, refreshIndex]);
 
     return { response, loading, error, refresh };
 };

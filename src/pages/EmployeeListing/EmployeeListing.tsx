@@ -19,11 +19,15 @@ import {
 } from '../../interfaces/ApiDataInterface';
 import { getEmployeesListingData } from '../../utils/employees';
 import { IEmployeeListing } from '../../interfaces/common';
+import { API } from '../../core/api/useApi';
 
 const EmployeesListing: React.FC = () => {
     const { appState } = useAppContext();
     const [isModalopen, setisModalOpen] = useState(false);
     const [employees, setEmployees] = useState<IApiEmployee[]>([]);
+    const [empIdtoDelete, setEmpIdToDelete] = useState<number | undefined>(
+        undefined
+    );
 
     const employeesFetchResponse = useApi<IApiFetchEmployees>(
         '/employee?sortBy=firstName&sortDir=asc'
@@ -69,7 +73,10 @@ const EmployeesListing: React.FC = () => {
                             <Button
                                 type="button"
                                 className="delete-emp-btn flex-container"
-                                onClick={() => setisModalOpen(true)}
+                                onClick={() => {
+                                    setEmpIdToDelete(employee.id);
+                                    setisModalOpen(true);
+                                }}
                             >
                                 <span className="material-symbols-rounded">
                                     delete
@@ -80,6 +87,23 @@ const EmployeesListing: React.FC = () => {
                 ))
         );
         return newEmployeesList;
+    };
+
+    const deleteConfirmHandler = () => {
+        setisModalOpen(false);
+        API({
+            method: 'DELETE',
+            url: `/employee/${empIdtoDelete}`,
+        })
+            .then(function (res) {
+                console.log(res);
+                employeesFetchResponse.refresh();
+                alert('Successfully deleted!');
+            })
+            .catch(function (res) {
+                console.log(res);
+                alert('delete Failed!');
+            });
     };
 
     return (
@@ -115,7 +139,6 @@ const EmployeesListing: React.FC = () => {
                 <EmployeesTable
                     tableHeaders={empTableHeaders}
                     tableData={createEmployeeLisitingData(employees)}
-                    onClick={() => setisModalOpen(false)}
                     loading={employeesFetchResponse.loading}
                 />
             </section>
@@ -125,7 +148,7 @@ const EmployeesListing: React.FC = () => {
                 text="Are you sure you want to permanently delete the employee
                     record?"
                 type="yesCancel"
-                confirmClickHandler={() => setisModalOpen(false)}
+                confirmClickHandler={deleteConfirmHandler}
                 cancelClickHandler={() => setisModalOpen(false)}
             />
         </>

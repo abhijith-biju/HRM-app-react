@@ -1,6 +1,6 @@
 import { IEmployeeSubmission } from '../../interfaces/common';
 import { IApiEmployeeSubmission } from '../../interfaces/ApiDataInterface';
-import { API } from '../../core/api/useFetch';
+import { API } from '../../core/api/useApi';
 
 interface IHandleSubmit {
     (submitData: IEmployeeSubmission, empId: string | null): void;
@@ -17,7 +17,7 @@ const handleFormSubmit: IHandleSubmit = (submitData, empId) => {
     if (empId) {
         API({
             method: 'PATCH',
-            url: `/employees/${empId}`,
+            url: `/employee/${empId}`,
             data: submissionData,
         })
             .then(function (res) {

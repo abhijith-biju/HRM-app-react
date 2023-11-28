@@ -62,7 +62,6 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                 validationSchema={validate}
                 onSubmit={(values) => {
                     handleFormSubmit(values, empId);
-                    console.log('here');
                     navigate(`/`);
                 }}
             >

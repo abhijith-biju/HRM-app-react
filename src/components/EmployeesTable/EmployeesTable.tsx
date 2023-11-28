@@ -1,11 +1,7 @@
 import { ITable } from '../common/Table/Table';
 import StyledEmployeesTable from './EmployeesTable.style';
 
-interface IEmployeesTable extends ITable {
-    onClick: () => void;
-}
-
-const EmployeesTable: React.FC<IEmployeesTable> = ({ ...props }) => {
+const EmployeesTable: React.FC<ITable> = ({ ...props }) => {
     return <StyledEmployeesTable {...props}></StyledEmployeesTable>;
 };
 

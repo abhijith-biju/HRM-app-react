@@ -18,13 +18,13 @@
 export interface IEmployee {
     id: number;
     firstName: string;
-    lastName: string; //
-    isActive: true; //
+    lastName: string;
+    isActive: true;
     dob: string;
     email: string;
-    phone: string; //
-    designation: string; //
-    salary: string; //
+    phone: string;
+    designation: string;
+    salary: string;
     dateOfJoining: string;
     address: string;
     role: IRole;
@@ -54,7 +54,6 @@ export interface IEmployeeListing {
     id: number;
     firstName: string;
     email: string;
-    phone: string; //
     role: string;
     department: string;
     actions: any;
