@@ -11,17 +11,16 @@ import StyledFormWrap from './EmployeeDetailsForm.style';
 // import { locations, genders } from '../../pages/EmployeeListing/constants';
 import validate from './validation';
 import { useAppContext } from '../../core/contexts/AppContext';
-import {
-    IApiEmployeeSubmission,
-    IEmployeeSubmission,
-} from '../../interfaces/ApiDataInterface';
-import { API } from '../../core/api/useApi';
+import { IEmployeeSubmission } from '../../interfaces/common';
+import handleFormSubmit from './handleFormSubmit';
 
 interface IEmployeeDetailsForm {
+    empId?: string | null;
     prefillData?: IEmployeeSubmission;
 }
 
 const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
+    empId = null,
     prefillData = {
         firstName: 'abhib',
         lastName: '',
@@ -54,37 +53,14 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     //     }
     // };
 
-    const initialValues = prefillData;
-
     return (
         <StyledFormWrap>
             <Formik
-                initialValues={initialValues}
+                initialValues={prefillData}
                 validationSchema={validate}
                 onSubmit={(values) => {
                     console.log('submit button clicked');
-
-                    const submissionData: IApiEmployeeSubmission = {
-                        ...values,
-                        department: Number(values.department?.value),
-                        role: Number(values.role?.value),
-                        skills: values.skills?.map((skill) =>
-                            Number(skill.value)
-                        ),
-                    };
-
-                    API({
-                        method: 'POST',
-                        url: '/employee',
-                        data: submissionData,
-                    })
-                        .then(function (res) {
-                            console.log(res);
-                            alert('Successfully submitted!');
-                        })
-                        .catch(function (res) {
-                            console.log(res);
-                        });
+                    handleFormSubmit(values, empId);
                 }}
             >
                 {(props) => {
@@ -94,12 +70,12 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                             onSubmit={props.handleSubmit}
                             noValidate
                         >
-                            {/* <div className="flex">
+                            <div className="flex">
                                 <pre>
                                     {JSON.stringify(props.values, null, 2)}
-                                    {JSON.stringify(props.touched, null, 2)}
+                                    {/* {JSON.stringify(props.touched, null, 2)} */}
                                 </pre>
-                            </div> */}
+                            </div>
 
                             {/* code to handle profile picture  */}
 

@@ -15,13 +15,13 @@ const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
     const refresh = () => {
         setRefreshIndex(refreshIndex + 1);
     };
-    // console.log('inside useAPI', url);
+    console.log('inside useAPI', url);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                // console.log('inside useApi useEffect', url);
+                // console.log('inside useEffect', url);
                 const response: AxiosResponse<T> = await API.get(url, params);
                 // console.log(url, response.data);
 
@@ -42,7 +42,7 @@ const useApi = <T,>(url: string, params?: AxiosRequestConfig) => {
         return () => {
             cancelled = true;
         };
-    }, [url]);
+    }, []);
 
     return { response, loading, error, refresh };
 };

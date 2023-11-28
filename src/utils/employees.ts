@@ -1,7 +1,10 @@
 import { employeesList } from '../pages/EmployeeListing/constants';
 import { IOption } from '../components/common/CustomSelect/CustomSelect';
 import { IEmployeeListing } from '../interfaces/common';
-import { IApiEmployee } from '../interfaces/ApiDataInterface';
+import {
+    IApiEmployee,
+    IEmployeeSubmission,
+} from '../interfaces/ApiDataInterface';
 
 export const getEmployeeDetails = (employeeId: number | undefined) => {
     return employeesList.find((employee) => employee.empId === employeeId);
@@ -42,45 +45,39 @@ export const getEmployeesListingData = (employeesList: IApiEmployee[]) => {
     return newEmpList;
 };
 
-// export const mapSelectObjtoValue = (selectObject: IOption) => {
-//     return selectObject.value;
-// };
+export const modifySelectOption = (optionObj: any, curLabelKey: string) => {
+    if (optionObj) {
+        return { value: String(optionObj.id), label: optionObj[curLabelKey] };
+    }
+    return { value: '0', label: 'N/A' };
+};
 
-// export const modifySelectOption = (optionObj: any, curLabelKey: string) => {
-//     if (optionObj) {
-//         return { value: String(optionObj.id), label: optionObj[curLabelKey] };
-//     }
-//     return { value: '0', label: 'N/A' };
-// };
+export const modifyFetchEmployeeToSubmit = (employeeObj: IApiEmployee) => {
+    const newEmployeeObj = {
+        firstName: employeeObj.firstName,
+        lastName: employeeObj.lastName,
+        isActive: employeeObj.isActive,
+        dob: employeeObj.dob,
+        email: employeeObj.email,
+        phone: employeeObj.phone,
+        designation: employeeObj.designation,
+        salary: employeeObj.salary,
+        dateOfJoining: employeeObj.dateOfJoining,
+        address: employeeObj.address,
+        moreDetails: employeeObj.moreDetails,
+    } as IEmployeeSubmission;
 
-// export const modifyFetchEmployeesList = (employeesList: IApiEmployee[]) => {
-//     const newEmpList: IEmployee[] = [];
-//     for (const emp of employeesList) {
-//         const newEmp = {
-//             id: emp.id,
-//             firstName: emp.firstName,
-//             lastName: emp.lastName,
-//             isActive: emp.isActive,
-//             dob: emp.dob,
-//             email: emp.email,
-//             phone: emp.phone,
-//             designation: emp.designation,
-//             salary: emp.salary,
-//             dateOfJoining: emp.dateOfJoining,
-//             address: emp.address,
-//             moreDetails: emp.moreDetails,
-//         } as IEmployee;
-//         newEmp.department = modifySelectOption(emp.department, 'department');
-//         newEmp.role = modifySelectOption(emp.role, 'role');
-//         newEmp.skills = [];
-//         for (const skillObj of emp.skills) {
-//             newEmp.skills.push(modifySelectOption(skillObj, 'skill'));
-//         }
-
-//         newEmpList.push(newEmp);
-//     }
-//     return newEmpList;
-// };
+    newEmployeeObj.department = modifySelectOption(
+        employeeObj.department,
+        'department'
+    );
+    newEmployeeObj.role = modifySelectOption(employeeObj.role, 'role');
+    newEmployeeObj.skills = [];
+    for (const skillObj of employeeObj.skills) {
+        newEmployeeObj.skills.push(modifySelectOption(skillObj, 'skill'));
+    }
+    return newEmployeeObj;
+};
 
 // export const modifyFetchEmployeesList = (employeesList: IApiEmployee[]) => {
 //     const newEmpList: IEmployee[] = employeesList.map((emp) => ({

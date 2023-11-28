@@ -1,24 +1,5 @@
-import { IDepartment, IRole, ISkill } from './common';
-
 export interface IApiEmployee {
     id: number;
-    firstName: string;
-    lastName: string; //
-    isActive: true; //
-    dob: string;
-    email: string;
-    phone: string; //
-    designation: string; //
-    salary: string; //
-    dateOfJoining: string;
-    address: string;
-    role: IApiRole;
-    department: IApiDepartment;
-    skills: IApiSkill[];
-    moreDetails: string;
-}
-
-export interface IEmployeeSubmission {
     firstName: string;
     lastName: string;
     isActive: true;
@@ -29,9 +10,9 @@ export interface IEmployeeSubmission {
     salary: string;
     dateOfJoining: string;
     address: string;
-    role: IRole;
-    department: IDepartment;
-    skills: ISkill[];
+    role: IApiRole;
+    department: IApiDepartment;
+    skills: IApiSkill[];
     moreDetails: string;
 }
 

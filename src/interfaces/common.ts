@@ -33,6 +33,23 @@ export interface IEmployee {
     moreDetails: string;
 }
 
+export interface IEmployeeSubmission {
+    firstName: string;
+    lastName: string;
+    isActive: true;
+    dob: string;
+    email: string;
+    phone: string;
+    designation: string;
+    salary: string;
+    dateOfJoining: string;
+    address: string;
+    role: IRole | null;
+    department: IDepartment | null;
+    skills: ISkill[] | [];
+    moreDetails: string;
+}
+
 export interface IEmployeeListing {
     id: number;
     firstName: string;
@@ -51,11 +68,6 @@ export interface IDepartment {
 export interface ISkill {
     label: string;
     value: string;
-}
-
-export interface IFetchSkill {
-    id: number;
-    skill: string;
 }
 
 export interface IRole {
