@@ -33,7 +33,12 @@ const EmployeesListing: React.FC = () => {
         '/employee?sortBy=firstName&sortDir=asc'
     );
     useEffect(() => {
+        console.log('Inside useEffect');
         if (employeesFetchResponse.response) {
+            console.log(
+                'updating employee list',
+                employeesFetchResponse.response.data.employees
+            );
             setEmployees(employeesFetchResponse.response.data.employees);
         }
     }, [employeesFetchResponse.loading]);
