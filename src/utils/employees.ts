@@ -42,6 +42,10 @@ export const getEmployeesListingData = (employeesList: IApiEmployee[]) => {
     return newEmpList;
 };
 
+// export const mapSelectObjtoValue = (selectObject: IOption) => {
+//     return selectObject.value;
+// };
+
 // export const modifySelectOption = (optionObj: any, curLabelKey: string) => {
 //     if (optionObj) {
 //         return { value: String(optionObj.id), label: optionObj[curLabelKey] };

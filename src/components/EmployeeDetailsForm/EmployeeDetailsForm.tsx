@@ -4,23 +4,27 @@ import {
     Button,
     CustomInput,
     CustomTextarea,
-    CustomRadioGroup,
+    // CustomRadioGroup,
     CustomSelect,
 } from '..';
 import StyledFormWrap from './EmployeeDetailsForm.style';
-import { locations, genders } from '../../pages/EmployeeListing/constants';
+// import { locations, genders } from '../../pages/EmployeeListing/constants';
 import validate from './validation';
 import { useAppContext } from '../../core/contexts/AppContext';
-import { IApiEmployee } from '../../interfaces/ApiDataInterface';
+import {
+    IApiEmployeeSubmission,
+    IEmployeeSubmission,
+} from '../../interfaces/ApiDataInterface';
+import { API } from '../../core/api/useApi';
 
 interface IEmployeeDetailsForm {
-    prefillData?: IApiEmployee;
+    prefillData?: IEmployeeSubmission;
 }
 
 const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     prefillData = {
         firstName: 'abhib',
-        lastName: 'abhib',
+        lastName: '',
         isActive: true,
         dob: '2017-06-01',
         email: 'abhib@qburst.com',
@@ -50,22 +54,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     //     }
     // };
 
-    // const initialValues = {
-    //     profilePicture: '',
-    //     firstName: 'abhijith',
-    //     email: 'add@qburst.com',
-    //     dob: '',
-    //     gender: 'male',
-    //     address: 'asdfghjkl;zxcvbnm,',
-    //     role: null,
-    //     department: null,
-    //     doj: '',
-    //     location: null,
-    //     skills: [],
-    // };
-
     const initialValues = prefillData;
-    // console.log(initialValues);
 
     return (
         <StyledFormWrap>
@@ -73,7 +62,29 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                 initialValues={initialValues}
                 validationSchema={validate}
                 onSubmit={(values) => {
-                    alert(JSON.stringify(values, null, 2));
+                    console.log('submit button clicked');
+
+                    const submissionData: IApiEmployeeSubmission = {
+                        ...values,
+                        department: Number(values.department?.value),
+                        role: Number(values.role?.value),
+                        skills: values.skills?.map((skill) =>
+                            Number(skill.value)
+                        ),
+                    };
+
+                    API({
+                        method: 'POST',
+                        url: '/employee',
+                        data: submissionData,
+                    })
+                        .then(function (res) {
+                            console.log(res);
+                            alert('Successfully submitted!');
+                        })
+                        .catch(function (res) {
+                            console.log(res);
+                        });
                 }}
             >
                 {(props) => {

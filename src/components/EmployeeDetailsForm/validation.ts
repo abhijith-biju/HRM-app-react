@@ -6,7 +6,7 @@ const selectShape = Yup.object().shape({
 });
 
 const validate = Yup.object().shape({
-    name: Yup.string()
+    firstName: Yup.string()
         .trim()
         .required('First name is required')
         .min(2, 'First name must be at least 2 characters')
