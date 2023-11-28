@@ -1,6 +1,10 @@
 import { employeesList } from '../pages/EmployeeListing/constants';
 import { IOption } from '../components/common/CustomSelect/CustomSelect';
-import { IEmployeeListing, IEmployeeSubmission } from '../interfaces/common';
+import {
+    IEmployeeListing,
+    IEmployeeSubmission,
+    ISkill,
+} from '../interfaces/common';
 import { IApiEmployee } from '../interfaces/ApiDataInterface';
 
 export const getEmployeeDetails = (employeeId: number | undefined) => {
@@ -44,7 +48,10 @@ export const getEmployeesListingData = (employeesList: IApiEmployee[]) => {
 
 export const modifySelectOption = (optionObj: any, curLabelKey: string) => {
     if (optionObj) {
-        return { value: String(optionObj.id), label: optionObj[curLabelKey] };
+        return {
+            value: String(optionObj.id),
+            label: String(optionObj[curLabelKey]),
+        } as ISkill;
     }
     return { value: '0', label: 'N/A' };
 };
@@ -69,10 +76,11 @@ export const modifyFetchEmployeeToSubmit = (employeeObj: IApiEmployee) => {
         'department'
     );
     newEmployeeObj.role = modifySelectOption(employeeObj.role, 'role');
-    newEmployeeObj.skills = [];
+    const skillArr: ISkill[] = [];
     for (const skillObj of employeeObj.skills) {
-        newEmployeeObj.skills.push(modifySelectOption(skillObj, 'skill'));
+        skillArr.push(modifySelectOption(skillObj, 'skill'));
     }
+    newEmployeeObj.skills = skillArr;
     return newEmployeeObj;
 };
 
