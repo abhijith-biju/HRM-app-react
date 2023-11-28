@@ -1,10 +1,7 @@
 import { employeesList } from '../pages/EmployeeListing/constants';
 import { IOption } from '../components/common/CustomSelect/CustomSelect';
-import { IEmployeeListing } from '../interfaces/common';
-import {
-    IApiEmployee,
-    IEmployeeSubmission,
-} from '../interfaces/ApiDataInterface';
+import { IEmployeeListing, IEmployeeSubmission } from '../interfaces/common';
+import { IApiEmployee } from '../interfaces/ApiDataInterface';
 
 export const getEmployeeDetails = (employeeId: number | undefined) => {
     return employeesList.find((employee) => employee.empId === employeeId);

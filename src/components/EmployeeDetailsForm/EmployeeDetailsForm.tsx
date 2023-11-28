@@ -13,6 +13,7 @@ import validate from './validation';
 import { useAppContext } from '../../core/contexts/AppContext';
 import { IEmployeeSubmission } from '../../interfaces/common';
 import handleFormSubmit from './handleFormSubmit';
+import { useNavigate } from 'react-router-dom';
 
 interface IEmployeeDetailsForm {
     empId?: string | null;
@@ -39,6 +40,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     },
 }) => {
     const { appState } = useAppContext();
+    const navigate = useNavigate();
 
     // code to handle profile picture
 
@@ -59,8 +61,9 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                 initialValues={prefillData}
                 validationSchema={validate}
                 onSubmit={(values) => {
-                    console.log('submit button clicked');
                     handleFormSubmit(values, empId);
+                    console.log('here');
+                    navigate(`/`);
                 }}
             >
                 {(props) => {

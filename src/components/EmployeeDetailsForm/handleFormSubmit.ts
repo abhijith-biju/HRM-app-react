@@ -17,7 +17,7 @@ const handleFormSubmit: IHandleSubmit = (submitData, empId) => {
     if (empId) {
         API({
             method: 'PATCH',
-            url: `/employee/${empId}`,
+            url: `/employees/${empId}`,
             data: submissionData,
         })
             .then(function (res) {
