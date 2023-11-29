@@ -5,6 +5,7 @@ import {
     Flex,
     Modal,
     EmployeesTable,
+    Pagination,
 } from '../../components';
 import { empTableHeaders } from './constants';
 import { Link } from 'react-router-dom';
@@ -27,10 +28,16 @@ const EmployeesListing: React.FC = () => {
     const [empIdtoDelete, setEmpIdToDelete] = useState<number | undefined>(
         undefined
     );
+    const [fetchUrl, setFetchUrl] = useState({
+        sortBy: 'id',
+        sortDir: 'asc',
+        limit: 10,
+        offset: 0,
+    });
 
     const employeesFetchResponse = useApi<IApiFetchEmployees>(
         'GET',
-        '/employee?sortBy=firstName&sortDir=asc'
+        `/employee?limit=${fetchUrl.limit}&offset=${fetchUrl.offset}&sortBy=${fetchUrl.sortBy}&sortDir=${fetchUrl.sortDir}`
     );
     useEffect(() => {
         console.log(
@@ -105,6 +112,7 @@ const EmployeesListing: React.FC = () => {
                     tableData={createEmployeeLisitingData(employees)}
                     loading={employeesFetchResponse.loading}
                 />
+                <Pagination fetchUrl={fetchUrl} setFetchUrl={setFetchUrl} />
             </section>
 
             <Modal

@@ -14,6 +14,7 @@ import CustomInput from './common/CustomInput/CustomInput.tsx';
 import CustomSelect from './common/CustomSelect/CustomSelect.tsx';
 import EmployeeDetailsForm from './EmployeeDetailsForm/EmployeeDetailsForm.tsx';
 import Loader from './common/Loader/Loader.tsx';
+import Pagination from './common/Pagination/Pagination.tsx';
 
 export {
     Header,
@@ -32,4 +33,5 @@ export {
     CustomSelect,
     EmployeeDetailsForm,
     Loader,
+    Pagination,
 };

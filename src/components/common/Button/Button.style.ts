@@ -37,6 +37,11 @@ const StyledButton = styled.button`
             color: inherit;
         }
     }
+
+    &:disabled {
+        background-color: var(--gray-clr);
+        pointer-events: none;
+    }
 `;
 
 export default StyledButton;

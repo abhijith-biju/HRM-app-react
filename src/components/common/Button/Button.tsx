@@ -4,6 +4,7 @@ interface IBtn {
     children: React.ReactNode;
     type?: 'submit' | 'reset' | 'button' | undefined;
     className?: string;
+    disabled?: boolean;
     onClick?: () => void;
 }
 

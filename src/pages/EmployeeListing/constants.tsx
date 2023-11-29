@@ -227,7 +227,7 @@ const employeesList = [
 ];
 
 const empTableHeaders = [
-    { value: 'id', label: 'Employee ID' },
+    { value: 'id', label: 'Emp ID' },
     { value: 'firstName', label: 'Name' },
     { value: 'email', label: 'Email' },
     { value: 'role', label: 'Role' },
