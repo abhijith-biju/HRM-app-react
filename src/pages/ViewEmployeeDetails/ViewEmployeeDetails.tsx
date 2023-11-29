@@ -110,7 +110,7 @@ const ViewEmployeeDetails = () => {
                             </dl>
                         </div>
                     </Flex>
-                    <Link to="/">
+                    <Link to="/employees">
                         <Button className="primary back-btn">
                             Go to Home Page
                         </Button>

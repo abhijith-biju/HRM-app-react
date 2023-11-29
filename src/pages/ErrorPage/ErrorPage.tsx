@@ -7,7 +7,7 @@ const ErrorPage: React.FC = () => {
         <StyledErrorPage>
             <h1>404</h1>
             <p>Oops! Something is wrong.</p>
-            <Link to="/">
+            <Link to="/employees">
                 <Button className="primary">Go to Home Page</Button>
             </Link>
         </StyledErrorPage>

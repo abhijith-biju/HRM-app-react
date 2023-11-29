@@ -1,3 +1,6 @@
+import { useState, useEffect } from 'react';
+import { empTableHeaders } from './constants';
+import { Link, useSearchParams } from 'react-router-dom';
 import {
     Button,
     Input,
@@ -7,9 +10,6 @@ import {
     EmployeesTable,
     Pagination,
 } from '../../components';
-import { empTableHeaders } from './constants';
-import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { CustomSelectStyles } from './EmployeeListing.style';
 import { useAppContext } from '../../core/contexts/AppContext';
@@ -19,10 +19,7 @@ import {
     IApiEmployee,
 } from '../../interfaces/ApiDataInterface';
 import { getEmployeesListingData } from '../../utils/employees';
-import {
-    IEmployeeListing,
-    IEmployeesFetchSearchParams,
-} from '../../interfaces/common';
+import { IEmployeeListing } from '../../interfaces/common';
 
 const EmployeesListing: React.FC = () => {
     const { appState } = useAppContext();
@@ -31,27 +28,22 @@ const EmployeesListing: React.FC = () => {
     const [empIdtoDelete, setEmpIdToDelete] = useState<number | undefined>(
         undefined
     );
-    const [fetchUrl, setFetchUrl] = useState<IEmployeesFetchSearchParams>({
-        sortBy: 'id',
-        sortDir: 'desc',
-        limit: 10,
-        offset: 0,
-    });
+    const [searchParams] = useSearchParams();
+
+    const getFetchURL = () => {
+        const limit = searchParams.get('limit') ?? '10';
+        const offset = searchParams.get('offset') ?? '0';
+        const sortBy = searchParams.get('sortBy') ?? 'id';
+        const sortDir = searchParams.get('sortDir') ?? 'desc';
+        return `/employee?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortDir=${sortDir}`;
+    };
 
     const employeesFetchResponse = useApi<IApiFetchEmployees>(
         'GET',
-        `/employee?limit=${fetchUrl.limit}&offset=${fetchUrl.offset}&sortBy=${fetchUrl.sortBy}&sortDir=${fetchUrl.sortDir}`
+        getFetchURL()
     );
     useEffect(() => {
-        // console.log(
-        //     'Inside employeeListing useEffect',
-        //     employeesFetchResponse.loading
-        // );
         if (employeesFetchResponse.response) {
-            // console.log(
-            //     'updating employee list',
-            //     employeesFetchResponse.response.data.employees
-            // );
             setEmployees(employeesFetchResponse.response.data.employees);
         }
     }, [employeesFetchResponse.loading]);
@@ -117,8 +109,9 @@ const EmployeesListing: React.FC = () => {
                 />
                 {employeesFetchResponse.response ? (
                     <Pagination
-                        fetchUrl={fetchUrl}
-                        setFetchUrl={setFetchUrl}
+                        // fetchUrl={fetchUrl}
+                        // setFetchUrl={setFetchUrl}
+                        refresh={employeesFetchResponse.refresh}
                         totalEntries={
                             employeesFetchResponse.response.data.count
                         }

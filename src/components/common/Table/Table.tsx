@@ -19,6 +19,25 @@ const Table1: React.FC<ITable> = ({
     className,
     loading,
 }) => {
+    let tableBodyData;
+    if (tableData.length === 0) {
+        tableBodyData = (
+            <tr>
+                <td colSpan={100} className="text-center">
+                    No records to display
+                </td>
+            </tr>
+        );
+    } else {
+        tableBodyData = tableData.map((rowData) => (
+            <tr key={rowData.id}>
+                {tableHeaders.map((header) => (
+                    <td key={header.value}>{rowData[header.value]}</td>
+                ))}
+            </tr>
+        ));
+    }
+
     return (
         <StyledTable className={className}>
             <thead>
@@ -36,15 +55,7 @@ const Table1: React.FC<ITable> = ({
                         </td>
                     </tr>
                 ) : (
-                    tableData.map((rowData) => (
-                        <tr key={rowData.id}>
-                            {tableHeaders.map((header) => (
-                                <td key={header.value}>
-                                    {rowData[header.value]}
-                                </td>
-                            ))}
-                        </tr>
-                    ))
+                    tableBodyData
                 )}
             </tbody>
         </StyledTable>

@@ -222,7 +222,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         </div>
                                     </div>
                                     <div className="form-controls-container flex">
-                                        <Link to="/">
+                                        <Link to="/employees">
                                             <Button
                                                 className="outline"
                                                 type="button"

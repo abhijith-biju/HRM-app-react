@@ -32,7 +32,7 @@ const Header: React.FC = () => {
     return (
         <StyledHeader>
             <Navbar>
-                <Link to="/">
+                <Link to="/employees">
                     <h1 className="brand-logo">HRM APP</h1>
                 </Link>
             </Navbar>
