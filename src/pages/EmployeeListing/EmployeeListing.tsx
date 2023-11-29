@@ -19,7 +19,10 @@ import {
     IApiEmployee,
 } from '../../interfaces/ApiDataInterface';
 import { getEmployeesListingData } from '../../utils/employees';
-import { IEmployeeListing } from '../../interfaces/common';
+import {
+    IEmployeeListing,
+    IEmployeesFetchSearchParams,
+} from '../../interfaces/common';
 
 const EmployeesListing: React.FC = () => {
     const { appState } = useAppContext();
@@ -28,9 +31,9 @@ const EmployeesListing: React.FC = () => {
     const [empIdtoDelete, setEmpIdToDelete] = useState<number | undefined>(
         undefined
     );
-    const [fetchUrl, setFetchUrl] = useState({
+    const [fetchUrl, setFetchUrl] = useState<IEmployeesFetchSearchParams>({
         sortBy: 'id',
-        sortDir: 'asc',
+        sortDir: 'desc',
         limit: 10,
         offset: 0,
     });
@@ -112,7 +115,15 @@ const EmployeesListing: React.FC = () => {
                     tableData={createEmployeeLisitingData(employees)}
                     loading={employeesFetchResponse.loading}
                 />
-                <Pagination fetchUrl={fetchUrl} setFetchUrl={setFetchUrl} />
+                {employeesFetchResponse.response ? (
+                    <Pagination
+                        fetchUrl={fetchUrl}
+                        setFetchUrl={setFetchUrl}
+                        totalEntries={
+                            employeesFetchResponse.response.data.count
+                        }
+                    />
+                ) : null}
             </section>
 
             <Modal

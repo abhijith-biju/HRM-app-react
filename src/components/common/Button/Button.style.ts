@@ -39,7 +39,7 @@ const StyledButton = styled.button`
     }
 
     &:disabled {
-        background-color: var(--gray-clr);
+        background-color: gray;
         pointer-events: none;
     }
 `;

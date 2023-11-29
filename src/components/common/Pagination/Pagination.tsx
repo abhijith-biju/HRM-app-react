@@ -1,22 +1,29 @@
-import { Flex, Button } from '../..';
-
-interface IFetchUrl {
-    sortBy: string;
-    sortDir: string;
-    limit: number;
-    offset: number;
-}
+import { Button } from '../..';
+import { IEmployeesFetchSearchParams } from '../../../interfaces/common';
+import PaginationContainer from './Pagination.style';
+import { useState } from 'react';
 
 interface IPagination {
-    fetchUrl: IFetchUrl;
-    setFetchUrl: (url: IFetchUrl) => void;
+    fetchUrl: IEmployeesFetchSearchParams;
+    setFetchUrl: (url: IEmployeesFetchSearchParams) => void;
+    totalEntries: number;
 }
 
-const Pagination: React.FC<IPagination> = ({ fetchUrl, setFetchUrl }) => {
+const Pagination: React.FC<IPagination> = ({
+    fetchUrl,
+    setFetchUrl,
+    totalEntries = 0,
+}) => {
+    const [currentPage, setCurrentPage] = useState(1);
+
     const isFirstPage = fetchUrl.offset === 0;
+    const totalPageCount = Math.ceil(totalEntries / fetchUrl.limit);
+    const isLastPage = currentPage === totalPageCount;
+    console.log('Current Page', currentPage);
+    console.log('Total Pages', totalPageCount);
 
     return (
-        <Flex className="gap-15p">
+        <PaginationContainer>
             <Button
                 className="btn primary"
                 disabled={isFirstPage}
@@ -25,24 +32,25 @@ const Pagination: React.FC<IPagination> = ({ fetchUrl, setFetchUrl }) => {
                         ...fetchUrl,
                         offset: fetchUrl.offset - 10,
                     });
-                    console.log('previous clicked');
+                    setCurrentPage(currentPage - 1);
                 }}
             >
                 Previous
             </Button>
             <Button
                 className="btn primary"
+                disabled={isLastPage}
                 onClick={() => {
                     setFetchUrl({
                         ...fetchUrl,
                         offset: fetchUrl.offset + 10,
                     });
-                    console.log('next clicked');
+                    setCurrentPage(currentPage + 1);
                 }}
             >
                 Next
             </Button>
-        </Flex>
+        </PaginationContainer>
     );
 };
 

@@ -80,3 +80,10 @@ export interface ILocation {
     label: string;
     value: string;
 }
+
+export interface IEmployeesFetchSearchParams {
+    sortBy: string;
+    sortDir: 'asc' | 'desc';
+    limit: number;
+    offset: number;
+}
