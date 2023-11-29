@@ -19,8 +19,6 @@ const Pagination: React.FC<IPagination> = ({
     const isFirstPage = fetchUrl.offset === 0;
     const totalPageCount = Math.ceil(totalEntries / fetchUrl.limit);
     const isLastPage = currentPage === totalPageCount;
-    console.log('Current Page', currentPage);
-    console.log('Total Pages', totalPageCount);
 
     return (
         <PaginationContainer>

@@ -43,15 +43,15 @@ const EmployeesListing: React.FC = () => {
         `/employee?limit=${fetchUrl.limit}&offset=${fetchUrl.offset}&sortBy=${fetchUrl.sortBy}&sortDir=${fetchUrl.sortDir}`
     );
     useEffect(() => {
-        console.log(
-            'Inside employeeListing useEffect',
-            employeesFetchResponse.loading
-        );
+        // console.log(
+        //     'Inside employeeListing useEffect',
+        //     employeesFetchResponse.loading
+        // );
         if (employeesFetchResponse.response) {
-            console.log(
-                'updating employee list',
-                employeesFetchResponse.response.data.employees
-            );
+            // console.log(
+            //     'updating employee list',
+            //     employeesFetchResponse.response.data.employees
+            // );
             setEmployees(employeesFetchResponse.response.data.employees);
         }
     }, [employeesFetchResponse.loading]);
