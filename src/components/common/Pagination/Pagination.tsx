@@ -28,7 +28,7 @@ const Pagination: React.FC<IPagination> = ({ refresh, totalEntries = 0 }) => {
                     );
                     searchParams.set('limit', String(limit));
                     setSearchParams(searchParams);
-                    refresh();
+                    // refresh();
                 }}
             >
                 Previous
@@ -43,7 +43,7 @@ const Pagination: React.FC<IPagination> = ({ refresh, totalEntries = 0 }) => {
                     );
                     searchParams.set('limit', String(limit));
                     setSearchParams(searchParams);
-                    refresh();
+                    // refresh();
                 }}
             >
                 Next

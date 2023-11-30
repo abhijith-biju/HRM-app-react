@@ -17,6 +17,30 @@ const StyledTable = styled.table`
     & th {
         background-color: #d5d5d5;
         text-align: left;
+
+        & .emp-heading-wrap {
+            display: flex;
+            align-items: center;
+        }
+
+        & .sort-btn {
+            padding: 0;
+
+            &[data-sort-dir='desc'] {
+                rotate: 180deg;
+            }
+
+            & span {
+                font-size: 30px;
+                display: block;
+                pointer-events: none;
+            }
+
+            &:hover span {
+                scale: 1.1;
+                font-variation-settings: 'wght' 450;
+            }
+        }
     }
 
     & th,

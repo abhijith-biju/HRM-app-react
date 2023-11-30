@@ -74,7 +74,6 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     //         setProfilePhoto(URL.createObjectURL(imgFile));
     //     }
     // };
-    console.log('inside form component');
 
     return (
         <>

@@ -42,6 +42,7 @@ const EmployeesListing: React.FC = () => {
         'GET',
         getFetchURL()
     );
+
     useEffect(() => {
         if (employeesFetchResponse.response) {
             setEmployees(employeesFetchResponse.response.data.employees);
@@ -109,8 +110,6 @@ const EmployeesListing: React.FC = () => {
                 />
                 {employeesFetchResponse.response ? (
                     <Pagination
-                        // fetchUrl={fetchUrl}
-                        // setFetchUrl={setFetchUrl}
                         refresh={employeesFetchResponse.refresh}
                         totalEntries={
                             employeesFetchResponse.response.data.count

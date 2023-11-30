@@ -227,12 +227,12 @@ const employeesList = [
 ];
 
 const empTableHeaders = [
-    { value: 'id', label: 'Emp ID' },
-    { value: 'firstName', label: 'Name' },
-    { value: 'email', label: 'Email' },
-    { value: 'role', label: 'Role' },
-    { value: 'department', label: 'Department' },
-    { value: 'actions', label: 'Actions' },
+    { value: 'id', label: 'Emp ID', isSortable: true },
+    { value: 'firstName', label: 'Name', isSortable: true },
+    { value: 'email', label: 'Email', isSortable: false },
+    { value: 'role', label: 'Role', isSortable: false },
+    { value: 'department', label: 'Department', isSortable: false },
+    { value: 'actions', label: 'Actions', isSortable: false },
 ];
 
 const locations = [

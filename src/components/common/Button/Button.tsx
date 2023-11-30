@@ -5,7 +5,7 @@ interface IBtn {
     type?: 'submit' | 'reset' | 'button' | undefined;
     className?: string;
     disabled?: boolean;
-    onClick?: () => void;
+    onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 const Button: React.FC<IBtn> = ({ children, ...props }) => {
