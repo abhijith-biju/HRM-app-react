@@ -10,7 +10,7 @@ import {
     EmployeesTable,
     Pagination,
 } from '../../components';
-import Select from 'react-select';
+import Select, { MultiValue } from 'react-select';
 import { CustomSelectStyles } from './EmployeeListing.style';
 import { useAppContext } from '../../core/contexts/AppContext';
 import useApi, { API } from '../../core/api/useApi';
@@ -20,15 +20,17 @@ import {
 } from '../../interfaces/ApiDataInterface';
 import { getEmployeesListingData } from '../../utils/employees';
 import { IEmployeeListing } from '../../interfaces/common';
+import { IOption } from '../../components/common/CustomSelect/CustomSelect';
 
 const EmployeesListing: React.FC = () => {
-    const { appState } = useAppContext();
+    const { appState, handleAppState } = useAppContext();
+    const [searchParams] = useSearchParams();
+
     const [isModalopen, setIsModalOpen] = useState(false);
     const [employees, setEmployees] = useState<IApiEmployee[]>([]);
     const [empIdtoDelete, setEmpIdToDelete] = useState<number | undefined>(
         undefined
     );
-    const [searchParams] = useSearchParams();
 
     const getFetchURL = () => {
         const limit = searchParams.get('limit') ?? '10';
@@ -38,18 +40,7 @@ const EmployeesListing: React.FC = () => {
         return `/employee?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortDir=${sortDir}`;
     };
 
-    const employeesFetchResponse = useApi<IApiFetchEmployees>(
-        'GET',
-        getFetchURL()
-    );
-
-    useEffect(() => {
-        if (employeesFetchResponse.response) {
-            setEmployees(employeesFetchResponse.response.data.employees);
-        }
-    }, [employeesFetchResponse.loading]);
-
-    const createEmployeeLisitingData = (employeesList: IApiEmployee[]) => {
+    const createEmployeeListingData = (employeesList: IApiEmployee[]) => {
         const newEmployeesList: IEmployeeListing[] = getEmployeesListingData(
             employeesList,
             setIsModalOpen,
@@ -73,19 +64,81 @@ const EmployeesListing: React.FC = () => {
             });
     };
 
+    const handleSearchInputChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        handleAppState({
+            ...appState,
+            employeeNameFilter: event.target.value.trim().toLowerCase(),
+        });
+    };
+
+    const filterEmployeesList = (employeesList: IEmployeeListing[]) => {
+        return employeesList.filter((employee) => {
+            let shouldInclude = true;
+
+            const employeeName = employee.firstName.trim().toLowerCase();
+            const selectedSkillsForFilter = appState.skillsFilter.map((skill) =>
+                Number(skill.value)
+            );
+            if (!(employeeName.indexOf(appState.employeeNameFilter) > -1)) {
+                shouldInclude = false;
+            }
+
+            if (
+                !selectedSkillsForFilter.every((skill) =>
+                    employee['skills'].includes(skill)
+                )
+            ) {
+                shouldInclude = false;
+            }
+
+            return shouldInclude;
+        });
+    };
+
+    const employeesFetchResponse = useApi<IApiFetchEmployees>(
+        'GET',
+        getFetchURL()
+    );
+
+    if (!employeesFetchResponse.loading) {
+        const fl = filterEmployeesList(createEmployeeListingData(employees));
+
+        console.log('filtered List', fl);
+        console.log('length', fl.length);
+    }
+
+    useEffect(() => {
+        if (employeesFetchResponse.response) {
+            setEmployees(employeesFetchResponse.response.data.employees);
+        }
+    }, [employeesFetchResponse.loading]);
+
     return (
         <>
             <section>
                 <Flex className="gap-15p">
                     <TableFilters>
-                        <Input placeholder="Search by Employee Name" />
+                        <Input
+                            placeholder="Search by Employee Name"
+                            value={appState.employeeNameFilter}
+                            onChange={handleSearchInputChange}
+                        />
                         <Select
                             options={appState.skills}
+                            value={appState.skillsFilter}
                             name="searchSkills"
                             isMulti
                             closeMenuOnSelect={false}
                             styles={CustomSelectStyles}
                             placeholder="Filter by skills"
+                            onChange={(options: MultiValue<IOption>) => {
+                                handleAppState({
+                                    ...appState,
+                                    skillsFilter: [...options],
+                                });
+                            }}
                         />
                         <Button className="outline icon-btn margin-left-auto">
                             <span>Clear Filters</span>
@@ -105,7 +158,7 @@ const EmployeesListing: React.FC = () => {
                 </Flex>
                 <EmployeesTable
                     tableHeaders={empTableHeaders}
-                    tableData={createEmployeeLisitingData(employees)}
+                    tableData={createEmployeeListingData(employees)}
                     loading={employeesFetchResponse.loading}
                 />
                 {employeesFetchResponse.response ? (

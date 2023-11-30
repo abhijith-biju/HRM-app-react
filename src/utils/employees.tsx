@@ -22,6 +22,7 @@ export const getEmployeesListingData = (
             email: emp.email,
             department: emp.department ? emp.department.department : 'N/A',
             role: emp.role ? emp.role.role : 'N/A',
+            skills: emp.skills.map((skill) => skill.id),
             actions: (
                 <ul className="employee-actions flex-container">
                     <li>
@@ -121,15 +122,3 @@ export const modifyFetchEmployeeToSubmit = (employeeObj: IApiEmployee) => {
     newEmployeeObj.skills = skillArr;
     return newEmployeeObj;
 };
-
-// export const mapValueToLabel = (
-//     refValue: string,
-//     refArray: { value: string; label: string }[]
-// ) => {
-//     for (const obj of refArray) {
-//         if (obj.value === refValue) {
-//             return obj.label;
-//         }
-//     }
-//     return 'N/A';
-// };

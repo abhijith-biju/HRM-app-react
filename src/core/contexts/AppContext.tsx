@@ -16,15 +16,26 @@ const initialState: IAppContextState = {
     roles: [],
     skills: [],
     departments: [],
+    employeeNameFilter: '',
+    skillsFilter: [
+        // {
+        //     value: '2',
+        //     label: 'Node',
+        // },
+    ],
 };
 
 const AppContext = createContext<IAppContext>({
     appState: initialState,
+    handleAppState: () => {},
 });
 
 const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const [appState, setAppState] = useState(initialState);
-    const value = { appState };
+
+    const handleAppState = (payload: IAppContextState) => setAppState(payload);
+
+    const value = { appState, handleAppState };
 
     const skillsFetchResponse = useApi<IApiFetchSkill>('GET', '/skills');
     useEffect(() => {

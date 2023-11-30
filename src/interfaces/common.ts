@@ -58,6 +58,7 @@ export interface IEmployeeListing {
     email: string;
     role: string;
     department: string;
+    skills: number[];
     actions: JSX.Element;
 }
 
