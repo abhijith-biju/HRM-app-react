@@ -5,7 +5,7 @@ import {
     CustomSelectStyles,
     StyledEmployeesFilterWrap,
 } from './EmployeesTableFilter.style';
-import { IOption } from './EmployeesTableFilter.style';
+import { IReactSelectOption } from '../../interfaces/common';
 
 const EmployeesTableFilter: React.FC = () => {
     const { appState, handleAppState } = useAppContext();
@@ -35,7 +35,9 @@ const EmployeesTableFilter: React.FC = () => {
                 styles={CustomSelectStyles}
                 placeholder="Filter by skills"
                 onChange={(
-                    options: MultiValue<IOption | MultiValue<IOption>>
+                    options: MultiValue<
+                        IReactSelectOption | MultiValue<IReactSelectOption>
+                    >
                 ) => {
                     handleAppState({
                         ...appState,

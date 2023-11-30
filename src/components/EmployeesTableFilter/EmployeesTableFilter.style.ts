@@ -1,11 +1,7 @@
 import { StylesConfig } from 'react-select';
 import styled from 'styled-components';
 import { MultiValue } from 'react-select';
-
-export interface IOption {
-    label: string;
-    value: string;
-}
+import { IReactSelectOption } from '../../interfaces/common';
 
 export const StyledEmployeesFilterWrap = styled.div`
     display: flex;
@@ -14,8 +10,8 @@ export const StyledEmployeesFilterWrap = styled.div`
 `;
 
 export const CustomSelectStyles: StylesConfig<
-    IOption | MultiValue<IOption>,
-    boolean
+    IReactSelectOption | MultiValue<IReactSelectOption>,
+    true
 > = {
     control: (provided, state) => ({
         ...provided,
