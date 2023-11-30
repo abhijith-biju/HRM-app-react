@@ -1,20 +1,3 @@
-// export interface IEmployee {
-//     address: string;
-//     empId: number;
-//     location: ILocation;
-//     profilePhoto: string;
-//     gender: string;
-//     email: string;
-//     department: IDepartment;
-//     skills: ISkill[];
-//     dob: string;
-//     name: string;
-//     doj: string;
-//     role: IRole;
-//     id: string;
-//     updatedAt?: { seconds: number; nanoseconds: number };
-// }
-
 export interface IEmployee {
     id: number;
     firstName: string;
@@ -27,9 +10,9 @@ export interface IEmployee {
     salary: string;
     dateOfJoining: string;
     address: string;
-    role: IRole;
-    department: IDepartment;
-    skills: ISkill[];
+    role: IReactSelectOption;
+    department: IReactSelectOption;
+    skills: IReactSelectOption[];
     moreDetails: string;
 }
 
@@ -44,11 +27,11 @@ export interface IEmployeeSubmission {
     salary: string;
     dateOfJoining: string;
     address: string;
-    role: IRole | null;
-    department: IDepartment | null;
-    skills: ISkill[] | [];
+    role: IReactSelectOption | null;
+    department: IReactSelectOption | null;
+    skills: IReactSelectOption[] | [];
     moreDetails: string;
-    // location: IRole
+    // location: IReactSelectOption;
     // gender: string;
 }
 
@@ -62,22 +45,7 @@ export interface IEmployeeListing {
     actions: JSX.Element;
 }
 
-export interface IDepartment {
-    label: string;
-    value: string;
-}
-
-export interface ISkill {
-    label: string;
-    value: string;
-}
-
-export interface IRole {
-    label: string;
-    value: string;
-}
-
-export interface ILocation {
+export interface IReactSelectOption {
     label: string;
     value: string;
 }

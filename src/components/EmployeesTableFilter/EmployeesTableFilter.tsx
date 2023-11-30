@@ -3,9 +3,9 @@ import { Input, Button } from '..';
 import Select, { MultiValue } from 'react-select';
 import {
     CustomSelectStyles,
-    IOption,
     StyledEmployeesFilterWrap,
 } from './EmployeesTableFilter.style';
+import { IOption } from './EmployeesTableFilter.style';
 
 const EmployeesTableFilter: React.FC = () => {
     const { appState, handleAppState } = useAppContext();
@@ -34,7 +34,9 @@ const EmployeesTableFilter: React.FC = () => {
                 closeMenuOnSelect={false}
                 styles={CustomSelectStyles}
                 placeholder="Filter by skills"
-                onChange={(options: MultiValue<IOption>) => {
+                onChange={(
+                    options: MultiValue<IOption | MultiValue<IOption>>
+                ) => {
                     handleAppState({
                         ...appState,
                         skillsFilter: [...options],

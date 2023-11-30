@@ -17,12 +17,7 @@ const initialState: IAppContextState = {
     skills: [],
     departments: [],
     employeeNameFilter: '',
-    skillsFilter: [
-        // {
-        //     value: '2',
-        //     label: 'Node',
-        // },
-    ],
+    skillsFilter: [],
 };
 
 const AppContext = createContext<IAppContext>({

@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
+import { MultiValue } from 'react-select';
 import { IOption } from '../components/common/CustomSelect/CustomSelect';
-import { ISkill } from './common';
 
 export interface IAppContextState {
     skills: IOption[];
     roles: IOption[];
     departments: IOption[];
     employeeNameFilter: string;
-    skillsFilter: ISkill[];
+    skillsFilter: MultiValue<IOption | MultiValue<IOption>>;
 }
 
 export interface IAppContext {

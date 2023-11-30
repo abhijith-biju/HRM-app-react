@@ -1,5 +1,6 @@
 import { StylesConfig } from 'react-select';
 import styled from 'styled-components';
+import { MultiValue } from 'react-select';
 
 export interface IOption {
     label: string;
@@ -12,7 +13,10 @@ export const StyledEmployeesFilterWrap = styled.div`
     width: 100%;
 `;
 
-export const CustomSelectStyles: StylesConfig<IOption, boolean> = {
+export const CustomSelectStyles: StylesConfig<
+    IOption | MultiValue<IOption>,
+    boolean
+> = {
     control: (provided, state) => ({
         ...provided,
         backgroundColor: '#fff',

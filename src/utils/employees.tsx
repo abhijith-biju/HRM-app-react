@@ -2,7 +2,7 @@ import { IOption } from '../components/common/CustomSelect/CustomSelect';
 import {
     IEmployeeListing,
     IEmployeeSubmission,
-    ISkill,
+    IReactSelectOption,
 } from '../interfaces/common';
 import { IApiEmployee } from '../interfaces/ApiDataInterface';
 import { Button, LinkButton } from '../components';
@@ -72,7 +72,7 @@ export const modifySelectOption = (optionObj: any, curLabelKey: string) => {
         return {
             value: String(optionObj.id),
             label: String(optionObj[curLabelKey]),
-        } as ISkill;
+        } as IReactSelectOption;
     }
     return { value: '0', label: 'N/A' };
 };
@@ -110,7 +110,7 @@ export const modifyFetchEmployeeToSubmit = (employeeObj: IApiEmployee) => {
         'department'
     );
     newEmployeeObj.role = modifySelectOption(employeeObj.role, 'role');
-    const skillArr: ISkill[] = [];
+    const skillArr: IReactSelectOption[] = [];
     for (const skillObj of employeeObj.skills) {
         skillArr.push(modifySelectOption(skillObj, 'skill'));
     }
