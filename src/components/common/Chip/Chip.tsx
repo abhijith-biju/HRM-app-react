@@ -1,5 +1,5 @@
 import StyledChip from './Chip.style';
-import { Flex, Button } from '..';
+import { Button } from '../..';
 
 interface IChip {
     children: React.ReactNode;
@@ -8,7 +8,7 @@ interface IChip {
 
 const Chip: React.FC<IChip> = ({ children, isDeletable }) => {
     return (
-        <Flex className="align-center justify-bw" tag={StyledChip}>
+        <StyledChip>
             {children}
             {isDeletable && (
                 <Button className="skill-remove-btn flex align-items-center">
@@ -17,7 +17,7 @@ const Chip: React.FC<IChip> = ({ children, isDeletable }) => {
                     </span>
                 </Button>
             )}
-        </Flex>
+        </StyledChip>
     );
 };
 

@@ -5,8 +5,7 @@ import {
     ISkill,
 } from '../interfaces/common';
 import { IApiEmployee } from '../interfaces/ApiDataInterface';
-import { Link } from 'react-router-dom';
-import { Button } from '../components';
+import { Button, LinkButton } from '../components';
 
 //modify fetched employee details to format for employee listing table
 export const getEmployeesListingData = (
@@ -26,28 +25,24 @@ export const getEmployeesListingData = (
             actions: (
                 <ul className="employee-actions flex-container">
                     <li>
-                        <Link to={`/view-employee/${emp.id}`}>
-                            <Button
-                                type="button"
-                                className="view-emp-btn flex-container"
-                            >
-                                <span className="material-symbols-rounded">
-                                    visibility
-                                </span>
-                            </Button>
-                        </Link>
+                        <LinkButton
+                            to={`/view-employee/${emp.id}`}
+                            className="view-emp-btn flex-container"
+                        >
+                            <span className="material-symbols-rounded">
+                                visibility
+                            </span>
+                        </LinkButton>
                     </li>
                     <li>
-                        <Link to={`/edit-employee/${emp.id}`}>
-                            <Button
-                                type="button"
-                                className="edit-emp-btn flex-container"
-                            >
-                                <span className="material-symbols-rounded">
-                                    edit_square
-                                </span>
-                            </Button>
-                        </Link>
+                        <LinkButton
+                            to={`/edit-employee/${emp.id}`}
+                            className="edit-emp-btn flex-container"
+                        >
+                            <span className="material-symbols-rounded">
+                                edit_square
+                            </span>
+                        </LinkButton>
                     </li>
                     <li>
                         <Button

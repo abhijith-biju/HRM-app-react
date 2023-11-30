@@ -1,11 +1,18 @@
 import { StylesConfig } from 'react-select';
+import styled from 'styled-components';
 
-interface IOption {
+export interface IOption {
     label: string;
     value: string;
 }
 
-const CustomSelectStyles: StylesConfig<IOption, boolean> = {
+export const StyledEmployeesFilterWrap = styled.div`
+    display: flex;
+    gap: 15px;
+    width: 100%;
+`;
+
+export const CustomSelectStyles: StylesConfig<IOption, boolean> = {
     control: (provided, state) => ({
         ...provided,
         backgroundColor: '#fff',
@@ -61,5 +68,3 @@ const CustomSelectStyles: StylesConfig<IOption, boolean> = {
         color: 'black',
     }),
 };
-
-export { CustomSelectStyles };

@@ -15,7 +15,7 @@ export interface ITable {
     loading?: boolean;
 }
 
-const Table1: React.FC<ITable> = ({
+const Table: React.FC<ITable> = ({
     tableHeaders,
     tableData,
     className,
@@ -111,4 +111,4 @@ const Table1: React.FC<ITable> = ({
     );
 };
 
-export default Table1;
+export default Table;

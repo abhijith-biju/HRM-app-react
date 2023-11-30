@@ -1,7 +1,6 @@
 import StyledEmpDetailsWrap from './ViewEmployeeDetails.style';
-import { Button, Loader, Chip } from '../../components';
-import { Link, useParams } from 'react-router-dom';
-import { Flex } from '../../components';
+import { Loader, Chip, LinkButton } from '../../components';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useApi from '../../core/api/useApi';
 import {
@@ -34,11 +33,8 @@ const ViewEmployeeDetails = () => {
             {loading ? (
                 <Loader className="full-screen-loader" />
             ) : (
-                <StyledEmpDetailsWrap
-                    className="details column align-center"
-                    tag="section"
-                >
-                    <Flex className="view-emp-card">
+                <StyledEmpDetailsWrap>
+                    <div className="view-emp-card">
                         <div className="main-details">
                             <img
                                 src={profilePictureAvatar}
@@ -109,12 +105,10 @@ const ViewEmployeeDetails = () => {
                                 </div>
                             </dl>
                         </div>
-                    </Flex>
-                    <Link to="/employees">
-                        <Button className="primary back-btn">
-                            Go to Home Page
-                        </Button>
-                    </Link>
+                    </div>
+                    <LinkButton to="/employees" className="primary back-btn">
+                        Go to Home Page
+                    </LinkButton>
                 </StyledEmpDetailsWrap>
             )}
         </>

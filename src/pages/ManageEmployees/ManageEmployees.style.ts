@@ -1,7 +1,18 @@
 import styled from 'styled-components';
-import { Table } from '..';
+import { Table } from '../../components';
 
-const StyledEmployeesTable = styled(Table)`
+export const StyledManageEmployeesWrap = styled.section`
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    & .employees-table-controls {
+        display: flex;
+        gap: 15px;
+    }
+`;
+
+export const StyledEmployeesTable = styled(Table)`
     & .employee-actions {
         padding-left: 0;
         margin: 0;
@@ -9,7 +20,8 @@ const StyledEmployeesTable = styled(Table)`
         align-items: center;
         gap: 25px;
 
-        & li button {
+        & li button,
+        & li a {
             padding: 0;
             align-items: center;
         }
@@ -36,5 +48,3 @@ const StyledEmployeesTable = styled(Table)`
         }
     }
 `;
-
-export default StyledEmployeesTable;

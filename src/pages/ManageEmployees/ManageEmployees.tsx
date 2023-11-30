@@ -1,29 +1,27 @@
 import { useState, useEffect } from 'react';
 import { empTableHeaders } from './constants';
-import { Link, useSearchParams } from 'react-router-dom';
 import {
-    Button,
-    Input,
-    TableFilters,
-    Flex,
+    StyledManageEmployeesWrap,
+    StyledEmployeesTable,
+} from './ManageEmployees.style';
+import { useSearchParams } from 'react-router-dom';
+import {
     Modal,
-    EmployeesTable,
     Pagination,
+    EmployeesTableFilter,
+    LinkButton,
 } from '../../components';
-import Select, { MultiValue } from 'react-select';
-import { CustomSelectStyles } from './EmployeeListing.style';
 import { useAppContext } from '../../core/contexts/AppContext';
 import useApi, { API } from '../../core/api/useApi';
 import {
     IApiFetchEmployees,
     IApiEmployee,
 } from '../../interfaces/ApiDataInterface';
-import { getEmployeesListingData } from '../../utils/employees';
 import { IEmployeeListing } from '../../interfaces/common';
-import { IOption } from '../../components/common/CustomSelect/CustomSelect';
+import { getEmployeesListingData } from '../../utils/employees';
 
-const EmployeesListing: React.FC = () => {
-    const { appState, handleAppState } = useAppContext();
+const ManageEmployees: React.FC = () => {
+    const { appState } = useAppContext();
     const [searchParams] = useSearchParams();
 
     const [isModalopen, setIsModalOpen] = useState(false);
@@ -62,15 +60,6 @@ const EmployeesListing: React.FC = () => {
             .catch(function (res) {
                 console.log('delete Failed!', res);
             });
-    };
-
-    const handleSearchInputChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        handleAppState({
-            ...appState,
-            employeeNameFilter: event.target.value.trim().toLowerCase(),
-        });
     };
 
     const filterEmployeesList = (employeesList: IEmployeeListing[]) => {
@@ -117,46 +106,17 @@ const EmployeesListing: React.FC = () => {
 
     return (
         <>
-            <section>
-                <Flex className="gap-15p">
-                    <TableFilters>
-                        <Input
-                            placeholder="Search by Employee Name"
-                            value={appState.employeeNameFilter}
-                            onChange={handleSearchInputChange}
-                        />
-                        <Select
-                            options={appState.skills}
-                            value={appState.skillsFilter}
-                            name="searchSkills"
-                            isMulti
-                            closeMenuOnSelect={false}
-                            styles={CustomSelectStyles}
-                            placeholder="Filter by skills"
-                            onChange={(options: MultiValue<IOption>) => {
-                                handleAppState({
-                                    ...appState,
-                                    skillsFilter: [...options],
-                                });
-                            }}
-                        />
-                        <Button className="outline icon-btn margin-left-auto">
-                            <span>Clear Filters</span>
-                            <span className="material-symbols-rounded">
-                                filter_alt_off
-                            </span>
-                        </Button>
-                    </TableFilters>
-                    <Link to="/add-employee">
-                        <Button className="primary icon-btn">
-                            <span>Add Employee</span>
-                            <span className="material-symbols-rounded">
-                                person_add
-                            </span>
-                        </Button>
-                    </Link>
-                </Flex>
-                <EmployeesTable
+            <StyledManageEmployeesWrap>
+                <div className="employees-table-controls">
+                    <EmployeesTableFilter />
+                    <LinkButton to="/add-employee" className="primary icon-btn">
+                        <span>Add Employee</span>
+                        <span className="material-symbols-rounded">
+                            person_add
+                        </span>
+                    </LinkButton>
+                </div>
+                <StyledEmployeesTable
                     tableHeaders={empTableHeaders}
                     tableData={createEmployeeListingData(employees)}
                     loading={employeesFetchResponse.loading}
@@ -168,7 +128,7 @@ const EmployeesListing: React.FC = () => {
                         }
                     />
                 ) : null}
-            </section>
+            </StyledManageEmployeesWrap>
 
             <Modal
                 $isOpen={isModalopen}
@@ -182,4 +142,4 @@ const EmployeesListing: React.FC = () => {
     );
 };
 
-export default EmployeesListing;
+export default ManageEmployees;

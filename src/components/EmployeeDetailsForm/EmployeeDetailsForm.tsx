@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Formik } from 'formik';
-import { Link } from 'react-router-dom';
 import {
     Button,
     CustomInput,
@@ -8,6 +7,7 @@ import {
     // CustomRadioGroup,
     CustomSelect,
     Loader,
+    LinkButton,
 } from '..';
 import StyledFormWrap from './EmployeeDetailsForm.style';
 // import { locations, genders } from '../../pages/EmployeeListing/constants';
@@ -221,14 +221,12 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         </div>
                                     </div>
                                     <div className="form-controls-container flex">
-                                        <Link to="/employees">
-                                            <Button
-                                                className="outline"
-                                                type="button"
-                                            >
-                                                CANCEL
-                                            </Button>
-                                        </Link>
+                                        <LinkButton
+                                            to="/employees"
+                                            className="outline"
+                                        >
+                                            CANCEL
+                                        </LinkButton>
                                         <Button
                                             className="primary"
                                             type="submit"

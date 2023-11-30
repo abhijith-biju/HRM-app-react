@@ -90,11 +90,6 @@ const GlobalStyle = createGlobalStyle`
         flex-grow: 1;
     }
 
-    a {
-    text-decoration: none;
-    color: inherit;
-}
-
     img {
         display: block;
     }

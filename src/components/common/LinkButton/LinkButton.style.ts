@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const StyledButton = styled.button`
+const StyledLinkButton = styled(Link)`
+    text-decoration: none;
     background-color: transparent;
-    cursor: pointer;
     border: none;
     padding: 7px 15px;
     border-radius: 5px;
@@ -49,4 +50,4 @@ const StyledButton = styled.button`
     }
 `;
 
-export default StyledButton;
+export default StyledLinkButton;

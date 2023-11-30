@@ -1,10 +1,13 @@
 import styled from 'styled-components';
-import { Flex } from '../../components';
 
-const StyledEmpDetailsWrap = styled(Flex)`
+const StyledEmpDetailsWrap = styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 45px;
 
     .view-emp-card {
+        display: flex;
         padding: 0;
         width: max-content;
         margin-inline: auto;

@@ -19,6 +19,11 @@ const StyledErrorPage = styled.section`
         font-weight: 300;
         margin: 0 0 50px;
     }
+
+    .link-button {
+        width: max-content;
+        margin-inline: auto;
+    }
 `;
 
 export default StyledErrorPage;

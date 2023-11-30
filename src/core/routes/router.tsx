@@ -1,7 +1,8 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import Layout from '../../layout/Layout';
-import EmployeesListing from '../../pages/EmployeeListing/EmployeeListing';
+// import EmployeesListing from '../../pages/EmployeeListing/EmployeeListing';
+import ManageEmployees from '../../pages/ManageEmployees/ManageEmployees';
 import ViewEmployeeDetails from '../../pages/ViewEmployeeDetails/ViewEmployeeDetails';
 import AddEmployeeDetails from '../../pages/AddEmployeeDetails/AddEmployeeDetails';
 import EditEmployeeDetails from '../../pages/EditEmployeeDetails/EditEmployeeDetails';
@@ -18,7 +19,7 @@ const router = createBrowserRouter(
                 },
                 {
                     path: '/employees',
-                    element: <EmployeesListing />,
+                    element: <ManageEmployees />,
                 },
                 {
                     path: 'add-employee',

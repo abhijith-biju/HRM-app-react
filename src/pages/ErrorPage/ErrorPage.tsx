@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { Button } from '../../components';
+import { LinkButton } from '../../components';
 import StyledErrorPage from './ErrorPage.style';
 
 const ErrorPage: React.FC = () => {
@@ -7,9 +6,9 @@ const ErrorPage: React.FC = () => {
         <StyledErrorPage>
             <h1>404</h1>
             <p>Oops! Something is wrong.</p>
-            <Link to="/employees">
-                <Button className="primary">Go to Home Page</Button>
-            </Link>
+            <LinkButton to="/employees" className="link-button primary">
+                Go to Home Page
+            </LinkButton>
         </StyledErrorPage>
     );
 };
