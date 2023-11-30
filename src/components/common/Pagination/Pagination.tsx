@@ -3,11 +3,10 @@ import PaginationContainer from './Pagination.style';
 import { useSearchParams } from 'react-router-dom';
 
 interface IPagination {
-    refresh: () => void;
     totalEntries: number;
 }
 
-const Pagination: React.FC<IPagination> = ({ refresh, totalEntries = 0 }) => {
+const Pagination: React.FC<IPagination> = ({ totalEntries = 0 }) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const offset = Number(searchParams.get('offset') ?? 0);
@@ -28,7 +27,6 @@ const Pagination: React.FC<IPagination> = ({ refresh, totalEntries = 0 }) => {
                     );
                     searchParams.set('limit', String(limit));
                     setSearchParams(searchParams);
-                    // refresh();
                 }}
             >
                 Previous
@@ -43,7 +41,6 @@ const Pagination: React.FC<IPagination> = ({ refresh, totalEntries = 0 }) => {
                     );
                     searchParams.set('limit', String(limit));
                     setSearchParams(searchParams);
-                    // refresh();
                 }}
             >
                 Next

@@ -110,7 +110,6 @@ const EmployeesListing: React.FC = () => {
                 />
                 {employeesFetchResponse.response ? (
                     <Pagination
-                        refresh={employeesFetchResponse.refresh}
                         totalEntries={
                             employeesFetchResponse.response.data.count
                         }
