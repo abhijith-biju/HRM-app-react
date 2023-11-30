@@ -1,6 +1,5 @@
-import { StylesConfig } from 'react-select';
+import { StylesConfig, GroupBase } from 'react-select';
 import styled from 'styled-components';
-import { MultiValue } from 'react-select';
 import { IReactSelectOption } from '../../interfaces/common';
 
 export const StyledEmployeesFilterWrap = styled.div`
@@ -10,8 +9,9 @@ export const StyledEmployeesFilterWrap = styled.div`
 `;
 
 export const CustomSelectStyles: StylesConfig<
-    IReactSelectOption | MultiValue<IReactSelectOption>,
-    true
+    IReactSelectOption,
+    true,
+    GroupBase<IReactSelectOption>
 > = {
     control: (provided, state) => ({
         ...provided,

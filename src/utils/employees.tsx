@@ -1,4 +1,3 @@
-import { IOption } from '../components/common/CustomSelect/CustomSelect';
 import {
     IEmployeeListing,
     IEmployeeSubmission,
@@ -82,7 +81,7 @@ export const modifySelectOptionsData = (
     optionsArr: any,
     curLabelKey: string
 ) => {
-    const newOptionsArr: IOption[] = [];
+    const newOptionsArr: IReactSelectOption[] = [];
     for (const obj of optionsArr) {
         newOptionsArr.push({ value: String(obj.id), label: obj[curLabelKey] });
     }

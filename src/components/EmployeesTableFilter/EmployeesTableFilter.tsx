@@ -34,15 +34,13 @@ const EmployeesTableFilter: React.FC = () => {
                 closeMenuOnSelect={false}
                 styles={CustomSelectStyles}
                 placeholder="Filter by skills"
-                onChange={(
-                    options: MultiValue<
-                        IReactSelectOption | MultiValue<IReactSelectOption>
-                    >
-                ) => {
+                onChange={(options: MultiValue<IReactSelectOption>) => {
                     handleAppState({
                         ...appState,
                         skillsFilter: [...options],
                     });
+                    console.log('option : ', options);
+                    console.log('app state : ', appState.skillsFilter);
                 }}
             />
             <Button

@@ -1,16 +1,12 @@
 import { Field, useField } from 'formik';
 import StyledRadioGrup from './CustomRadioGroup.style';
-
-interface IOption {
-    value: string;
-    label: string;
-}
+import { IReactSelectOption } from '../../../interfaces/common';
 
 interface IRadioGroup {
     label: string;
     id: string;
     name: string;
-    options: IOption[];
+    options: IReactSelectOption[];
     className?: string;
 }
 

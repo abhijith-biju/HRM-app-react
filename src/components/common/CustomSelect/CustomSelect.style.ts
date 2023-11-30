@@ -1,7 +1,7 @@
 import { StylesConfig } from 'react-select';
-import { IOption } from './CustomSelect';
+import { IReactSelectOption } from '../../../interfaces/common';
 
-const CustomSelectStyles: StylesConfig<IOption, boolean> = {
+const CustomSelectStyles: StylesConfig<IReactSelectOption, boolean> = {
     control: (provided, state) => ({
         ...provided,
         backgroundColor: '#fff',

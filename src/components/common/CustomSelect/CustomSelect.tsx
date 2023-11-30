@@ -2,18 +2,14 @@ import Select from 'react-select';
 import { useField } from 'formik';
 import CustomSelectStyles from './CustomSelect.style';
 import makeAnimated from 'react-select/animated';
-
-export interface IOption {
-    value: string;
-    label: string;
-}
+import { IReactSelectOption } from '../../../interfaces/common';
 
 interface ICustomSelect {
     label: string;
     name: string;
     id?: string;
     placeholder?: string;
-    options: IOption[];
+    options: IReactSelectOption[];
     isMulti?: boolean;
     closeMenuOnSelect?: false;
     required?: boolean;
@@ -43,7 +39,7 @@ const CustomSelect: React.FC<ICustomSelect> = ({
                     })
                 }
                 value={field.value}
-                onChange={(option: IOption) => {
+                onChange={(option: IReactSelectOption) => {
                     if (option) {
                         setValue(option);
                     }

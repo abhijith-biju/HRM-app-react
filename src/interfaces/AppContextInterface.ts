@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 import { MultiValue } from 'react-select';
-import { IOption } from '../components/common/CustomSelect/CustomSelect';
+import { IReactSelectOption } from './common';
 
 export interface IAppContextState {
-    skills: IOption[];
-    roles: IOption[];
-    departments: IOption[];
+    skills: IReactSelectOption[];
+    roles: IReactSelectOption[];
+    departments: IReactSelectOption[];
     employeeNameFilter: string;
-    skillsFilter: MultiValue<IOption | MultiValue<IOption>>;
+    skillsFilter: MultiValue<IReactSelectOption>;
 }
 
 export interface IAppContext {
