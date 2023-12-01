@@ -16,9 +16,19 @@ const ViewEmployeeDetails = () => {
         throw new Response('Not Found', { status: 404 });
     }
 
-    const [employeeDetails, setEmployeeDetails] = useState({} as IApiEmployee);
+    interface IViewEmployee extends IApiEmployee {
+        gender: string;
+        location: string;
+        photoId: string;
+    }
 
-    let gender: string | undefined = undefined;
+    const [employeeDetails, setEmployeeDetails] = useState({
+        gender: '',
+        location: '',
+        photoId: '',
+    } as IViewEmployee);
+
+    const notAvailableString = 'N/A';
 
     const { response, loading, error } = useApi<IApiFetchEmployee>(
         'GET',
@@ -27,9 +37,16 @@ const ViewEmployeeDetails = () => {
 
     useEffect(() => {
         if (response && response.data) {
-            const moreDetails = JSON.parse(response.data.moreDetails);
-            gender = moreDetails.gender ?? undefined;
-            setEmployeeDetails(response.data);
+            const moreDetails = response.data.moreDetails
+                ? JSON.parse(response.data.moreDetails)
+                : {};
+
+            setEmployeeDetails({
+                ...response.data,
+                gender: moreDetails.gender,
+                location: moreDetails.location,
+                photoId: moreDetails.photoId,
+            });
         }
         if (error) {
             toast.error('Could not employee details');
@@ -45,7 +62,11 @@ const ViewEmployeeDetails = () => {
                     <div className="view-emp-card">
                         <div className="main-details">
                             <img
-                                src={profilePictureAvatar}
+                                src={
+                                    employeeDetails.photoId
+                                        ? employeeDetails.photoId
+                                        : profilePictureAvatar
+                                }
                                 alt="profile photo"
                                 className="profile-photo"
                                 draggable="false"
@@ -53,11 +74,18 @@ const ViewEmployeeDetails = () => {
                             <p className="full-name">
                                 {employeeDetails.firstName}
                             </p>
-                            <p className="role">{employeeDetails.role?.role}</p>
-                            <p className="department">
-                                {employeeDetails.department?.department}
+                            <p className="role">
+                                {employeeDetails.role?.role ??
+                                    `Role : ${notAvailableString}`}
                             </p>
-                            {/* <p className="location">{employeeDetails.location.label}</p> */}
+                            <p className="department">
+                                {employeeDetails.department?.department ??
+                                    `Department : ${notAvailableString}`}
+                            </p>
+                            <p className="location">
+                                {employeeDetails.location ??
+                                    `Location : ${notAvailableString}`}
+                            </p>
                         </div>
                         <div className="extended-details">
                             <dl>
@@ -73,12 +101,13 @@ const ViewEmployeeDetails = () => {
                                         {employeeDetails.email}
                                     </dd>
                                 </div>
-                                {gender && (
-                                    <div className="data-entry">
-                                        <dt>Gender</dt>
-                                        <dd className="gender">{gender}</dd>
-                                    </div>
-                                )}
+                                <div className="data-entry">
+                                    <dt>Gender</dt>
+                                    <dd className="gender">
+                                        {employeeDetails.gender ??
+                                            notAvailableString}
+                                    </dd>
+                                </div>
                                 <div className="data-entry">
                                     <dt>Date of Birth</dt>
                                     <dd className="dob">
@@ -94,7 +123,8 @@ const ViewEmployeeDetails = () => {
                                 <div className="data-entry">
                                     <dt>Address</dt>
                                     <dd className="address">
-                                        {employeeDetails.address}
+                                        {employeeDetails.address ??
+                                            notAvailableString}
                                     </dd>
                                 </div>
                                 <div className="data-entry">

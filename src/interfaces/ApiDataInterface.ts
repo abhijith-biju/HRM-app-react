@@ -10,8 +10,8 @@ export interface IApiEmployee {
     salary: string;
     dateOfJoining: string;
     address: string;
-    role: IApiRole;
-    department: IApiDepartment;
+    role: IApiRole | null;
+    department: IApiDepartment | null;
     skills: IApiSkill[];
     moreDetails: string;
 }

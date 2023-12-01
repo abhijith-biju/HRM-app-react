@@ -51,34 +51,16 @@ export const genders = [
 ];
 
 export const prefillDataOnEmployeeAdd: IEmployeeSubmission = {
-    firstName: 'abhib',
-    email: 'abhib@qburst.com',
-    dob: '2017-06-01',
-    gender: 'female',
-    address: 'abc street, pqr',
-    role: {
-        value: '1',
-        label: 'Developer',
-    },
-    department: {
-        value: '2',
-        label: 'Marketing',
-    },
-    dateOfJoining: '2001-06-01',
-    location: {
-        value: 'L3',
-        label: 'Cochin',
-    },
-    skills: [
-        {
-            value: '8',
-            label: 'UI/UX Design',
-        },
-        {
-            value: '2',
-            label: 'Node',
-        },
-    ],
+    firstName: '',
+    email: '',
+    dob: '',
+    gender: '',
+    address: '',
+    role: null,
+    department: null,
+    dateOfJoining: '',
+    location: null,
+    skills: [],
     moreDetails: '',
     lastName: '',
     isActive: true,
@@ -87,3 +69,41 @@ export const prefillDataOnEmployeeAdd: IEmployeeSubmission = {
     salary: '',
     photoId: '',
 };
+
+// export const prefillDataOnEmployeeAdd: IEmployeeSubmission = {
+//     firstName: 'abhib',
+//     email: 'abhib@qburst.com',
+//     dob: '2017-06-01',
+//     gender: 'female',
+//     address: 'abc street, pqr',
+//     role: {
+//         value: '1',
+//         label: 'Developer',
+//     },
+//     department: {
+//         value: '2',
+//         label: 'Marketing',
+//     },
+//     dateOfJoining: '2001-06-01',
+//     location: {
+//         value: 'L3',
+//         label: 'Cochin',
+//     },
+//     skills: [
+//         {
+//             value: '8',
+//             label: 'UI/UX Design',
+//         },
+//         {
+//             value: '2',
+//             label: 'Node',
+//         },
+//     ],
+//     moreDetails: '',
+//     lastName: '',
+//     isActive: true,
+//     designation: '',
+//     phone: '',
+//     salary: '',
+//     photoId: '',
+// };
