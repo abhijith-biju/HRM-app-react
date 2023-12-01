@@ -4,13 +4,13 @@ import {
     Button,
     CustomInput,
     CustomTextarea,
-    // CustomRadioGroup,
+    CustomRadioGroup,
     CustomSelect,
     Loader,
     LinkButton,
 } from '..';
 import StyledFormWrap from './EmployeeDetailsForm.style';
-// import { locations, genders } from '../../pages/EmployeeListing/constants';
+import { genders } from '../../pages/ManageEmployees/constants';
 import validate from './validation';
 import { useAppContext } from '../../core/contexts/AppContext';
 import { IEmployeeSubmission } from '../../interfaces/common';
@@ -28,7 +28,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
         firstName: 'abhib',
         email: 'abhib@qburst.com',
         dob: '2017-06-01',
-        // gender: '',
+        gender: 'female',
         address: 'abc street, pqr',
         role: {
             value: '1',
@@ -156,13 +156,13 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                                 type="date"
                                             />
                                         </div>
-                                        {/* <CustomRadioGroup
+                                        <CustomRadioGroup
                                             id="gender"
                                             label="Gender"
                                             name="gender"
                                             options={genders}
                                             className="form-entry"
-                                        /> */}
+                                        />
                                     </div>
                                     <div className="flex form-row">
                                         <div className="form-entry">

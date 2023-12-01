@@ -18,7 +18,7 @@ const validate = Yup.object().shape({
     dob: Yup.date()
         .max(new Date(), 'Date of birth cannot be in the future')
         .required('Date of Birth is required'),
-    // gender: Yup.string().required('Gender is required.'),
+    gender: Yup.string().required('Gender is required.'),
     address: Yup.string()
         .min(10, 'Address must be at least 10 characters')
         .max(200, 'Address cannot exceed 200 characters')

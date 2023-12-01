@@ -6,11 +6,17 @@ const handleFormSubmit = async (
     submitData: IEmployeeSubmission,
     empId: string | null
 ) => {
+    const extraDetails = {
+        gender: submitData.gender,
+    };
+    delete submitData.gender;
+
     const submissionData: IApiEmployeeSubmission = {
         ...submitData,
         department: Number(submitData.department?.value),
         role: Number(submitData.role?.value),
         skills: submitData.skills?.map((skill) => Number(skill.value)),
+        moreDetails: JSON.stringify(extraDetails),
     };
 
     if (empId) {
@@ -31,9 +37,9 @@ const handleFormSubmit = async (
                 url: '/employee',
                 data: submissionData,
             });
-            console.log('edit success : ', respose);
+            console.log('add success : ', respose);
         } catch (error) {
-            console.log('edit failed : ', error);
+            console.log('add failed : ', error);
         }
     }
 };

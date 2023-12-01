@@ -31,8 +31,9 @@ export interface IEmployeeSubmission {
     department: IReactSelectOption | null;
     skills: IReactSelectOption[] | [];
     moreDetails: string;
-    // location: IReactSelectOption;
-    // gender: string;
+    profileInput?: string;
+    location?: IReactSelectOption | null;
+    gender?: string;
 }
 
 export interface IEmployeeListing {

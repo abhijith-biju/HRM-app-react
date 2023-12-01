@@ -101,6 +101,7 @@ export const modifyFetchEmployeeToSubmit = (employeeObj: IApiEmployee) => {
         salary: employeeObj.salary,
         dateOfJoining: employeeObj.dateOfJoining,
         address: employeeObj.address,
+        gender: JSON.parse(employeeObj.moreDetails).gender,
         moreDetails: employeeObj.moreDetails,
     } as IEmployeeSubmission;
 

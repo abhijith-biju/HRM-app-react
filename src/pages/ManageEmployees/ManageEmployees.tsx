@@ -11,6 +11,7 @@ import {
     EmployeesTableFilter,
     LinkButton,
 } from '../../components';
+// import { toast } from 'react-toastify';
 import { useAppContext } from '../../core/contexts/AppContext';
 import useApi, { API } from '../../core/api/useApi';
 import { IApiFetchEmployees } from '../../interfaces/ApiDataInterface';
@@ -35,19 +36,20 @@ const ManageEmployees: React.FC = () => {
         return `/employee?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortDir=${sortDir}`;
     };
 
-    const deleteConfirmHandler = () => {
+    const deleteConfirmHandler = async () => {
         setIsModalOpen(false);
-        API({
-            method: 'DELETE',
-            url: `/employee/${empIdtoDelete}`,
-        })
-            .then(function (res) {
-                console.log('Successfully deleted!', res);
-                employeesFetchResponse.refresh();
-            })
-            .catch(function (res) {
-                console.log('delete Failed!', res);
+        try {
+            const res = await API({
+                method: 'DELETE',
+                url: `/employee/${empIdtoDelete}`,
             });
+            // toast.success('Employee Added Successfully');
+            console.log('Successfully deleted!', res);
+            employeesFetchResponse.refresh();
+        } catch (error) {
+            // toast.error('Employee deletion failed');
+            console.log('delete Failed!', error);
+        }
     };
 
     const filterEmployeesList = (employeesList: IEmployeeListing[]) => {
