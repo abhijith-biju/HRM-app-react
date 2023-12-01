@@ -46,6 +46,10 @@ const StyledTable = styled.table`
     & tr:not(:last-child) td {
         border-bottom: 1px solid #000;
     }
+
+    & .table-loader {
+        margin: 20px auto;
+    }
 `;
 
 export default StyledTable;

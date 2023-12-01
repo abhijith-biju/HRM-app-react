@@ -13,10 +13,7 @@ import {
 } from '../../components';
 import { useAppContext } from '../../core/contexts/AppContext';
 import useApi, { API } from '../../core/api/useApi';
-import {
-    IApiFetchEmployees,
-    IApiEmployee,
-} from '../../interfaces/ApiDataInterface';
+import { IApiFetchEmployees } from '../../interfaces/ApiDataInterface';
 import { IEmployeeListing } from '../../interfaces/common';
 import { getEmployeesListingData } from '../../utils/employees';
 
@@ -25,7 +22,7 @@ const ManageEmployees: React.FC = () => {
     const [searchParams] = useSearchParams();
 
     const [isModalopen, setIsModalOpen] = useState(false);
-    const [employees, setEmployees] = useState<IApiEmployee[]>([]);
+    const [employees, setEmployees] = useState<IEmployeeListing[]>([]);
     const [empIdtoDelete, setEmpIdToDelete] = useState<number | undefined>(
         undefined
     );
@@ -36,15 +33,6 @@ const ManageEmployees: React.FC = () => {
         const sortBy = searchParams.get('sortBy') ?? 'id';
         const sortDir = searchParams.get('sortDir') ?? 'desc';
         return `/employee?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortDir=${sortDir}`;
-    };
-
-    const createEmployeeListingData = (employeesList: IApiEmployee[]) => {
-        const newEmployeesList: IEmployeeListing[] = getEmployeesListingData(
-            employeesList,
-            setIsModalOpen,
-            setEmpIdToDelete
-        );
-        return newEmployeesList;
     };
 
     const deleteConfirmHandler = () => {
@@ -91,19 +79,23 @@ const ManageEmployees: React.FC = () => {
         getFetchURL()
     );
 
-    if (!employeesFetchResponse.loading) {
-        const fl = filterEmployeesList(createEmployeeListingData(employees));
-
-        console.log('filtered List', fl);
-        console.log('length', fl.length);
-    }
-
     useEffect(() => {
+        // console.log('inside manageEmployees useEffect');
         if (employeesFetchResponse.response) {
-            setEmployees(employeesFetchResponse.response.data.employees);
+            // console.log('fetch response obtained');
+            const EmployeesData =
+                employeesFetchResponse.response.data.employees;
+            setEmployees(
+                getEmployeesListingData(
+                    EmployeesData,
+                    setIsModalOpen,
+                    setEmpIdToDelete
+                )
+            );
         }
     }, [employeesFetchResponse.loading]);
 
+    // console.log('inside manage employee component');
     return (
         <>
             <StyledManageEmployeesWrap>
@@ -118,7 +110,9 @@ const ManageEmployees: React.FC = () => {
                 </div>
                 <StyledEmployeesTable
                     tableHeaders={empTableHeaders}
-                    tableData={createEmployeeListingData(employees)}
+                    tableData={
+                        employees.length ? filterEmployeesList(employees) : []
+                    }
                     loading={employeesFetchResponse.loading}
                 />
                 {employeesFetchResponse.response ? (

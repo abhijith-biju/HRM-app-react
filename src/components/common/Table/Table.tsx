@@ -69,44 +69,47 @@ const Table: React.FC<ITable> = ({
         ));
     }
 
+    // console.log('inside table component');
     return (
         <StyledTable className={className}>
-            <thead>
-                <tr>
-                    {tableHeaders.map((header) => (
-                        <th key={header.value}>
-                            <div className="emp-heading-wrap">
-                                <span>{header.label}</span>
-                                {header.isSortable && (
-                                    <Button
-                                        className="btn sort-btn"
-                                        data-value={header.value}
-                                        data-sort-dir={getSortDirection(
-                                            header.value
-                                        )}
-                                        onClick={sortButtonClickHandler}
-                                    >
-                                        <span className="material-symbols-rounded">
-                                            arrow_upward_alt
-                                        </span>
-                                    </Button>
-                                )}
-                            </div>
-                        </th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {loading ? (
+            {loading ? (
+                <tbody>
                     <tr>
-                        <td colSpan={100}>
-                            <Loader />
+                        <td>
+                            <Loader className="table-loader" />
                         </td>
                     </tr>
-                ) : (
-                    tableBodyData
-                )}
-            </tbody>
+                </tbody>
+            ) : (
+                <>
+                    <thead>
+                        <tr>
+                            {tableHeaders.map((header) => (
+                                <th key={header.value}>
+                                    <div className="emp-heading-wrap">
+                                        <span>{header.label}</span>
+                                        {header.isSortable && (
+                                            <Button
+                                                className="btn sort-btn"
+                                                data-value={header.value}
+                                                data-sort-dir={getSortDirection(
+                                                    header.value
+                                                )}
+                                                onClick={sortButtonClickHandler}
+                                            >
+                                                <span className="material-symbols-rounded">
+                                                    arrow_upward_alt
+                                                </span>
+                                            </Button>
+                                        )}
+                                    </div>
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>{tableBodyData}</tbody>
+                </>
+            )}
         </StyledTable>
     );
 };

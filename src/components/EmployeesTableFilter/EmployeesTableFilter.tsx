@@ -39,8 +39,6 @@ const EmployeesTableFilter: React.FC = () => {
                         ...appState,
                         skillsFilter: [...options],
                     });
-                    console.log('option : ', options);
-                    console.log('app state : ', appState.skillsFilter);
                 }}
             />
             <Button

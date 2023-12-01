@@ -35,6 +35,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const skillsFetchResponse = useApi<IApiFetchSkill>('GET', '/skills');
     useEffect(() => {
         if (skillsFetchResponse.response) {
+            // console.log('setting skill state');
             const skillOptions = skillsFetchResponse.response.data;
             setAppState((appState) => ({
                 ...appState,
@@ -46,6 +47,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const rolesFetchResponse = useApi<IApiRole>('GET', '/roles');
     useEffect(() => {
         if (rolesFetchResponse.response) {
+            // console.log('setting role state');
             const roleOptions = rolesFetchResponse.response;
             setAppState((appState) => ({
                 ...appState,
@@ -60,6 +62,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     );
     useEffect(() => {
         if (departmentsFetchResponse.response) {
+            // console.log('setting dept state');
             const departmentOptions = departmentsFetchResponse.response;
             setAppState((appState) => ({
                 ...appState,
