@@ -34,6 +34,7 @@ export interface IEmployeeSubmission {
     profileInput?: string;
     location?: IReactSelectOption | null;
     gender?: string;
+    profileId?: string;
 }
 
 export interface IEmployeeListing {

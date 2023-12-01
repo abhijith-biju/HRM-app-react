@@ -28,7 +28,7 @@ const validate = Yup.object().shape({
     dateOfJoining: Yup.date()
         .max(new Date(), 'Date of joining cannot be in the future.')
         .required('Date of Joining is required'),
-    // location: selectShape.required('Location is required.'),
+    location: selectShape.required('Location is required.'),
     skills: Yup.array()
         .of(selectShape)
         .min(1, 'Atleast one skill is required.'),

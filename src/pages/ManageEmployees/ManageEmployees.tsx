@@ -11,7 +11,7 @@ import {
     EmployeesTableFilter,
     LinkButton,
 } from '../../components';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useAppContext } from '../../core/contexts/AppContext';
 import useApi, { API } from '../../core/api/useApi';
 import { IApiFetchEmployees } from '../../interfaces/ApiDataInterface';
@@ -43,11 +43,10 @@ const ManageEmployees: React.FC = () => {
                 method: 'DELETE',
                 url: `/employee/${empIdtoDelete}`,
             });
-            // toast.success('Employee Added Successfully');
-            console.log('Successfully deleted!', res);
+            toast.success('Employee Added Successfully');
             employeesFetchResponse.refresh();
         } catch (error) {
-            // toast.error('Employee deletion failed');
+            toast.error('Employee deletion failed');
             console.log('delete Failed!', error);
         }
     };

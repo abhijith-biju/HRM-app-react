@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
+// import { toast } from 'react-toastify';
 
 export const API = axios.create({
     baseURL: 'https://vipinms.cloud/',
@@ -37,6 +38,7 @@ const useApi = <T,>(
                 }
             } catch (err) {
                 if (!cancelled) {
+                    // toast.error('Could not fetch data');
                     setError('error getting the data');
                     setLoading(false);
                 }

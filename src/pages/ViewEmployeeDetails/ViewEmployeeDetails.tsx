@@ -8,6 +8,7 @@ import {
     IApiFetchEmployee,
 } from '../../interfaces/ApiDataInterface';
 import profilePictureAvatar from '../../assets/images/employee-avatar.svg';
+import { toast } from 'react-toastify';
 
 const ViewEmployeeDetails = () => {
     const { employeeId } = useParams();
@@ -17,16 +18,23 @@ const ViewEmployeeDetails = () => {
 
     const [employeeDetails, setEmployeeDetails] = useState({} as IApiEmployee);
 
-    const { response, loading } = useApi<IApiFetchEmployee>(
+    let gender: string | undefined = undefined;
+
+    const { response, loading, error } = useApi<IApiFetchEmployee>(
         'GET',
         `/employee/${employeeId}`
     );
 
     useEffect(() => {
         if (response && response.data) {
+            const moreDetails = JSON.parse(response.data.moreDetails);
+            gender = moreDetails.gender ?? undefined;
             setEmployeeDetails(response.data);
         }
-    }, [response]);
+        if (error) {
+            toast.error('Could not employee details');
+        }
+    }, [response, error]);
 
     return (
         <>
@@ -65,10 +73,12 @@ const ViewEmployeeDetails = () => {
                                         {employeeDetails.email}
                                     </dd>
                                 </div>
-                                <div className="data-entry">
-                                    <dt>Gender</dt>
-                                    {/* <dd className="gender">{employeeDetails.gender}</dd> */}
-                                </div>
+                                {gender && (
+                                    <div className="data-entry">
+                                        <dt>Gender</dt>
+                                        <dd className="gender">{gender}</dd>
+                                    </div>
+                                )}
                                 <div className="data-entry">
                                     <dt>Date of Birth</dt>
                                     <dd className="dob">

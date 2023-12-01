@@ -1,6 +1,7 @@
 import { IEmployeeSubmission } from '../../interfaces/common';
 import { IApiEmployeeSubmission } from '../../interfaces/ApiDataInterface';
 import { API } from '../../core/api/useApi';
+import { toast } from 'react-toastify';
 
 const handleFormSubmit = async (
     submitData: IEmployeeSubmission,
@@ -8,8 +9,11 @@ const handleFormSubmit = async (
 ) => {
     const extraDetails = {
         gender: submitData.gender,
+        location: submitData.location ? submitData.location.label : null,
     };
     delete submitData.gender;
+    delete submitData.location;
+    delete submitData.profileId;
 
     const submissionData: IApiEmployeeSubmission = {
         ...submitData,
@@ -18,29 +22,20 @@ const handleFormSubmit = async (
         skills: submitData.skills?.map((skill) => Number(skill.value)),
         moreDetails: JSON.stringify(extraDetails),
     };
+    console.log(submissionData);
 
-    if (empId) {
-        try {
-            const respose = await API({
-                method: 'PATCH',
-                url: `/employee/${empId}`,
-                data: submissionData,
-            });
-            console.log('edit success : ', respose);
-        } catch (error) {
-            console.log('edit failed : ', error);
-        }
-    } else {
-        try {
-            const respose = await API({
-                method: 'POST',
-                url: '/employee',
-                data: submissionData,
-            });
-            console.log('add success : ', respose);
-        } catch (error) {
-            console.log('add failed : ', error);
-        }
+    try {
+        await API({
+            method: empId ? 'PATCH' : 'POST',
+            url: empId ? `/employee/${empId}` : '/employee',
+            data: submissionData,
+        });
+        toast.success(
+            `Employee details ${empId ? 'edited' : 'added'} successfully`
+        );
+    } catch (error) {
+        toast.error(`${empId ? 'Edit' : 'Add'} employee details failed`);
+        console.log(`${empId ? 'Edit' : 'Add'} failed`, error);
     }
 };
 

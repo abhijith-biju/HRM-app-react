@@ -6,6 +6,10 @@ const GlobalStyle = createGlobalStyle`
     *:before {
         box-sizing: border-box;
     }
+
+    :root {
+        --toastify-color-success: green;
+    }
     
     html {
         height: 100%;

@@ -10,7 +10,11 @@ import {
     LinkButton,
 } from '..';
 import StyledFormWrap from './EmployeeDetailsForm.style';
-import { genders } from '../../pages/ManageEmployees/constants';
+import {
+    genders,
+    locations,
+    prefillDataOnEmployeeAdd,
+} from '../../pages/ManageEmployees/constants';
 import validate from './validation';
 import { useAppContext } from '../../core/contexts/AppContext';
 import { IEmployeeSubmission } from '../../interfaces/common';
@@ -25,37 +29,7 @@ interface IEmployeeDetailsForm {
 const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     empId = null,
     prefillData = {
-        firstName: 'abhib',
-        email: 'abhib@qburst.com',
-        dob: '2017-06-01',
-        gender: 'female',
-        address: 'abc street, pqr',
-        role: {
-            value: '1',
-            label: 'Developer',
-        },
-        department: {
-            value: '2',
-            label: 'Marketing',
-        },
-        dateOfJoining: '2001-06-01',
-        // location: null,
-        skills: [
-            {
-                value: '8',
-                label: 'UI/UX Design',
-            },
-            {
-                value: '2',
-                label: 'Node',
-            },
-        ],
-        moreDetails: '',
-        lastName: '',
-        isActive: true,
-        designation: '',
-        phone: '',
-        salary: '',
+        ...prefillDataOnEmployeeAdd,
     },
 }) => {
     const { appState } = useAppContext();
@@ -99,11 +73,19 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                     noValidate
                                 >
                                     {/* <div className="flex">
-                            <pre>
-                                {JSON.stringify(props.values, null, 2)}
-                                {JSON.stringify(props.touched, null, 2)}
-                            </pre>
-                        </div> */}
+                                        <pre>
+                                            {JSON.stringify(
+                                                props.values,
+                                                null,
+                                                2
+                                            )}
+                                            {JSON.stringify(
+                                                props.touched,
+                                                null,
+                                                2
+                                            )}
+                                        </pre>
+                                    </div> */}
 
                                     {/* code to handle profile picture  */}
 
@@ -199,14 +181,14 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                                 type="date"
                                             />
                                         </div>
-                                        {/* <div className="form-entry">
+                                        <div className="form-entry">
                                             <CustomSelect
                                                 name="location"
                                                 label="Location"
                                                 options={locations}
                                                 placeholder="Select a Location"
                                             />
-                                        </div> */}
+                                        </div>
                                     </div>
                                     <div className="flex form-row">
                                         <div className="form-entry skills-input-container">

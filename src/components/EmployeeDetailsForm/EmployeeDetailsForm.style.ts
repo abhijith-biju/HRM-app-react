@@ -9,7 +9,6 @@ const StyledFormWrap = styled.div`
     border-radius: 5px;
 
     --input-field-height: 2em;
-    /* --input-field-min-height: 38px; */
 
     & h3 {
         font-weight: normal;
@@ -19,6 +18,7 @@ const StyledFormWrap = styled.div`
     & label,
     & .checkbox-label {
         font-size: 1em;
+        font-weight: 500;
         position: relative;
         display: inline-block;
         margin-bottom: 3px;

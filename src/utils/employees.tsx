@@ -5,6 +5,7 @@ import {
 } from '../interfaces/common';
 import { IApiEmployee } from '../interfaces/ApiDataInterface';
 import { Button, LinkButton } from '../components';
+import { locations } from '../pages/ManageEmployees/constants';
 
 //modify fetched employee details to format for employee listing table
 export const getEmployeesListingData = (
@@ -73,7 +74,7 @@ export const modifySelectOption = (optionObj: any, curLabelKey: string) => {
             label: String(optionObj[curLabelKey]),
         } as IReactSelectOption;
     }
-    return { value: '0', label: 'N/A' };
+    return null;
 };
 
 //modify each option object in options array to {value: string, label: string}
@@ -90,6 +91,8 @@ export const modifySelectOptionsData = (
 
 // modify fetched employee details to format required for employee form
 export const modifyFetchEmployeeToSubmit = (employeeObj: IApiEmployee) => {
+    const moreDetails = JSON.parse(employeeObj.moreDetails);
+
     const newEmployeeObj = {
         firstName: employeeObj.firstName,
         lastName: employeeObj.lastName,
@@ -101,8 +104,12 @@ export const modifyFetchEmployeeToSubmit = (employeeObj: IApiEmployee) => {
         salary: employeeObj.salary,
         dateOfJoining: employeeObj.dateOfJoining,
         address: employeeObj.address,
-        gender: JSON.parse(employeeObj.moreDetails).gender,
         moreDetails: employeeObj.moreDetails,
+        gender: moreDetails?.gender ? moreDetails.gender : '',
+        location: moreDetails?.location
+            ? getObjectFromLabel(moreDetails.location, locations)
+            : null,
+        profileId: moreDetails?.profileId ? moreDetails.profileId : '',
     } as IEmployeeSubmission;
 
     newEmployeeObj.department = modifySelectOption(
@@ -112,8 +119,17 @@ export const modifyFetchEmployeeToSubmit = (employeeObj: IApiEmployee) => {
     newEmployeeObj.role = modifySelectOption(employeeObj.role, 'role');
     const skillArr: IReactSelectOption[] = [];
     for (const skillObj of employeeObj.skills) {
-        skillArr.push(modifySelectOption(skillObj, 'skill'));
+        const modifiedSkillOption = modifySelectOption(skillObj, 'skill');
+        modifiedSkillOption && skillArr.push(modifiedSkillOption);
     }
     newEmployeeObj.skills = skillArr;
     return newEmployeeObj;
+};
+
+export const getObjectFromLabel = (
+    searchLabel: string,
+    refArray: { label: string; [key: string]: any }[]
+) => {
+    const targetObj = refArray.find((obj) => obj.label === searchLabel);
+    return targetObj ?? null;
 };
