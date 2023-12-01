@@ -9,7 +9,6 @@ const CustomSelectStyles: StylesConfig<IReactSelectOption, boolean> = {
         cursor: 'text',
         width: '100%',
         minHeight: 'initial',
-        height: 'var(--input-field-height)',
         borderRadius: '3px',
         borderColor: state.isFocused ? '#000' : '#7e7e7e',
         '&:hover': {

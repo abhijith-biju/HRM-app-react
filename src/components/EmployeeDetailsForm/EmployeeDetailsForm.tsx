@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Formik } from 'formik';
 import {
     Button,
@@ -36,18 +36,19 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    // code to handle profile picture
+    const [photoId, setPhotoId] = useState(
+        prefillData.photoId === ''
+            ? '/src/assets/images/employee-avatar.svg'
+            : prefillData.photoId
+    );
+    const photoRef = useRef<HTMLInputElement>(null);
 
-    // const [profilePhoto, setProfilePhoto] = useState(
-    //     prefillData.profilePhoto || '/src/assets/images/employee-avatar.svg'
-    // );
-
-    // const photoUploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     if (e.target.files) {
-    //         const imgFile = e.target.files[0];
-    //         setProfilePhoto(URL.createObjectURL(imgFile));
-    //     }
-    // };
+    const photoUploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const imgFile = e.target.files[0];
+            setPhotoId(URL.createObjectURL(imgFile));
+        }
+    };
 
     return (
         <>
@@ -60,7 +61,11 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                         validationSchema={validate}
                         onSubmit={async (values) => {
                             setLoading(true);
-                            await handleFormSubmit(values, empId);
+                            await handleFormSubmit(
+                                values,
+                                empId,
+                                photoRef.current
+                            );
                             navigate(`/`);
                             setLoading(false);
                         }}
@@ -72,44 +77,28 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                     onSubmit={props.handleSubmit}
                                     noValidate
                                 >
-                                    {/* <div className="flex">
-                                        <pre>
-                                            {JSON.stringify(
-                                                props.values,
-                                                null,
-                                                2
-                                            )}
-                                            {JSON.stringify(
-                                                props.touched,
-                                                null,
-                                                2
-                                            )}
-                                        </pre>
-                                    </div> */}
-
-                                    {/* code to handle profile picture  */}
-
-                                    {/* <div className="flex form-row">
-                            <label
-                                htmlFor="profilePhoto"
-                                className="profile-picture-wrap"
-                            >
-                                <img
-                                    src={profilePhoto}
-                                    alt="employee profile photo"
-                                    title="Add a profile photo"
-                                    draggable="false"
-                                />
-                                <input
-                                    type="file"
-                                    className="display-none"
-                                    name="profilePhoto"
-                                    id="profilePhoto"
-                                    accept="image/*"
-                                    onChange={photoUploadHandler}
-                                />
-                            </label>
-                        </div> */}
+                                    <div className="flex form-row">
+                                        <label
+                                            htmlFor="photoId"
+                                            className="profile-picture-wrap"
+                                        >
+                                            <img
+                                                src={photoId}
+                                                alt="employee profile photo"
+                                                title="Add a profile photo"
+                                                draggable="false"
+                                            />
+                                            <input
+                                                type="file"
+                                                className="display-none"
+                                                name="photoId"
+                                                id="photoId"
+                                                accept="image/*"
+                                                ref={photoRef}
+                                                onChange={photoUploadHandler}
+                                            />
+                                        </label>
+                                    </div>
                                     <div className="flex form-row">
                                         <div className="form-entry">
                                             <CustomInput

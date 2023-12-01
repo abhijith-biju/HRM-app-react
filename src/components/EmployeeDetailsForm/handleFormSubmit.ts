@@ -2,18 +2,34 @@ import { IEmployeeSubmission } from '../../interfaces/common';
 import { IApiEmployeeSubmission } from '../../interfaces/ApiDataInterface';
 import { API } from '../../core/api/useApi';
 import { toast } from 'react-toastify';
+import { getPhotoUrl } from '../../core/api/firebase';
 
 const handleFormSubmit = async (
     submitData: IEmployeeSubmission,
-    empId: string | null
+    empId: string | null,
+    photoRef: HTMLInputElement | null
 ) => {
+    let photoUrl = '';
+    try {
+        if (submitData.photoId) {
+            photoUrl = submitData.photoId;
+        }
+
+        if (photoRef?.files && photoRef.files[0]) {
+            photoUrl = await getPhotoUrl(photoRef.files[0]);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
     const extraDetails = {
         gender: submitData.gender,
         location: submitData.location ? submitData.location.label : null,
+        photoId: photoUrl,
     };
     delete submitData.gender;
     delete submitData.location;
-    delete submitData.profileId;
+    delete submitData.photoId;
 
     const submissionData: IApiEmployeeSubmission = {
         ...submitData,

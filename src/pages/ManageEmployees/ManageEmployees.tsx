@@ -39,7 +39,7 @@ const ManageEmployees: React.FC = () => {
     const deleteConfirmHandler = async () => {
         setIsModalOpen(false);
         try {
-            const res = await API({
+            await API({
                 method: 'DELETE',
                 url: `/employee/${empIdtoDelete}`,
             });

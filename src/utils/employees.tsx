@@ -109,7 +109,7 @@ export const modifyFetchEmployeeToSubmit = (employeeObj: IApiEmployee) => {
         location: moreDetails?.location
             ? getObjectFromLabel(moreDetails.location, locations)
             : null,
-        profileId: moreDetails?.profileId ? moreDetails.profileId : '',
+        photoId: moreDetails?.photoId ? moreDetails.photoId : '',
     } as IEmployeeSubmission;
 
     newEmployeeObj.department = modifySelectOption(

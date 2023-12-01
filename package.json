@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.2",
+    "firebase": "^10.7.0",
     "formik": "^2.4.5",
     "i": "^0.3.7",
     "react": "^18.2.0",

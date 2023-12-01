@@ -97,6 +97,12 @@ const StyledFormWrap = styled.div`
         border-color: #b70000;
     }
 
+    & .skills-input-container {
+        & input {
+            height: auto;
+        }
+    }
+
     & .form-controls-container {
         justify-content: end;
         gap: 20px;

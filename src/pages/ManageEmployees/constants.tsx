@@ -85,4 +85,5 @@ export const prefillDataOnEmployeeAdd: IEmployeeSubmission = {
     designation: '',
     phone: '',
     salary: '',
+    photoId: '',
 };

@@ -31,10 +31,9 @@ export interface IEmployeeSubmission {
     department: IReactSelectOption | null;
     skills: IReactSelectOption[] | [];
     moreDetails: string;
-    profileInput?: string;
     location?: IReactSelectOption | null;
     gender?: string;
-    profileId?: string;
+    photoId?: string;
 }
 
 export interface IEmployeeListing {
