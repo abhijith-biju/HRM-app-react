@@ -1,4 +1,4 @@
-import { IEmployeeSubmission } from '../../interfaces/common';
+import { IEmployee, IReactSelectOption } from '../../interfaces/common';
 
 export const empTableHeaders = [
     { value: 'id', label: 'Emp Id', isSortable: true },
@@ -9,7 +9,7 @@ export const empTableHeaders = [
     { value: 'actions', label: 'Actions', isSortable: false },
 ];
 
-export const locations = [
+export const locations: IReactSelectOption[] = [
     {
         value: 'L1',
         label: 'Trivandrum',
@@ -50,7 +50,8 @@ export const genders = [
     { value: 'others', label: 'Others' },
 ];
 
-export const prefillDataOnEmployeeAdd: IEmployeeSubmission = {
+export const prefillDataOnEmployeeAdd: IEmployee = {
+    id: 0,
     firstName: '',
     email: '',
     dob: '',

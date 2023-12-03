@@ -3,7 +3,7 @@ import { EmployeeDetailsForm, Loader } from '../../components';
 import { useParams } from 'react-router-dom';
 import useApi from '../../core/api/useApi';
 import { IApiFetchEmployee } from '../../interfaces/ApiDataInterface';
-import { modifyFetchEmployeeToSubmit } from '../../utils/employees';
+import { modifyFetchedEmployeeData } from '../../utils/employees';
 
 const EditEmployeeDetails: React.FC = () => {
     const { employeeId } = useParams();
@@ -28,7 +28,7 @@ const EditEmployeeDetails: React.FC = () => {
                     ) : (
                         <EmployeeDetailsForm
                             empId={employeeId}
-                            prefillData={modifyFetchEmployeeToSubmit(
+                            prefillData={modifyFetchedEmployeeData(
                                 response!.data
                             )}
                         />

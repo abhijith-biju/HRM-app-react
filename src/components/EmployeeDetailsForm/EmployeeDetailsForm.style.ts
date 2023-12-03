@@ -60,9 +60,8 @@ const StyledFormWrap = styled.div`
 
     & .error-msg {
         color: #b70000;
-        margin: 1px 0 0 0;
+        margin: 5px 0 0 0;
         font-size: 0.8em;
-        margin-top: 5px;
     }
 
     .profile-picture-wrap {

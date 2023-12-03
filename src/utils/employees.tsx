@@ -1,6 +1,6 @@
 import {
     IEmployeeListing,
-    IEmployeeSubmission,
+    IEmployee,
     IReactSelectOption,
 } from '../interfaces/common';
 import { IApiEmployee } from '../interfaces/ApiDataInterface';
@@ -68,67 +68,69 @@ export const getEmployeesListingData = (
 
 //modify option object to {value: string, label: string}
 export const modifySelectOption = (optionObj: any, curLabelKey: string) => {
-    if (optionObj) {
-        return {
-            value: String(optionObj.id),
-            label: String(optionObj[curLabelKey]),
-        } as IReactSelectOption;
-    }
-    return null;
+    // console.log('old obj', optionObj);
+    const newObj = {
+        value: String(optionObj.id),
+        label: String(optionObj[curLabelKey]),
+    } as IReactSelectOption;
+    // console.log('new obj', newObj);
+    return newObj;
 };
 
 //modify each option object in options array to {value: string, label: string}
-export const modifySelectOptionsData = (
+export const modifySelectOptionsArray = (
     optionsArr: any,
     curLabelKey: string
 ) => {
     const newOptionsArr: IReactSelectOption[] = [];
-    for (const obj of optionsArr) {
-        newOptionsArr.push({ value: String(obj.id), label: obj[curLabelKey] });
+    for (const optionObj of optionsArr) {
+        newOptionsArr.push(modifySelectOption(optionObj, curLabelKey));
     }
     return newOptionsArr;
 };
 
 // modify fetched employee details to format required for employee form
-export const modifyFetchEmployeeToSubmit = (employeeObj: IApiEmployee) => {
+export const modifyFetchedEmployeeData = (employeeObj: IApiEmployee) => {
     const moreDetails = JSON.parse(employeeObj.moreDetails);
 
-    const newEmployeeObj = {
-        firstName: employeeObj.firstName,
-        lastName: employeeObj.lastName,
-        isActive: employeeObj.isActive,
-        dob: employeeObj.dob,
-        email: employeeObj.email,
-        phone: employeeObj.phone,
-        designation: employeeObj.designation,
-        salary: employeeObj.salary,
-        dateOfJoining: employeeObj.dateOfJoining,
-        address: employeeObj.address,
+    const newEmployeeObj: IEmployee = {
+        id: employeeObj.id,
+        firstName: employeeObj.firstName || '',
+        lastName: employeeObj.lastName || '',
+        isActive: employeeObj.isActive || false,
+        dob: employeeObj.dob || '',
+        email: employeeObj.email || '',
+        phone: employeeObj.phone || '',
+        designation: employeeObj.designation || '',
+        salary: employeeObj.salary || '',
+        dateOfJoining: employeeObj.dateOfJoining || '',
+        address: employeeObj.address || '',
+        department: employeeObj.department
+            ? modifySelectOption(employeeObj.department, 'department')
+            : null,
+
+        role: employeeObj.role
+            ? modifySelectOption(employeeObj.role, 'role')
+            : null,
+
+        skills: employeeObj.skills
+            ? modifySelectOptionsArray(employeeObj.skills, 'skill')
+            : [],
+
         moreDetails: employeeObj.moreDetails,
-        gender: moreDetails?.gender ? moreDetails.gender : '',
         location: moreDetails?.location
             ? getObjectFromLabel(moreDetails.location, locations)
             : null,
-        photoId: moreDetails?.photoId ? moreDetails.photoId : '',
-    } as IEmployeeSubmission;
 
-    newEmployeeObj.department = modifySelectOption(
-        employeeObj.department,
-        'department'
-    );
-    newEmployeeObj.role = modifySelectOption(employeeObj.role, 'role');
-    const skillArr: IReactSelectOption[] = [];
-    for (const skillObj of employeeObj.skills) {
-        const modifiedSkillOption = modifySelectOption(skillObj, 'skill');
-        modifiedSkillOption && skillArr.push(modifiedSkillOption);
-    }
-    newEmployeeObj.skills = skillArr;
+        gender: moreDetails?.gender ? moreDetails.gender : '',
+        photoId: moreDetails?.photoId ? moreDetails.photoId : '',
+    };
     return newEmployeeObj;
 };
 
 export const getObjectFromLabel = (
     searchLabel: string,
-    refArray: { label: string; [key: string]: any }[]
+    refArray: IReactSelectOption[]
 ) => {
     const targetObj = refArray.find((obj) => obj.label === searchLabel);
     return targetObj ?? null;

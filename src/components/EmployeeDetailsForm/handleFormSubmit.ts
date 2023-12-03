@@ -1,11 +1,11 @@
-import { IEmployeeSubmission } from '../../interfaces/common';
+import { IEmployee } from '../../interfaces/common';
 import { IApiEmployeeSubmission } from '../../interfaces/ApiDataInterface';
 import { API } from '../../core/api/useApi';
 import { toast } from 'react-toastify';
 import { getPhotoUrl } from '../../core/api/firebase';
 
 const handleFormSubmit = async (
-    submitData: IEmployeeSubmission,
+    submitData: IEmployee,
     empId: string | null,
     photoRef: HTMLInputElement | null
 ) => {
@@ -15,10 +15,11 @@ const handleFormSubmit = async (
             photoUrl = submitData.photoId;
         }
 
-        if (photoRef?.files && photoRef.files[0]) {
+        if (photoRef?.files && photoRef?.files[0]) {
             photoUrl = await getPhotoUrl(photoRef.files[0]);
         }
     } catch (error) {
+        toast.error('Profile photo could not be uploaded.');
         console.log(error);
     }
 
@@ -27,9 +28,9 @@ const handleFormSubmit = async (
         location: submitData.location ? submitData.location.label : null,
         photoId: photoUrl,
     };
-    delete submitData.gender;
-    delete submitData.location;
-    delete submitData.photoId;
+    // delete submitData.gender;
+    // delete submitData.location;
+    // delete submitData.photoId;
 
     const submissionData: IApiEmployeeSubmission = {
         ...submitData,
@@ -47,10 +48,10 @@ const handleFormSubmit = async (
             data: submissionData,
         });
         toast.success(
-            `Employee details ${empId ? 'edited' : 'added'} successfully`
+            `Employee details ${empId ? 'edited' : 'added'} successfully.`
         );
     } catch (error) {
-        toast.error(`${empId ? 'Edit' : 'Add'} employee details failed`);
+        toast.error(`${empId ? 'Edit' : 'Add'} employee details failed.`);
         console.log(`${empId ? 'Edit' : 'Add'} failed`, error);
     }
 };

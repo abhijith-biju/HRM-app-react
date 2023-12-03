@@ -8,13 +8,9 @@ const StyledEmpDetailsWrap = styled.section`
 
     .view-emp-card {
         display: flex;
-        padding: 0;
-        width: max-content;
-        margin-inline: auto;
         border-radius: 5px;
-        overflow: hidden;
         box-shadow: 0 6px 20px -5px rgba(0, 0, 0);
-        position: relative;
+        overflow: hidden;
 
         & .main-details {
             background-color: var(--primary-clr);
@@ -27,19 +23,14 @@ const StyledEmpDetailsWrap = styled.section`
             justify-content: center;
         }
 
-        & .extended-details {
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 450px;
-        }
-
         & .profile-photo {
-            height: 200px;
-            width: 200px;
+            --img-size: 200px;
+
+            height: var(--img-size);
+            width: var(--img-size);
             text-align: center;
-            line-height: 200px;
+            line-height: var(--img-size);
+            font-size: 1.5em;
             border-radius: 50%;
             border: 5px solid #fff;
             margin-inline: auto;
@@ -60,8 +51,13 @@ const StyledEmpDetailsWrap = styled.section`
             margin: 0 0 4px 0;
         }
 
-        & dl {
+        & dl.extended-details {
             margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 450px;
         }
 
         & .data-entry {
@@ -92,6 +88,21 @@ const StyledEmpDetailsWrap = styled.section`
             padding: 0;
             gap: 8px;
             flex-wrap: wrap;
+            max-height: 190px;
+            overflow-y: auto;
+        }
+    }
+
+    .navigation-controls {
+        display: flex;
+        gap: 20px;
+
+        .edit-emp-btn {
+            background-color: var(--edit-clr);
+
+            &:hover {
+                background-color: var(--edit-clr-accent);
+            }
         }
     }
 `;

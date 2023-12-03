@@ -16,10 +16,15 @@ export interface IApiEmployee {
     moreDetails: string;
 }
 
+export interface IApiFetchEmployee {
+    message: string;
+    data: IApiEmployee;
+}
+
 export interface IApiEmployeeSubmission {
     firstName: string;
     lastName: string;
-    isActive: true;
+    isActive: boolean;
     dob: string;
     email: string;
     phone: string;
@@ -27,23 +32,18 @@ export interface IApiEmployeeSubmission {
     salary: string;
     dateOfJoining: string;
     address: string;
-    role: number;
-    department: number;
+    role: number | null;
+    department: number | null;
     skills: number[];
     moreDetails: string;
 }
 
-export interface IApiFetchEmployees {
+export interface IApiFetchEmployeesArray {
     message: string;
     data: {
         employees: IApiEmployee[];
         count: number;
     };
-}
-
-export interface IApiFetchEmployee {
-    message: string;
-    data: IApiEmployee;
 }
 
 export interface IApiFetchSkill {
@@ -64,12 +64,11 @@ export interface IApiDepartment {
     department: string;
 }
 
-export interface IApiLocation {
-    id: number;
-    location: string;
-}
-
 export interface IApiRole {
     id: number;
     role: string;
+}
+
+export interface IApiLocation {
+    location: string;
 }

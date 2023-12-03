@@ -6,7 +6,7 @@ const StyledHeader = styled.header`
     border-bottom: 1px solid var(--gray-clr);
     position: sticky;
     top: 0;
-    z-index: 5;
+    z-index: 2;
 `;
 
 const Navbar = styled.nav`

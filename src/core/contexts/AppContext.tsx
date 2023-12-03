@@ -10,7 +10,7 @@ import {
     IApiRole,
     IApiFetchSkill,
 } from '../../interfaces/ApiDataInterface';
-import { modifySelectOptionsData } from '../../utils/employees';
+import { modifySelectOptionsArray } from '../../utils/employees';
 
 const initialState: IAppContextState = {
     roles: [],
@@ -39,7 +39,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
             const skillOptions = skillsFetchResponse.response.data;
             setAppState((appState) => ({
                 ...appState,
-                skills: modifySelectOptionsData(skillOptions, 'skill'),
+                skills: modifySelectOptionsArray(skillOptions, 'skill'),
             }));
         }
     }, [skillsFetchResponse.response]);
@@ -51,7 +51,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
             const roleOptions = rolesFetchResponse.response;
             setAppState((appState) => ({
                 ...appState,
-                roles: modifySelectOptionsData(roleOptions, 'role'),
+                roles: modifySelectOptionsArray(roleOptions, 'role'),
             }));
         }
     }, [rolesFetchResponse.response]);
@@ -66,7 +66,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
             const departmentOptions = departmentsFetchResponse.response;
             setAppState((appState) => ({
                 ...appState,
-                departments: modifySelectOptionsData(
+                departments: modifySelectOptionsArray(
                     departmentOptions,
                     'department'
                 ),

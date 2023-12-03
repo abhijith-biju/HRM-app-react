@@ -8,7 +8,7 @@ const Overlay = styled.div<IModal>`
     position: fixed;
     display: none;
     inset: 0 0 0 0;
-    z-index: 2;
+    z-index: 3;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(2.5px);
 
@@ -29,7 +29,7 @@ const StyledModal = styled.div<IModal>`
     overflow: hidden auto;
     min-width: 250px;
     border: 1px solid black;
-    z-index: 3;
+    z-index: 4;
     background-color: #fff;
     border: none;
     border-radius: 5px;

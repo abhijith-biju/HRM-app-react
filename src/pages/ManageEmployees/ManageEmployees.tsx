@@ -14,7 +14,7 @@ import {
 import { toast } from 'react-toastify';
 import { useAppContext } from '../../core/contexts/AppContext';
 import useApi, { API } from '../../core/api/useApi';
-import { IApiFetchEmployees } from '../../interfaces/ApiDataInterface';
+import { IApiFetchEmployeesArray } from '../../interfaces/ApiDataInterface';
 import { IEmployeeListing } from '../../interfaces/common';
 import { getEmployeesListingData } from '../../utils/employees';
 
@@ -75,7 +75,7 @@ const ManageEmployees: React.FC = () => {
         });
     };
 
-    const employeesFetchResponse = useApi<IApiFetchEmployees>(
+    const employeesFetchResponse = useApi<IApiFetchEmployeesArray>(
         'GET',
         getFetchURL()
     );

@@ -17,13 +17,13 @@ import {
 } from '../../pages/ManageEmployees/constants';
 import validate from './validation';
 import { useAppContext } from '../../core/contexts/AppContext';
-import { IEmployeeSubmission } from '../../interfaces/common';
+import { IEmployee } from '../../interfaces/common';
 import handleFormSubmit from './handleFormSubmit';
 import { useNavigate } from 'react-router-dom';
 
 interface IEmployeeDetailsForm {
     empId?: string | null;
-    prefillData?: IEmployeeSubmission;
+    prefillData?: IEmployee;
 }
 
 const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
@@ -102,7 +102,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                     <div className="flex form-row">
                                         <div className="form-entry">
                                             <CustomInput
-                                                label="First Name"
+                                                label="Full Name"
                                                 name="firstName"
                                                 id="name"
                                                 type="text"
@@ -201,6 +201,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         <Button
                                             className="primary"
                                             type="submit"
+                                            disabled={props.isSubmitting}
                                         >
                                             SUBMIT
                                         </Button>

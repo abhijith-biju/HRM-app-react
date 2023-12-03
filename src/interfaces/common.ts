@@ -10,30 +10,13 @@ export interface IEmployee {
     salary: string;
     dateOfJoining: string;
     address: string;
-    role: IReactSelectOption;
-    department: IReactSelectOption;
-    skills: IReactSelectOption[];
-    moreDetails: string;
-}
-
-export interface IEmployeeSubmission {
-    firstName: string;
-    lastName: string;
-    isActive: true;
-    dob: string;
-    email: string;
-    phone: string;
-    designation: string;
-    salary: string;
-    dateOfJoining: string;
-    address: string;
     role: IReactSelectOption | null;
     department: IReactSelectOption | null;
     skills: IReactSelectOption[] | [];
     moreDetails: string;
-    location?: IReactSelectOption | null;
-    gender?: string;
-    photoId?: string;
+    location: IReactSelectOption | null;
+    gender: string;
+    photoId: string;
 }
 
 export interface IEmployeeListing {

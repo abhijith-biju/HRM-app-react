@@ -22,7 +22,7 @@ const EmployeesTableFilter: React.FC = () => {
     return (
         <StyledEmployeesFilterWrap>
             <Input
-                placeholder="Search by Employee Name"
+                placeholder="Filter by Employee Name"
                 value={appState.employeeNameFilter}
                 onChange={handleSearchInputChange}
             />

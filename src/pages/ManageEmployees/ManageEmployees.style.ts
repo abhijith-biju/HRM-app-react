@@ -40,7 +40,7 @@ export const StyledEmployeesTable = styled(Table)`
         }
 
         & .edit-emp-btn span {
-            color: orange;
+            color: var(--edit-clr);
         }
 
         & .delete-emp-btn span {

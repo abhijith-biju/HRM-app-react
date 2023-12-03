@@ -9,6 +9,7 @@ const StyledLinkButton = styled(Link)`
     border-radius: 5px;
     font-weight: bold;
     font-size: 1em;
+    display: inline-block;
 
     &.primary {
         background-color: var(--primary-clr);
