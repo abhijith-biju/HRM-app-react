@@ -1,6 +1,7 @@
 import StyledTable from './Table.style';
 import { Loader, Button } from '../..';
 import { useSearchParams } from 'react-router-dom';
+import { initQueryParams } from '../../../pages/ManageEmployees/constants';
 
 interface ITheader {
     value: string;
@@ -42,13 +43,23 @@ const Table: React.FC<ITable> = ({
 
     const getSortDirection = (headerValue: string) => {
         const currentSortBy = searchParams.get('sortBy');
-        const currentSortDir = searchParams.get('sortDir');
 
         if (currentSortBy === headerValue) {
-            return currentSortDir;
-        } else {
-            return 'desc';
+            return searchParams.get('sortDir') || 'desc';
         }
+        return initQueryParams.sortDir;
+    };
+
+    const isSortActiveColumn = (headerValue: string) => {
+        const currentSortBy = searchParams.get('sortBy');
+
+        if (!currentSortBy && headerValue === initQueryParams.sortBy) {
+            return 'true';
+        }
+        if (currentSortBy === headerValue) {
+            return 'true';
+        }
+        return 'false';
     };
 
     let tableBodyData;
@@ -84,27 +95,45 @@ const Table: React.FC<ITable> = ({
                 <>
                     <thead>
                         <tr>
-                            {tableHeaders.map((header) => (
-                                <th key={header.value}>
-                                    <div className="emp-heading-wrap">
-                                        <span>{header.label}</span>
-                                        {header.isSortable && (
-                                            <Button
-                                                className="btn sort-btn"
-                                                data-value={header.sortValue}
-                                                data-sort-dir={getSortDirection(
-                                                    header.sortValue
-                                                )}
-                                                onClick={sortButtonClickHandler}
-                                            >
-                                                <span className="material-symbols-rounded">
-                                                    arrow_upward_alt
-                                                </span>
-                                            </Button>
-                                        )}
-                                    </div>
-                                </th>
-                            ))}
+                            {tableHeaders.map((header) => {
+                                const isSortActive = isSortActiveColumn(
+                                    header.sortValue
+                                );
+                                return (
+                                    <th key={header.value}>
+                                        <div className="emp-heading-wrap">
+                                            <span>{header.label}</span>
+                                            {header.isSortable && (
+                                                <Button
+                                                    className="btn sort-btn"
+                                                    data-value={
+                                                        header.sortValue
+                                                    }
+                                                    data-sort-dir={getSortDirection(
+                                                        header.sortValue
+                                                    )}
+                                                    data-is-sort-active-column={
+                                                        isSortActive
+                                                    }
+                                                    onClick={
+                                                        sortButtonClickHandler
+                                                    }
+                                                >
+                                                    {isSortActive === 'true' ? (
+                                                        <span className="material-symbols-rounded">
+                                                            arrow_upward_alt
+                                                        </span>
+                                                    ) : (
+                                                        <span className="material-symbols-rounded">
+                                                            sync_alt
+                                                        </span>
+                                                    )}
+                                                </Button>
+                                            )}
+                                        </div>
+                                    </th>
+                                );
+                            })}
                         </tr>
                     </thead>
                     <tbody>{tableBodyData}</tbody>

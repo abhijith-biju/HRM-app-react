@@ -47,8 +47,12 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
         }
     };
 
-    const handlePhotoLabelClick = () => {
-        photoRef.current?.click();
+    const handlePhotoLabelClick = (
+        e: React.KeyboardEvent<HTMLLabelElement>
+    ) => {
+        if (e.key === 'Enter') {
+            photoRef.current?.click();
+        }
     };
 
     return (
@@ -84,8 +88,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                             className="profile-picture-wrap"
                                             tabIndex={0}
                                             onKeyDown={(e) =>
-                                                e.key === 'Enter' &&
-                                                handlePhotoLabelClick()
+                                                handlePhotoLabelClick(e)
                                             }
                                         >
                                             <img

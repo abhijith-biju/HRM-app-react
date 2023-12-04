@@ -24,9 +24,19 @@ const StyledTable = styled.table`
 
         & .sort-btn {
             padding: 0;
+            color: gray;
 
             &[data-sort-dir='desc'] {
                 rotate: 180deg;
+            }
+
+            &[data-is-sort-active-column='true'] {
+                color: #000;
+            }
+
+            &[data-is-sort-active-column='false'] {
+                rotate: 90deg;
+                margin-left: 3px;
             }
 
             & span {

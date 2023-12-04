@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { empTableHeaders } from './constants';
+import { empTableHeaders, initQueryParams } from './constants';
 import {
     StyledManageEmployeesWrap,
     StyledEmployeesTable,
@@ -31,10 +31,10 @@ const ManageEmployees: React.FC = () => {
     });
 
     const getFetchURL = () => {
-        const limit = searchParams.get('limit') ?? '10';
-        const offset = searchParams.get('offset') ?? '0';
-        const sortBy = searchParams.get('sortBy') ?? 'id';
-        const sortDir = searchParams.get('sortDir') ?? 'desc';
+        const limit = searchParams.get('limit') ?? initQueryParams.limit;
+        const offset = searchParams.get('offset') ?? initQueryParams.offset;
+        const sortBy = searchParams.get('sortBy') ?? initQueryParams.sortBy;
+        const sortDir = searchParams.get('sortDir') ?? initQueryParams.sortDir;
         return `/employee?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortDir=${sortDir}`;
     };
 
