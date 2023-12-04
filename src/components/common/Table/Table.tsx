@@ -2,6 +2,8 @@ import StyledTable from './Table.style';
 import { Loader, Button } from '../..';
 import { useSearchParams } from 'react-router-dom';
 import { initQueryParams } from '../../../pages/ManageEmployees/constants';
+import upArrow from '../../../assets/images/up-arrow.svg';
+import doubleArrow from '../../../assets/images/multi-arrow.svg';
 
 interface ITheader {
     value: string;
@@ -120,13 +122,15 @@ const Table: React.FC<ITable> = ({
                                                     }
                                                 >
                                                     {isSortActive === 'true' ? (
-                                                        <span className="material-symbols-rounded">
-                                                            arrow_upward_alt
-                                                        </span>
+                                                        <img
+                                                            src={upArrow}
+                                                            alt="sort-icon"
+                                                        />
                                                     ) : (
-                                                        <span className="material-symbols-rounded">
-                                                            sync_alt
-                                                        </span>
+                                                        <img
+                                                            src={doubleArrow}
+                                                            alt="sort-icon"
+                                                        />
                                                     )}
                                                 </Button>
                                             )}

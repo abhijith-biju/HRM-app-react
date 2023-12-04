@@ -20,6 +20,7 @@ const StyledTable = styled.table`
         & .emp-heading-wrap {
             display: flex;
             align-items: center;
+            gap: 7px;
         }
 
         & .sort-btn {
@@ -30,23 +31,14 @@ const StyledTable = styled.table`
                 rotate: 180deg;
             }
 
-            &[data-is-sort-active-column='true'] {
-                color: #000;
-            }
-
-            &[data-is-sort-active-column='false'] {
-                rotate: 90deg;
-                margin-left: 3px;
-            }
-
-            & span {
-                font-size: 30px;
-                display: block;
+            & img {
+                height: 18px;
+                width: auto;
                 pointer-events: none;
             }
 
-            &:hover span {
-                scale: 1.1;
+            &:hover img {
+                scale: 1.2;
                 font-variation-settings: 'wght' 450;
             }
         }
