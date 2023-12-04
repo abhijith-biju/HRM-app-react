@@ -20,7 +20,7 @@ import { useAppContext } from '../../core/contexts/AppContext';
 import { IEmployee } from '../../interfaces/common';
 import handleFormSubmit from './handleFormSubmit';
 import { sortObjByKey } from '../../utils/employees';
-import profilePictureAvatar from '../../assets/images/employee-avatar.svg';
+import profilePictureAvatar from '../../assets/images/add-profile-photo.svg';
 
 interface IEmployeeDetailsForm {
     empId?: string | null;
@@ -45,6 +45,10 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
             const imgFile = e.target.files[0];
             setPhotoId(URL.createObjectURL(imgFile));
         }
+    };
+
+    const handlePhotoLabelClick = () => {
+        photoRef.current?.click();
     };
 
     return (
@@ -78,6 +82,11 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                         <label
                                             htmlFor="photoId"
                                             className="profile-picture-wrap"
+                                            tabIndex={0}
+                                            onKeyDown={(e) =>
+                                                e.key === 'Enter' &&
+                                                handlePhotoLabelClick()
+                                            }
                                         >
                                             <img
                                                 src={

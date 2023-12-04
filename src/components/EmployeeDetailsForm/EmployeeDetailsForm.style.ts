@@ -81,11 +81,17 @@ const StyledFormWrap = styled.div`
         overflow: clip;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
             rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        transition: scale 200ms ease;
 
         & > img {
             height: 100%;
             width: 100%;
             object-fit: cover;
+        }
+
+        &:hover,
+        &:focus {
+            scale: 1.1;
         }
     }
 
