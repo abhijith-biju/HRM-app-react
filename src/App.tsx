@@ -1,15 +1,27 @@
 import GlobalStyle from './globalStyles.ts';
-import Layout from './layout/Layout.tsx';
+import { AppContextProvider } from './core/contexts/AppContext.tsx';
 import { RouterProvider } from 'react-router-dom';
 import router from './core/routes/router.tsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     return (
         <>
-            <GlobalStyle />
-            <Layout>
-                <RouterProvider router={router}></RouterProvider>
-            </Layout>
+            <AppContextProvider>
+                <GlobalStyle />
+                <RouterProvider router={router} />
+            </AppContextProvider>
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                pauseOnFocusLoss
+                pauseOnHover
+                theme="colored"
+            />
         </>
     );
 }

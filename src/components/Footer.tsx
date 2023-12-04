@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
-    margin-top: auto;
     text-align: center;
     padding: 15px 10px;
     border-top: 1px solid var(--gray-clr);

@@ -7,6 +7,7 @@ const StyledButton = styled.button`
     padding: 7px 15px;
     border-radius: 5px;
     font-weight: bold;
+    font-size: 1em;
 
     &.primary {
         background-color: var(--primary-clr);
@@ -33,9 +34,18 @@ const StyledButton = styled.button`
         align-items: center;
         gap: 7px;
 
+        & span {
+            width: max-content;
+        }
+
         & .icon {
             color: inherit;
         }
+    }
+
+    &:disabled {
+        background-color: gray;
+        pointer-events: none;
     }
 `;
 

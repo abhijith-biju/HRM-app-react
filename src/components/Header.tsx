@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const StyledHeader = styled.header`
     background-color: #fff;
     border-bottom: 1px solid var(--gray-clr);
     position: sticky;
     top: 0;
-    z-index: 5;
+    z-index: 2;
 `;
 
 const Navbar = styled.nav`
@@ -31,9 +32,9 @@ const Header: React.FC = () => {
     return (
         <StyledHeader>
             <Navbar>
-                <a href="/">
+                <Link to="/employees">
                     <h1 className="brand-logo">HRM APP</h1>
-                </a>
+                </Link>
             </Navbar>
         </StyledHeader>
     );
