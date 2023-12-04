@@ -8,7 +8,8 @@ const CustomSelectStyles: StylesConfig<IReactSelectOption, boolean> = {
         boxShadow: 'none',
         cursor: 'text',
         width: '100%',
-        minHeight: 'initial',
+        height: 'auto',
+        minHeight: '2em',
         borderRadius: '3px',
         borderColor: state.isFocused ? '#000' : '#7e7e7e',
         '&:hover': {

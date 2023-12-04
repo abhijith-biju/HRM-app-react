@@ -5,6 +5,11 @@ export const StyledManageEmployeesWrap = styled.section`
     display: flex;
     flex-direction: column;
     gap: 25px;
+    --table-control-field-max-height: 40px;
+
+    & .table-control-field {
+        max-height: var(--table-control-field-max-height);
+    }
 
     & .employees-table-controls {
         display: flex;

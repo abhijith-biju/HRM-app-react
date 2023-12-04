@@ -2,78 +2,35 @@ import {
     IEmployeeListing,
     IEmployee,
     IReactSelectOption,
+    IDeleteEmployee,
 } from '../interfaces/common';
 import { IApiEmployee } from '../interfaces/ApiDataInterface';
 import { Button, LinkButton } from '../components';
 import { locations } from '../pages/ManageEmployees/constants';
 
-//modify fetched employee details to format for employee listing table
-export const getEmployeesListingData = (
-    employeesList: IApiEmployee[],
-    setIsModalOpen: (isOpen: boolean) => void,
-    setEmpIdToDelete: (id: number | undefined) => void
-) => {
-    const newEmpList: IEmployeeListing[] = [];
-    for (const emp of employeesList) {
-        const newEmp: IEmployeeListing = {
-            id: emp.id,
-            firstName: emp.firstName,
-            email: emp.email,
-            department: emp.department ? emp.department.department : 'N/A',
-            role: emp.role ? emp.role.role : 'N/A',
-            skills: emp.skills.map((skill) => skill.id),
-            actions: (
-                <ul className="employee-actions flex-container">
-                    <li>
-                        <LinkButton
-                            to={`/view-employee/${emp.id}`}
-                            className="view-emp-btn flex-container"
-                        >
-                            <span className="material-symbols-rounded">
-                                visibility
-                            </span>
-                        </LinkButton>
-                    </li>
-                    <li>
-                        <LinkButton
-                            to={`/edit-employee/${emp.id}`}
-                            className="edit-emp-btn flex-container"
-                        >
-                            <span className="material-symbols-rounded">
-                                edit_square
-                            </span>
-                        </LinkButton>
-                    </li>
-                    <li>
-                        <Button
-                            type="button"
-                            className="delete-emp-btn flex-container"
-                            onClick={() => {
-                                setEmpIdToDelete(emp.id);
-                                setIsModalOpen(true);
-                            }}
-                        >
-                            <span className="material-symbols-rounded">
-                                delete
-                            </span>
-                        </Button>
-                    </li>
-                </ul>
-            ),
-        };
-        newEmpList.push(newEmp);
-    }
-    return newEmpList;
+//sort array object by sortKey (slice create a new array)
+export const sortObjByKey = (srcObjArray: any[], sortKey: string) => {
+    return srcObjArray
+        .slice()
+        .sort((a: any, b: any) =>
+            a[sortKey].toLowerCase().localeCompare(b[sortKey].toLowerCase())
+        );
+};
+
+export const filterObjByKey = (srcObjArray: any[], sortKey: string) => {
+    const uniqueObjArray = srcObjArray.filter(
+        (option: any, index: number, array: any[]) =>
+            index === 0 || option[sortKey] !== array[index - 1][sortKey]
+    );
+    return uniqueObjArray;
 };
 
 //modify option object to {value: string, label: string}
 export const modifySelectOption = (optionObj: any, curLabelKey: string) => {
-    // console.log('old obj', optionObj);
     const newObj = {
         value: String(optionObj.id),
         label: String(optionObj[curLabelKey]),
     } as IReactSelectOption;
-    // console.log('new obj', newObj);
     return newObj;
 };
 
@@ -82,17 +39,27 @@ export const modifySelectOptionsArray = (
     optionsArr: any,
     curLabelKey: string
 ) => {
-    const newOptionsArr: IReactSelectOption[] = [];
+    let newOptionsArr: IReactSelectOption[] = [];
     for (const optionObj of optionsArr) {
         newOptionsArr.push(modifySelectOption(optionObj, curLabelKey));
     }
-    return newOptionsArr;
+    newOptionsArr = sortObjByKey(newOptionsArr, 'label');
+    return filterObjByKey(newOptionsArr, 'label');
+};
+
+export const getObjectFromLabel = (
+    searchLabel: string,
+    refArray: IReactSelectOption[]
+) => {
+    const targetObj = refArray.find((obj) => obj.label === searchLabel);
+    return targetObj ?? null;
 };
 
 // modify fetched employee details to format required for employee form
 export const modifyFetchedEmployeeData = (employeeObj: IApiEmployee) => {
-    const moreDetails = JSON.parse(employeeObj.moreDetails);
-
+    const moreDetails = employeeObj.moreDetails
+        ? JSON.parse(employeeObj.moreDetails)
+        : {};
     const newEmployeeObj: IEmployee = {
         id: employeeObj.id,
         firstName: employeeObj.firstName || '',
@@ -128,10 +95,74 @@ export const modifyFetchedEmployeeData = (employeeObj: IApiEmployee) => {
     return newEmployeeObj;
 };
 
-export const getObjectFromLabel = (
-    searchLabel: string,
-    refArray: IReactSelectOption[]
+//modify fetched employee details to format for employee listing table
+export const getEmployeesListingData = (
+    employeesList: IApiEmployee[],
+    setIsModalOpen: (isOpen: boolean) => void,
+    setDeleteEmployee: (deleteEmployee: IDeleteEmployee) => void
 ) => {
-    const targetObj = refArray.find((obj) => obj.label === searchLabel);
-    return targetObj ?? null;
+    const newEmpList: IEmployeeListing[] = [];
+    for (const emp of employeesList) {
+        const {
+            firstName,
+            lastName,
+            department,
+            role,
+            skills,
+            location,
+            ...rest
+        } = modifyFetchedEmployeeData(emp);
+
+        const newEmp: IEmployeeListing = {
+            ...rest,
+            fullName: firstName + ' ' + lastName,
+            department: department ? department.label : 'N/A',
+            role: role ? role.label : 'N/A',
+            location: location ? location.label : 'N/A',
+            skills: skills.map((skill) => Number(skill.value)),
+            actions: (
+                <ul className="employee-actions flex-container">
+                    <li>
+                        <LinkButton
+                            to={`/view-employee/${emp.id}`}
+                            className="view-emp-btn flex-container"
+                        >
+                            <span className="material-symbols-rounded">
+                                visibility
+                            </span>
+                        </LinkButton>
+                    </li>
+                    <li>
+                        <LinkButton
+                            to={`/edit-employee/${emp.id}`}
+                            className="edit-emp-btn flex-container"
+                        >
+                            <span className="material-symbols-rounded">
+                                edit_square
+                            </span>
+                        </LinkButton>
+                    </li>
+                    <li>
+                        <Button
+                            type="button"
+                            className="delete-emp-btn flex-container"
+                            onClick={() => {
+                                setDeleteEmployee({
+                                    isDeleting: false,
+                                    empIdToDelete: emp.id,
+                                });
+                                setIsModalOpen(true);
+                            }}
+                        >
+                            <span className="material-symbols-rounded">
+                                delete
+                            </span>
+                        </Button>
+                    </li>
+                </ul>
+            ),
+        };
+        newEmpList.push(newEmp);
+    }
+    return newEmpList;
 };

@@ -18,7 +18,7 @@ const SearchEmployee = () => {
                         .required('Please enter an employee Id'),
                 })}
                 onSubmit={(values) => {
-                    navigate(`/edit-employee/${values.employeeId}`);
+                    navigate(`/view-employee/${values.employeeId}`);
                 }}
             >
                 {(props) => {

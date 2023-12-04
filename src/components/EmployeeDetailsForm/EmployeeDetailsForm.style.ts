@@ -16,7 +16,7 @@ const StyledFormWrap = styled.div`
     }
 
     & label,
-    & .checkbox-label {
+    & .radio-group-label {
         font-size: 1em;
         font-weight: 500;
         position: relative;
@@ -24,9 +24,17 @@ const StyledFormWrap = styled.div`
         margin-bottom: 3px;
     }
 
-    & input {
+    & input,
+    & .radio-group-container {
         font-size: 1em;
         height: var(--input-field-height);
+    }
+
+    .radio-group-container {
+        & label {
+            font-weight: normal;
+            margin-bottom: 0;
+        }
     }
 
     & input,
@@ -51,7 +59,7 @@ const StyledFormWrap = styled.div`
         color: #b70000;
         position: absolute;
         top: 0;
-        right: -8px;
+        right: -10px;
     }
 
     & .form-entry {
@@ -81,19 +89,9 @@ const StyledFormWrap = styled.div`
         }
     }
 
-    & .checkbox-container {
-        height: var(--input-field-height);
-
-        & label {
-            font-size: 1em;
-        }
-    }
-
-    & input:not([type='radio'], [type='file']).error-border,
-    & select.error-border,
-    & textarea.error-border {
-        outline: 1px solid #b70000;
-        border-color: #b70000;
+    & input.invalid,
+    & textarea.invalid {
+        background-color: #f8d7da;
     }
 
     & .skills-input-container {

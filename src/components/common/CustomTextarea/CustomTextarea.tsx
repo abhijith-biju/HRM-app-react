@@ -7,14 +7,25 @@ interface ITextarea {
     placeholder?: string;
     className?: string;
     rows?: string;
+    required?: boolean;
 }
 
-const CustomTextarea: React.FC<ITextarea> = ({ label, ...props }) => {
+const CustomTextarea: React.FC<ITextarea> = ({ label, required, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <>
-            <label htmlFor={props.id || props.name}>{label}</label>
-            <Field as="textarea" {...field} {...props} />
+            <label
+                htmlFor={props.id || props.name}
+                className={required ? 'required-field' : ''}
+            >
+                {label}
+            </label>
+            <Field
+                as="textarea"
+                {...field}
+                {...props}
+                className={meta.touched && meta.error ? 'invalid' : ''}
+            />
             {meta.touched && meta.error ? (
                 <div className="error-msg">{meta.error}</div>
             ) : null}

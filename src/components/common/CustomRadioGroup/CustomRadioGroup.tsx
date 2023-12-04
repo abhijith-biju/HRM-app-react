@@ -8,6 +8,7 @@ interface IRadioGroup {
     name: string;
     options: IReactSelectOption[];
     className?: string;
+    required?: boolean;
 }
 
 const CustomRadioGroup: React.FC<IRadioGroup> = ({
@@ -16,18 +17,24 @@ const CustomRadioGroup: React.FC<IRadioGroup> = ({
     name,
     className,
     options,
+    required,
 }) => {
     const [_, meta] = useField(name);
 
     return (
         <StyledRadioGrup className={className}>
-            <div id={id} className="checkbox-label">
+            <div
+                id={id}
+                className={`radio-group-label ${
+                    required ? 'required-field' : ''
+                }`}
+            >
                 {label}
             </div>
             <div
                 role="group"
                 aria-labelledby={id}
-                className="checkbox-container"
+                className="radio-group-container"
             >
                 {options.map((option) => (
                     <label key={option.value}>

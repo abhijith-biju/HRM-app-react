@@ -1,6 +1,6 @@
 import StyledEmpDetailsWrap from './ViewEmployeeDetails.style';
 import { modifyFetchedEmployeeData } from '../../utils/employees';
-import { Loader, Chip, LinkButton } from '../../components';
+import { Loader, Chip, LinkButton, Button } from '../../components';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -129,9 +129,12 @@ const ViewEmployeeDetails = () => {
                         >
                             Edit Employee Details
                         </LinkButton>
-                        <LinkButton to="/employees" className="primary">
-                            Go to Home Page
-                        </LinkButton>
+                        <Button
+                            className="primary"
+                            onClick={() => navigate(-1)}
+                        >
+                            Go Back
+                        </Button>
                     </div>
                 </StyledEmpDetailsWrap>
             )}

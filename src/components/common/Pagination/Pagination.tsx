@@ -1,19 +1,31 @@
 import { Button } from '../..';
 import PaginationContainer from './Pagination.style';
 import { useSearchParams } from 'react-router-dom';
+import { useAppContext } from '../../../core/contexts/AppContext';
 
 interface IPagination {
     totalEntries: number;
 }
 
 const Pagination: React.FC<IPagination> = ({ totalEntries = 0 }) => {
+    const { appState } = useAppContext();
     const [searchParams, setSearchParams] = useSearchParams();
+
+    const isSearchFilters = () => {
+        if (
+            appState.employeeNameFilter === '' &&
+            appState.skillsFilter.length === 0
+        ) {
+            return false;
+        }
+        return true;
+    };
 
     const offset = Number(searchParams.get('offset') ?? 0);
     const limit = Number(searchParams.get('limit') ?? 10);
 
-    const isFirstPage = offset === 0;
-    const isLastPage = offset + limit >= totalEntries;
+    const isFirstPage = offset === 0 || isSearchFilters();
+    const isLastPage = offset + limit >= totalEntries || isSearchFilters();
 
     return (
         <PaginationContainer>

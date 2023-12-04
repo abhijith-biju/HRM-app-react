@@ -19,6 +19,7 @@ export const CustomSelectStyles: StylesConfig<
         boxShadow: 'none',
         cursor: 'text',
         width: '100%',
+        minWidth: '200px',
         minHeight: '100%',
         borderRadius: '3px',
         borderColor: state.isFocused ? '#000' : '#7e7e7e',

@@ -20,6 +20,7 @@ const animatedComponents = makeAnimated();
 const CustomSelect: React.FC<ICustomSelect> = ({
     label,
     options,
+    required,
     ...props
 }) => {
     const [field, meta, helpers] = useField(props);
@@ -27,7 +28,12 @@ const CustomSelect: React.FC<ICustomSelect> = ({
 
     return (
         <>
-            <label htmlFor={props.id || props.name}>{label}</label>
+            <label
+                htmlFor={props.id || props.name}
+                className={required ? 'required-field' : ''}
+            >
+                {label}
+            </label>
             <Select
                 options={options}
                 styles={CustomSelectStyles}

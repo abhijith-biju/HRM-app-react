@@ -1,12 +1,27 @@
 import { IEmployee, IReactSelectOption } from '../../interfaces/common';
 
 export const empTableHeaders = [
-    { value: 'id', label: 'Emp Id', isSortable: true },
-    { value: 'firstName', label: 'Name', isSortable: true },
-    { value: 'email', label: 'Email', isSortable: false },
-    { value: 'role', label: 'Role', isSortable: false },
-    { value: 'department', label: 'Department', isSortable: false },
-    { value: 'actions', label: 'Actions', isSortable: false },
+    { value: 'id', label: 'Emp Id', isSortable: true, sortValue: 'id' },
+    {
+        value: 'fullName',
+        label: 'Name',
+        isSortable: true,
+        sortValue: 'firstName',
+    },
+    { value: 'email', label: 'Email', isSortable: false, sortValue: 'email' },
+    { value: 'role', label: 'Role', isSortable: false, sortValue: 'role' },
+    {
+        value: 'department',
+        label: 'Department',
+        isSortable: false,
+        sortValue: 'department',
+    },
+    {
+        value: 'actions',
+        label: 'Actions',
+        isSortable: false,
+        sortValue: 'actions',
+    },
 ];
 
 export const locations: IReactSelectOption[] = [
@@ -70,41 +85,3 @@ export const prefillDataOnEmployeeAdd: IEmployee = {
     salary: '',
     photoId: '',
 };
-
-// export const prefillDataOnEmployeeAdd: IEmployeeSubmission = {
-//     firstName: 'abhib',
-//     email: 'abhib@qburst.com',
-//     dob: '2017-06-01',
-//     gender: 'female',
-//     address: 'abc street, pqr',
-//     role: {
-//         value: '1',
-//         label: 'Developer',
-//     },
-//     department: {
-//         value: '2',
-//         label: 'Marketing',
-//     },
-//     dateOfJoining: '2001-06-01',
-//     location: {
-//         value: 'L3',
-//         label: 'Cochin',
-//     },
-//     skills: [
-//         {
-//             value: '8',
-//             label: 'UI/UX Design',
-//         },
-//         {
-//             value: '2',
-//             label: 'Node',
-//         },
-//     ],
-//     moreDetails: '',
-//     lastName: '',
-//     isActive: true,
-//     designation: '',
-//     phone: '',
-//     salary: '',
-//     photoId: '',
-// };

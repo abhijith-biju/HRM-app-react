@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import {
     Button,
@@ -7,7 +8,6 @@ import {
     CustomRadioGroup,
     CustomSelect,
     Loader,
-    LinkButton,
 } from '..';
 import StyledFormWrap from './EmployeeDetailsForm.style';
 import {
@@ -19,7 +19,7 @@ import validate from './validation';
 import { useAppContext } from '../../core/contexts/AppContext';
 import { IEmployee } from '../../interfaces/common';
 import handleFormSubmit from './handleFormSubmit';
-import { useNavigate } from 'react-router-dom';
+import { sortObjByKey } from '../../utils/employees';
 
 interface IEmployeeDetailsForm {
     empId?: string | null;
@@ -106,6 +106,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                                 name="firstName"
                                                 id="name"
                                                 type="text"
+                                                required
                                             />
                                         </div>
                                         <div className="form-entry">
@@ -115,6 +116,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                                 id="email"
                                                 placeholder="user@qburst.com"
                                                 type="email"
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -125,6 +127,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                                 name="dob"
                                                 id="dob"
                                                 type="date"
+                                                required
                                             />
                                         </div>
                                         <CustomRadioGroup
@@ -133,6 +136,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                             name="gender"
                                             options={genders}
                                             className="form-entry"
+                                            required
                                         />
                                     </div>
                                     <div className="flex form-row">
@@ -141,6 +145,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                                 label="Address"
                                                 name="address"
                                                 rows="3"
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -151,6 +156,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                                 label="Role"
                                                 options={appState.roles}
                                                 placeholder="Select a Role"
+                                                required
                                             />
                                         </div>
                                         <div className="form-entry">
@@ -159,6 +165,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                                 label="Department"
                                                 options={appState.departments}
                                                 placeholder="Select a Department"
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -168,14 +175,19 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                                 label="Date of Joining"
                                                 name="dateOfJoining"
                                                 type="date"
+                                                required
                                             />
                                         </div>
                                         <div className="form-entry">
                                             <CustomSelect
                                                 name="location"
                                                 label="Location"
-                                                options={locations}
+                                                options={sortObjByKey(
+                                                    locations,
+                                                    'label'
+                                                )}
                                                 placeholder="Select a Location"
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -188,16 +200,17 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                                 placeholder="Select one or more skills"
                                                 isMulti
                                                 closeMenuOnSelect={false}
+                                                required
                                             />
                                         </div>
                                     </div>
                                     <div className="form-controls-container flex">
-                                        <LinkButton
-                                            to="/employees"
+                                        <Button
                                             className="outline"
+                                            onClick={() => navigate(-1)}
                                         >
                                             CANCEL
-                                        </LinkButton>
+                                        </Button>
                                         <Button
                                             className="primary"
                                             type="submit"

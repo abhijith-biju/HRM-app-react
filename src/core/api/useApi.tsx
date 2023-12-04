@@ -24,7 +24,6 @@ const useApi = <T,>(
         const fetchData = async () => {
             setLoading(true);
             try {
-                // console.log('inside useApi useEffect', url);
                 const response: AxiosResponse<T> = await API({
                     method,
                     url,

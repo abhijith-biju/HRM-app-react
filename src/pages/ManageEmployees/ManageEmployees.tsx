@@ -10,12 +10,13 @@ import {
     Pagination,
     EmployeesTableFilter,
     LinkButton,
+    Loader,
 } from '../../components';
 import { toast } from 'react-toastify';
 import { useAppContext } from '../../core/contexts/AppContext';
 import useApi, { API } from '../../core/api/useApi';
 import { IApiFetchEmployeesArray } from '../../interfaces/ApiDataInterface';
-import { IEmployeeListing } from '../../interfaces/common';
+import { IEmployeeListing, IDeleteEmployee } from '../../interfaces/common';
 import { getEmployeesListingData } from '../../utils/employees';
 
 const ManageEmployees: React.FC = () => {
@@ -24,9 +25,10 @@ const ManageEmployees: React.FC = () => {
 
     const [isModalopen, setIsModalOpen] = useState(false);
     const [employees, setEmployees] = useState<IEmployeeListing[]>([]);
-    const [empIdtoDelete, setEmpIdToDelete] = useState<number | undefined>(
-        undefined
-    );
+    const [deleteEmployee, setDeleteEmployee] = useState<IDeleteEmployee>({
+        isDeleting: false,
+        empIdToDelete: undefined,
+    });
 
     const getFetchURL = () => {
         const limit = searchParams.get('limit') ?? '10';
@@ -37,17 +39,26 @@ const ManageEmployees: React.FC = () => {
     };
 
     const deleteConfirmHandler = async () => {
+        setDeleteEmployee({
+            isDeleting: true,
+            empIdToDelete: deleteEmployee.empIdToDelete,
+        });
         setIsModalOpen(false);
         try {
             await API({
                 method: 'DELETE',
-                url: `/employee/${empIdtoDelete}`,
+                url: `/employee/${deleteEmployee.empIdToDelete}`,
             });
             toast.success('Employee Added Successfully');
             employeesFetchResponse.refresh();
         } catch (error) {
             toast.error('Employee deletion failed');
             console.log('delete Failed!', error);
+        } finally {
+            setDeleteEmployee({
+                isDeleting: false,
+                empIdToDelete: undefined,
+            });
         }
     };
 
@@ -55,7 +66,7 @@ const ManageEmployees: React.FC = () => {
         return employeesList.filter((employee) => {
             let shouldInclude = true;
 
-            const employeeName = employee.firstName.trim().toLowerCase();
+            const employeeName = employee.fullName.trim().toLowerCase();
             const selectedSkillsForFilter = appState.skillsFilter.map((skill) =>
                 Number(skill.value)
             );
@@ -81,58 +92,66 @@ const ManageEmployees: React.FC = () => {
     );
 
     useEffect(() => {
-        // console.log('inside manageEmployees useEffect');
         if (employeesFetchResponse.response) {
-            // console.log('fetch response obtained');
             const EmployeesData =
                 employeesFetchResponse.response.data.employees;
             setEmployees(
                 getEmployeesListingData(
                     EmployeesData,
                     setIsModalOpen,
-                    setEmpIdToDelete
+                    setDeleteEmployee
                 )
             );
         }
     }, [employeesFetchResponse.loading]);
 
-    // console.log('inside manage employee component');
     return (
         <>
-            <StyledManageEmployeesWrap>
-                <div className="employees-table-controls">
-                    <EmployeesTableFilter />
-                    <LinkButton to="/add-employee" className="primary icon-btn">
-                        <span>Add Employee</span>
-                        <span className="material-symbols-rounded">
-                            person_add
-                        </span>
-                    </LinkButton>
-                </div>
-                <StyledEmployeesTable
-                    tableHeaders={empTableHeaders}
-                    tableData={
-                        employees.length ? filterEmployeesList(employees) : []
-                    }
-                    loading={employeesFetchResponse.loading}
-                />
-                {employeesFetchResponse.response ? (
-                    <Pagination
-                        totalEntries={
-                            employeesFetchResponse.response.data.count
-                        }
-                    />
-                ) : null}
-            </StyledManageEmployeesWrap>
+            {deleteEmployee.isDeleting ? (
+                <Loader className="full-screen-loader" />
+            ) : (
+                <>
+                    <StyledManageEmployeesWrap>
+                        <div className="employees-table-controls">
+                            <EmployeesTableFilter />
+                            <LinkButton
+                                to="/add-employee"
+                                className="primary icon-btn table-control-field"
+                            >
+                                <span>Add Employee</span>
+                                <span className="material-symbols-rounded">
+                                    person_add
+                                </span>
+                            </LinkButton>
+                        </div>
+                        <StyledEmployeesTable
+                            tableHeaders={empTableHeaders}
+                            tableData={
+                                employees.length
+                                    ? filterEmployeesList(employees)
+                                    : []
+                            }
+                            loading={employeesFetchResponse.loading}
+                        />
+                        {employeesFetchResponse.response ? (
+                            <Pagination
+                                totalEntries={
+                                    employeesFetchResponse.response.data.count
+                                }
+                            />
+                        ) : null}
+                    </StyledManageEmployeesWrap>
 
-            <Modal
-                $isOpen={isModalopen}
-                text="Are you sure you want to permanently delete the employee
+                    <Modal
+                        $isOpen={isModalopen}
+                        text="Are you sure you want to permanently delete the employee
                     record?"
-                type="yesCancel"
-                confirmClickHandler={deleteConfirmHandler}
-                cancelClickHandler={() => setIsModalOpen(false)}
-            />
+                        type="yesCancel"
+                        confirmClickHandler={deleteConfirmHandler}
+                        cancelClickHandler={() => setIsModalOpen(false)}
+                    />
+                </>
+            )}
         </>
     );
 };

@@ -6,6 +6,7 @@ interface ITheader {
     value: string;
     label: string;
     isSortable: boolean;
+    sortValue: string;
 }
 
 export interface ITable {
@@ -46,7 +47,7 @@ const Table: React.FC<ITable> = ({
         if (currentSortBy === headerValue) {
             return currentSortDir;
         } else {
-            return 'asc';
+            return 'desc';
         }
     };
 
@@ -69,7 +70,6 @@ const Table: React.FC<ITable> = ({
         ));
     }
 
-    // console.log('inside table component');
     return (
         <StyledTable className={className}>
             {loading ? (
@@ -91,9 +91,9 @@ const Table: React.FC<ITable> = ({
                                         {header.isSortable && (
                                             <Button
                                                 className="btn sort-btn"
-                                                data-value={header.value}
+                                                data-value={header.sortValue}
                                                 data-sort-dir={getSortDirection(
-                                                    header.value
+                                                    header.sortValue
                                                 )}
                                                 onClick={sortButtonClickHandler}
                                             >

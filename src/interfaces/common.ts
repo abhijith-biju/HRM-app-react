@@ -2,7 +2,7 @@ export interface IEmployee {
     id: number;
     firstName: string;
     lastName: string;
-    isActive: true;
+    isActive: boolean;
     dob: string;
     email: string;
     phone: string;
@@ -20,16 +20,32 @@ export interface IEmployee {
 }
 
 export interface IEmployeeListing {
+    actions: JSX.Element;
     id: number;
-    firstName: string;
+    fullName: string;
+    isActive: boolean;
+    dob: string;
     email: string;
+    phone: string;
+    designation: string;
+    salary: string;
+    dateOfJoining: string;
+    address: string;
     role: string;
     department: string;
     skills: number[];
-    actions: JSX.Element;
+    moreDetails: string;
+    location: string;
+    gender: string;
+    photoId: string;
 }
 
 export interface IReactSelectOption {
     label: string;
     value: string;
+}
+
+export interface IDeleteEmployee {
+    isDeleting: boolean;
+    empIdToDelete: number | undefined;
 }

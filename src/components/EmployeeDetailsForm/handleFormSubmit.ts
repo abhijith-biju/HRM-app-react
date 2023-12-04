@@ -5,14 +5,14 @@ import { toast } from 'react-toastify';
 import { getPhotoUrl } from '../../core/api/firebase';
 
 const handleFormSubmit = async (
-    submitData: IEmployee,
+    formSubmitData: IEmployee,
     empId: string | null,
     photoRef: HTMLInputElement | null
 ) => {
     let photoUrl = '';
     try {
-        if (submitData.photoId) {
-            photoUrl = submitData.photoId;
+        if (formSubmitData.photoId) {
+            photoUrl = formSubmitData.photoId;
         }
 
         if (photoRef?.files && photoRef?.files[0]) {
@@ -23,29 +23,28 @@ const handleFormSubmit = async (
         console.log(error);
     }
 
-    const extraDetails = {
-        gender: submitData.gender,
-        location: submitData.location ? submitData.location.label : null,
+    const { id, gender, location, photoId, role, department, skills, ...rest } =
+        formSubmitData;
+
+    const moreDetails = {
+        gender: gender,
+        location: location ? location.label : null,
         photoId: photoUrl,
     };
-    // delete submitData.gender;
-    // delete submitData.location;
-    // delete submitData.photoId;
 
-    const submissionData: IApiEmployeeSubmission = {
-        ...submitData,
-        department: Number(submitData.department?.value),
-        role: Number(submitData.role?.value),
-        skills: submitData.skills?.map((skill) => Number(skill.value)),
-        moreDetails: JSON.stringify(extraDetails),
+    const apiSubmitData: IApiEmployeeSubmission = {
+        ...rest,
+        role: role ? Number(role.value) : null,
+        department: department ? Number(department.value) : null,
+        skills: skills.map((skill) => Number(skill.value)),
+        moreDetails: JSON.stringify(moreDetails),
     };
-    console.log(submissionData);
 
     try {
         await API({
             method: empId ? 'PATCH' : 'POST',
             url: empId ? `/employee/${empId}` : '/employee',
-            data: submissionData,
+            data: apiSubmitData,
         });
         toast.success(
             `Employee details ${empId ? 'edited' : 'added'} successfully.`

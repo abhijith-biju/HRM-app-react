@@ -8,8 +8,12 @@ interface IBtn {
     onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const Button: React.FC<IBtn> = ({ children, ...props }) => {
-    return <StyledButton {...props}>{children}</StyledButton>;
+const Button: React.FC<IBtn> = ({ type = 'button', children, ...props }) => {
+    return (
+        <StyledButton type={type} {...props}>
+            {children}
+        </StyledButton>
+    );
 };
 
 export default Button;

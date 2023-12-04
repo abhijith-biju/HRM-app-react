@@ -15,7 +15,7 @@ const EmployeesTableFilter: React.FC = () => {
     ) => {
         handleAppState({
             ...appState,
-            employeeNameFilter: event.target.value.trim().toLowerCase(),
+            employeeNameFilter: event.target.value.trimStart().toLowerCase(),
         });
     };
 
@@ -25,6 +25,7 @@ const EmployeesTableFilter: React.FC = () => {
                 placeholder="Filter by Employee Name"
                 value={appState.employeeNameFilter}
                 onChange={handleSearchInputChange}
+                className="table-control-field"
             />
             <Select
                 options={appState.skills}
@@ -42,7 +43,7 @@ const EmployeesTableFilter: React.FC = () => {
                 }}
             />
             <Button
-                className="outline icon-btn margin-left-auto"
+                className="outline icon-btn margin-left-auto table-control-field"
                 onClick={() =>
                     handleAppState({
                         ...appState,

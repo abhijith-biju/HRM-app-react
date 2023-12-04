@@ -15,7 +15,6 @@ const storage = getStorage();
 
 export const getPhotoUrl = async (imageFile: File) => {
     try {
-        console.log('generating url');
         const storageRef = ref(storage, `employees/${crypto.randomUUID()}`);
         const snapshot = await uploadBytes(storageRef, imageFile);
         return getDownloadURL(snapshot.ref);
