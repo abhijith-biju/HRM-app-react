@@ -9,7 +9,7 @@ const SearchEmployee = () => {
     return (
         <FormContainer>
             <Formik
-                initialValues={{ employeeId: undefined }}
+                initialValues={{ employeeId: '' }}
                 validateOnBlur={false}
                 validationSchema={Yup.object().shape({
                     employeeId: Yup.number()
@@ -23,39 +23,36 @@ const SearchEmployee = () => {
             >
                 {(props) => {
                     return (
-                        <>
-                            <form
-                                autoComplete="off"
-                                onSubmit={props.handleSubmit}
-                                noValidate
-                            >
-                                <h3>Search for an Employee</h3>
-                                <div className="form-wrap">
-                                    <div className="form-entry">
-                                        <Field
-                                            type="search"
-                                            name="employeeId"
-                                            placeholder="Employee Id"
-                                        />
-                                        <ErrorMessage
-                                            name="employeeId"
-                                            className="error-msg"
-                                            component="div"
-                                        />
-                                    </div>
-                                    <Button
-                                        className="primary icon-btn"
-                                        type="submit"
-                                        disabled={props.isSubmitting}
-                                    >
-                                        <span>SEARCH</span>
-                                        <span className="material-symbols-rounded">
-                                            person_search
-                                        </span>
-                                    </Button>
+                        <form
+                            autoComplete="off"
+                            onSubmit={props.handleSubmit}
+                            noValidate
+                        >
+                            <h3>Search for an Employee</h3>
+                            <div className="form-wrap">
+                                <div className="form-entry">
+                                    <Field
+                                        type="search"
+                                        name="employeeId"
+                                        placeholder="Employee Id"
+                                    />
+                                    <ErrorMessage
+                                        name="employeeId"
+                                        className="error-msg"
+                                        component="div"
+                                    />
                                 </div>
-                            </form>
-                        </>
+                                <Button
+                                    className="primary icon-btn"
+                                    type="submit"
+                                >
+                                    <span>SEARCH</span>
+                                    <span className="material-symbols-rounded">
+                                        person_search
+                                    </span>
+                                </Button>
+                            </div>
+                        </form>
                     );
                 }}
             </Formik>
