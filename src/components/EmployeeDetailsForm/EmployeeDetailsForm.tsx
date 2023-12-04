@@ -20,6 +20,7 @@ import { useAppContext } from '../../core/contexts/AppContext';
 import { IEmployee } from '../../interfaces/common';
 import handleFormSubmit from './handleFormSubmit';
 import { sortObjByKey } from '../../utils/employees';
+import profilePictureAvatar from '../../assets/images/employee-avatar.svg';
 
 interface IEmployeeDetailsForm {
     empId?: string | null;
@@ -36,11 +37,7 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const [photoId, setPhotoId] = useState(
-        prefillData.photoId === ''
-            ? '/src/assets/images/employee-avatar.svg'
-            : prefillData.photoId
-    );
+    const [photoId, setPhotoId] = useState(prefillData.photoId);
     const photoRef = useRef<HTMLInputElement>(null);
 
     const photoUploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,7 +80,10 @@ const EmployeeDetailsForm: React.FC<IEmployeeDetailsForm> = ({
                                             className="profile-picture-wrap"
                                         >
                                             <img
-                                                src={photoId}
+                                                src={
+                                                    photoId ||
+                                                    profilePictureAvatar
+                                                }
                                                 alt="employee profile photo"
                                                 title="Add a profile photo"
                                                 draggable="false"
