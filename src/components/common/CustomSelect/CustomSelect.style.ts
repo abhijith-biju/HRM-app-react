@@ -4,7 +4,7 @@ import { IReactSelectOption } from '../../../interfaces/common';
 const CustomSelectStyles: StylesConfig<IReactSelectOption, boolean> = {
     control: (provided, state) => ({
         ...provided,
-        backgroundColor: '#fff',
+        backgroundColor: state.selectProps.isValid ? '#fff' : '#f8d7da',
         boxShadow: 'none',
         cursor: 'text',
         width: '100%',

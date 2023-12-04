@@ -1,8 +1,20 @@
-import Select from 'react-select';
+import Select, { GroupBase } from 'react-select';
+import type {} from 'react-select/base';
 import { useField } from 'formik';
 import CustomSelectStyles from './CustomSelect.style';
 import makeAnimated from 'react-select/animated';
 import { IReactSelectOption } from '../../../interfaces/common';
+
+//extending select to include extra prop isValid
+declare module 'react-select/base' {
+    export interface Props<
+        Option,
+        IsMulti extends boolean,
+        Group extends GroupBase<Option>
+    > {
+        isValid: boolean;
+    }
+}
 
 interface ICustomSelect {
     label: string;
@@ -52,6 +64,7 @@ const CustomSelect: React.FC<ICustomSelect> = ({
                 }}
                 components={animatedComponents}
                 {...props}
+                isValid={meta.touched && meta.error ? false : true}
             />
             {meta.touched && meta.error ? (
                 <div className="error-msg">{meta.error}</div>
