@@ -12,7 +12,7 @@ declare module 'react-select/base' {
         IsMulti extends boolean,
         Group extends GroupBase<Option>
     > {
-        isValid: boolean;
+        isValid?: boolean;
     }
 }
 
