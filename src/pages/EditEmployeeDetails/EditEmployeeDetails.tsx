@@ -22,7 +22,7 @@ const EditEmployeeDetails: React.FC = () => {
             navigate('/');
         }
 
-        if (response && !response?.data) {
+        if (response && !response.data) {
             toast.error('Could not find the requested employee.');
             navigate('/view-employee');
         }
@@ -37,7 +37,7 @@ const EditEmployeeDetails: React.FC = () => {
 
                     <EmployeeDetailsForm
                         empId={employeeId}
-                        prefillData={modifyFetchedEmployeeData(response!.data)}
+                        prefillData={modifyFetchedEmployeeData(response.data)}
                     />
                 </StyledEditEmployeeDetails>
             )}

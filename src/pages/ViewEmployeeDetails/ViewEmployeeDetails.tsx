@@ -22,6 +22,9 @@ const ViewEmployeeDetails = () => {
     );
 
     let employeeDetails = {} as IEmployee;
+    if (response && response.data) {
+        employeeDetails = modifyFetchedEmployeeData(response.data);
+    }
 
     useEffect(() => {
         if (error) {
@@ -33,16 +36,12 @@ const ViewEmployeeDetails = () => {
             toast.error('Could not find the requested employee.');
             navigate('/view-employee');
         }
-
-        if (response && response.data) {
-            employeeDetails = modifyFetchedEmployeeData(response.data);
-        }
     }, [loading]);
 
     return (
         <>
             {loading && <Loader className="full-screen-loader" />}
-            {response?.data && (
+            {response && response.data && (
                 <StyledEmpDetailsWrap>
                     <div className="view-emp-card">
                         <div className="main-details">
