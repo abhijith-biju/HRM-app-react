@@ -91,7 +91,7 @@ export const prefillDataOnEmployeeAdd: IEmployee = {
 };
 
 export const initQueryParams: IInitQueryParams = {
-    offset: 10,
+    offset: 0,
     limit: 10,
     sortBy: 'id',
     sortDir: 'desc',

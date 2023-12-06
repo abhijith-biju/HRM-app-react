@@ -107,7 +107,7 @@ const Table: React.FC<ITable> = ({
                                             <span>{header.label}</span>
                                             {header.isSortable && (
                                                 <Button
-                                                    className="btn sort-btn"
+                                                    className="sort-btn"
                                                     data-value={
                                                         header.sortValue
                                                     }

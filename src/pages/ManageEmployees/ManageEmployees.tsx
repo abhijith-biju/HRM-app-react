@@ -86,6 +86,16 @@ const ManageEmployees: React.FC = () => {
         });
     };
 
+    const isSearchFilters = () => {
+        if (
+            appState.employeeNameFilter === '' &&
+            appState.skillsFilter.length === 0
+        ) {
+            return false;
+        }
+        return true;
+    };
+
     const employeesFetchResponse = useApi<IApiFetchEmployeesArray>(
         'GET',
         getFetchURL()
@@ -133,7 +143,8 @@ const ManageEmployees: React.FC = () => {
                             }
                             loading={employeesFetchResponse.loading}
                         />
-                        {employeesFetchResponse.response ? (
+                        {employeesFetchResponse.response &&
+                        !isSearchFilters() ? (
                             <Pagination
                                 totalEntries={
                                     employeesFetchResponse.response.data.count
