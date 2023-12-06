@@ -3,7 +3,7 @@ import { modifyFetchedEmployeeData } from '../../utils/employees';
 import { Loader, Chip, LinkButton, Button } from '../../components';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useApi from '../../core/api/useApi';
 import { IApiFetchEmployee } from '../../interfaces/ApiDataInterface';
 import { IEmployee } from '../../interfaces/common';
@@ -13,29 +13,36 @@ const ViewEmployeeDetails = () => {
     const { employeeId } = useParams();
     const navigate = useNavigate();
 
-    const [employeeDetails, setEmployeeDetails] = useState({} as IEmployee);
     const notAvailableString = 'N/A';
     const noSkillsString = 'No Skills Entered';
 
-    const { response } = useApi<IApiFetchEmployee>(
+    const { response, loading, error } = useApi<IApiFetchEmployee>(
         'GET',
         `/employee/${employeeId}`
     );
 
+    let employeeDetails = {} as IEmployee;
+
     useEffect(() => {
+        if (error) {
+            toast.error(`Could not fetch the requested employee's details`);
+            navigate('/');
+        }
+
         if (response && !response.data) {
             toast.error('Could not find the requested employee.');
             navigate('/view-employee');
-        } else if (response && response.data) {
-            setEmployeeDetails(modifyFetchedEmployeeData(response.data));
         }
-    }, [response]);
+
+        if (response && response.data) {
+            employeeDetails = modifyFetchedEmployeeData(response.data);
+        }
+    }, [loading]);
 
     return (
         <>
-            {!(response && response.data) ? (
-                <Loader className="full-screen-loader" />
-            ) : (
+            {loading && <Loader className="full-screen-loader" />}
+            {response?.data && (
                 <StyledEmpDetailsWrap>
                     <div className="view-emp-card">
                         <div className="main-details">

@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 
 export const API = axios.create({
@@ -13,7 +13,7 @@ const useApi = <T,>(
 ) => {
     const [response, setResponse] = useState<T | null>(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<AxiosError | null>(null);
     const [refreshIndex, setRefreshIndex] = useState(0);
 
     const refresh = () => {
@@ -30,13 +30,17 @@ const useApi = <T,>(
                     ...params,
                 });
 
+                // if (url === '/employee/1000') {
+                //     throw new Error('fetching employee 1000 details failed');
+                // }
+
                 if (!cancelled) {
                     setResponse(response.data);
                     setLoading(false);
                 }
             } catch (err) {
                 if (!cancelled) {
-                    setError('error getting the data');
+                    setError(err as AxiosError);
                     setLoading(false);
                 }
             }
