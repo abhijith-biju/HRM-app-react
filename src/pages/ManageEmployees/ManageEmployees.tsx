@@ -17,7 +17,7 @@ import { useAppContext } from '../../core/contexts/AppContext';
 import useApi, { API } from '../../core/api/useApi';
 import { IApiFetchEmployeesArray } from '../../interfaces/ApiDataInterface';
 import { IEmployeeListing, IDeleteEmployee } from '../../interfaces/common';
-import { getEmployeesListingData } from '../../utils/employees';
+import { getEmployeesListingData } from '../../utils';
 
 const ManageEmployees: React.FC = () => {
     const { appState } = useAppContext();

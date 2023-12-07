@@ -10,7 +10,7 @@ import {
     IApiRole,
     IApiFetchSkill,
 } from '../../interfaces/ApiDataInterface';
-import { modifySelectOptionsArray } from '../../utils/employees';
+import { modifySelectOptionsArray } from '../../utils';
 import { toast } from 'react-toastify';
 
 const initialState: IAppContextState = {
@@ -30,11 +30,13 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const [appState, setAppState] = useState(initialState);
 
     const handleAppState = (payload: IAppContextState) => setAppState(payload);
-
     const value = { appState, handleAppState };
 
-    const { response: skillsFetchResponse, error: skillsFetchError } =
-        useApi<IApiFetchSkill>('GET', '/skills');
+    const {
+        response: skillsFetchResponse,
+        error: skillsFetchError,
+        loading: skillsFetchLoading,
+    } = useApi<IApiFetchSkill>('GET', '/skills');
     useEffect(() => {
         if (skillsFetchError) {
             toast.error(
@@ -49,10 +51,13 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
                 skills: modifySelectOptionsArray(skillOptions, 'skill'),
             }));
         }
-    }, [skillsFetchResponse]);
+    }, [skillsFetchLoading]);
 
-    const { response: rolesFetchResponse, error: rolesFetchError } =
-        useApi<IApiRole>('GET', '/roles');
+    const {
+        response: rolesFetchResponse,
+        error: rolesFetchError,
+        loading: rolesFetchLoading,
+    } = useApi<IApiRole>('GET', '/roles');
     useEffect(() => {
         if (rolesFetchError) {
             toast.error(
@@ -67,10 +72,13 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
                 roles: modifySelectOptionsArray(roleOptions, 'role'),
             }));
         }
-    }, [rolesFetchResponse]);
+    }, [rolesFetchLoading]);
 
-    const { response: departmentsFetchResponse, error: departmentsFetchError } =
-        useApi<IApiDepartment>('GET', '/departments');
+    const {
+        response: departmentsFetchResponse,
+        error: departmentsFetchError,
+        loading: departmentsFetchLoading,
+    } = useApi<IApiDepartment>('GET', '/departments');
     useEffect(() => {
         if (departmentsFetchError) {
             toast.error(
@@ -88,7 +96,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
                 ),
             }));
         }
-    }, [departmentsFetchResponse]);
+    }, [departmentsFetchLoading]);
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

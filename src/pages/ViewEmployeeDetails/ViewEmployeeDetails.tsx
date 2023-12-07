@@ -1,5 +1,5 @@
 import StyledEmpDetailsWrap from './ViewEmployeeDetails.style';
-import { modifyFetchedEmployeeData } from '../../utils/employees';
+import { modifyFetchedEmployeeData } from '../../utils';
 import { Loader, Chip, LinkButton, Button } from '../../components';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';

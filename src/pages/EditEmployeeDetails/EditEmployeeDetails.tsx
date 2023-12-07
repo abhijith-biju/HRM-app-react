@@ -5,7 +5,7 @@ import StyledEditEmployeeDetails from './EditEmployeeDetails.style';
 import { EmployeeDetailsForm, Loader } from '../../components';
 import { toast } from 'react-toastify';
 import { IApiFetchEmployee } from '../../interfaces/ApiDataInterface';
-import { modifyFetchedEmployeeData } from '../../utils/employees';
+import { modifyFetchedEmployeeData } from '../../utils';
 
 const EditEmployeeDetails: React.FC = () => {
     const { employeeId } = useParams();

@@ -19,7 +19,7 @@ import validate from './validation';
 import { useAppContext } from '../../core/contexts/AppContext';
 import { IEmployee } from '../../interfaces/common';
 import handleFormSubmit from './handleFormSubmit';
-import { sortObjByKey } from '../../utils/employees';
+import { sortObjByKey } from '../../utils';
 import profilePictureAvatar from '../../assets/images/add-profile-photo.svg';
 
 interface IEmployeeDetailsForm {

@@ -16,14 +16,28 @@ const Navbar = styled.nav`
     padding-inline: 10px;
     margin-inline: auto;
     display: flex;
+    gap: 10px;
     align-items: center;
 
     & .brand-logo {
         color: var(--primary-clr);
+        margin: 0;
+        font-size: 2em;
+    }
 
-        & h1 {
-            margin: 0;
-            font-size: 2em;
+    & .navlinks {
+        padding: 0;
+        display: flex;
+        margin-left: auto;
+
+        & a {
+            font-size: 1em;
+            font-weight: 500;
+            color: #000;
+
+            &:hover {
+                color: var(--primary-clr);
+            }
         }
     }
 `;
@@ -35,6 +49,9 @@ const Header: React.FC = () => {
                 <Link to="/employees">
                     <h1 className="brand-logo">HRM APP</h1>
                 </Link>
+                <ul className="navlinks">
+                    <Link to="/view-employee">Search Employee</Link>
+                </ul>
             </Navbar>
         </StyledHeader>
     );
