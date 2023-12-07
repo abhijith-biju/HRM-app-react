@@ -20,16 +20,22 @@ const Pagination: React.FC<IPagination> = ({ totalEntries = 0 }) => {
     const isFirstPage = offset === 0;
     const isLastPage = offset + limit >= totalEntries;
 
-    const pageInputButtonClickHandler = () => {
-        let newOffset = String((Number(currentPage) - 1) * limit + 1);
+    const updateQueryParams = (newOffset: number) => {
+        const newPageNumber = Math.floor(newOffset / limit) + 1;
+        setCurrentPage(String(newPageNumber));
 
-        if (Number(newOffset) > totalEntries) {
-            newOffset = String(Math.floor(totalEntries / limit) * limit);
-        }
-
-        searchParams.set('offset', newOffset);
+        searchParams.set('offset', String(newOffset));
         searchParams.set('limit', String(limit));
         setSearchParams(searchParams);
+    };
+
+    const pageInputButtonClickHandler = () => {
+        let newOffset = currentPage ? (Number(currentPage) - 1) * limit : 1;
+
+        if (Number(newOffset) > totalEntries) {
+            newOffset = Math.floor(totalEntries / limit) * limit;
+        }
+        updateQueryParams(newOffset);
     };
 
     return (
@@ -38,11 +44,7 @@ const Pagination: React.FC<IPagination> = ({ totalEntries = 0 }) => {
                 <Button
                     className="icon-btn primary"
                     disabled={isFirstPage}
-                    onClick={() => {
-                        searchParams.set('offset', '0');
-                        searchParams.set('limit', String(limit));
-                        setSearchParams(searchParams);
-                    }}
+                    onClick={() => updateQueryParams(0)}
                 >
                     <span className="material-symbols-rounded">first_page</span>
                 </Button>
@@ -50,12 +52,7 @@ const Pagination: React.FC<IPagination> = ({ totalEntries = 0 }) => {
                     className="icon-btn primary"
                     disabled={isFirstPage}
                     onClick={() => {
-                        searchParams.set(
-                            'offset',
-                            String(Math.max(offset - limit, 0))
-                        );
-                        searchParams.set('limit', String(limit));
-                        setSearchParams(searchParams);
+                        updateQueryParams(Math.max(offset - limit, 0));
                     }}
                 >
                     <span className="material-symbols-rounded">
@@ -76,12 +73,17 @@ const Pagination: React.FC<IPagination> = ({ totalEntries = 0 }) => {
                                 setCurrentPage(inputText);
                             }
                         }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                pageInputButtonClickHandler();
+                            }
+                        }}
                     />
                     <Button
                         className="outline"
                         onClick={pageInputButtonClickHandler}
                     >
-                        Go
+                        GO
                     </Button>
                 </div>
 
@@ -89,12 +91,9 @@ const Pagination: React.FC<IPagination> = ({ totalEntries = 0 }) => {
                     className="icon-btn primary"
                     disabled={isLastPage}
                     onClick={() => {
-                        searchParams.set(
-                            'offset',
-                            String(Math.min(offset + limit, totalEntries))
+                        updateQueryParams(
+                            Math.min(offset + limit, totalEntries)
                         );
-                        searchParams.set('limit', String(limit));
-                        setSearchParams(searchParams);
                     }}
                 >
                     <span className="material-symbols-rounded">
@@ -105,12 +104,9 @@ const Pagination: React.FC<IPagination> = ({ totalEntries = 0 }) => {
                     className="icon-btn primary"
                     disabled={isLastPage}
                     onClick={() => {
-                        searchParams.set(
-                            'offset',
-                            String(Math.floor(totalEntries / limit) * limit)
+                        updateQueryParams(
+                            Math.floor(totalEntries / limit) * limit
                         );
-                        searchParams.set('limit', String(limit));
-                        setSearchParams(searchParams);
                     }}
                 >
                     <span className="material-symbols-rounded">last_page</span>

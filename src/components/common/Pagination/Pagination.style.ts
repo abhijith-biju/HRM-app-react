@@ -9,7 +9,8 @@ const PaginationContainer = styled.div`
     .page-controls {
         display: flex;
         margin-inline: auto;
-        gap: 20px;
+        gap: 15px;
+        height: 30px;
     }
 
     .current-page-input-wrap {
@@ -18,9 +19,9 @@ const PaginationContainer = styled.div`
 
         .current-page-input {
             text-align: center;
-            /* display: inline-block; */
-            /* width: auto; */
             font-size: 1.2em;
+            min-width: 0;
+            max-width: 80px;
         }
     }
 `;

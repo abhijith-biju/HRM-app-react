@@ -50,7 +50,7 @@ const ManageEmployees: React.FC = () => {
                 url: `/employee/${deleteEmployee.empIdToDelete}`,
             });
             toast.success('Employee Added Successfully');
-            employeesFetchResponse.refresh();
+            refreshEmployeesList();
         } catch (error) {
             toast.error('Employee deletion failed');
             console.log('delete Failed!', error);
@@ -96,15 +96,22 @@ const ManageEmployees: React.FC = () => {
         return true;
     };
 
-    const employeesFetchResponse = useApi<IApiFetchEmployeesArray>(
-        'GET',
-        getFetchURL()
-    );
+    const {
+        response: employeesList,
+        loading,
+        refresh: refreshEmployeesList,
+        error: fetchError,
+    } = useApi<IApiFetchEmployeesArray>('GET', getFetchURL());
 
     useEffect(() => {
-        if (employeesFetchResponse.response) {
-            const EmployeesData =
-                employeesFetchResponse.response.data.employees;
+        if (fetchError) {
+            toast.error(
+                'Could not fetch employees List. Please try reloading the page.'
+            );
+        }
+
+        if (employeesList) {
+            const EmployeesData = employeesList.data.employees;
             setEmployees(
                 getEmployeesListingData(
                     EmployeesData,
@@ -113,7 +120,7 @@ const ManageEmployees: React.FC = () => {
                 )
             );
         }
-    }, [employeesFetchResponse.loading]);
+    }, [loading]);
 
     return (
         <>
@@ -141,14 +148,11 @@ const ManageEmployees: React.FC = () => {
                                     ? filterEmployeesList(employees)
                                     : []
                             }
-                            loading={employeesFetchResponse.loading}
+                            loading={loading}
                         />
-                        {employeesFetchResponse.response &&
-                        !isSearchFilters() ? (
+                        {employeesList && !isSearchFilters() ? (
                             <Pagination
-                                totalEntries={
-                                    employeesFetchResponse.response.data.count
-                                }
+                                totalEntries={employeesList.data.count}
                             />
                         ) : null}
                     </StyledManageEmployeesWrap>

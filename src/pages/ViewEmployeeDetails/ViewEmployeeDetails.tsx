@@ -29,12 +29,12 @@ const ViewEmployeeDetails = () => {
     useEffect(() => {
         if (error) {
             toast.error(`Could not fetch the requested employee's details`);
-            navigate('/');
+            navigate('/', { replace: true });
         }
 
         if (response && !response.data) {
             toast.error('Could not find the requested employee.');
-            navigate('/view-employee');
+            navigate('/view-employee', { replace: true });
         }
     }, [loading]);
 

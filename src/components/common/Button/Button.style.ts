@@ -8,6 +8,8 @@ const StyledButton = styled.button`
     border-radius: 5px;
     font-weight: bold;
     font-size: 1em;
+    display: flex;
+    align-items: center;
 
     &.primary {
         background-color: var(--primary-clr);
@@ -30,8 +32,6 @@ const StyledButton = styled.button`
     }
 
     &.icon-btn {
-        display: flex;
-        align-items: center;
         gap: 7px;
 
         & span {
