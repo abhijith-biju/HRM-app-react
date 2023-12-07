@@ -12,11 +12,16 @@ const PaginationContainer = styled.div`
         gap: 20px;
     }
 
-    .current-page-input {
-        text-align: center;
-        width: max-content;
-        font-size: 1.2em;
-        font-weight: 500;
+    .current-page-input-wrap {
+        display: flex;
+        gap: 5px;
+
+        .current-page-input {
+            text-align: center;
+            /* display: inline-block; */
+            /* width: auto; */
+            font-size: 1.2em;
+        }
     }
 `;
 

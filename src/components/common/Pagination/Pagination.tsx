@@ -1,6 +1,7 @@
+import { useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
 import { Button } from '../..';
 import PaginationContainer from './Pagination.style';
-import { useSearchParams } from 'react-router-dom';
 
 interface IPagination {
     totalEntries: number;
@@ -12,9 +13,24 @@ const Pagination: React.FC<IPagination> = ({ totalEntries = 0 }) => {
     const offset = Number(searchParams.get('offset') ?? 0);
     const limit = Number(searchParams.get('limit') ?? 10);
 
+    const [currentPage, setCurrentPage] = useState<String>(
+        String(Math.ceil(offset / limit) + 1)
+    );
+
     const isFirstPage = offset === 0;
     const isLastPage = offset + limit >= totalEntries;
-    const currentPage = Math.ceil(offset / limit) + 1;
+
+    const pageInputButtonClickHandler = () => {
+        let newOffset = String((Number(currentPage) - 1) * limit + 1);
+
+        if (Number(newOffset) > totalEntries) {
+            newOffset = String(Math.floor(totalEntries / limit) * limit);
+        }
+
+        searchParams.set('offset', newOffset);
+        searchParams.set('limit', String(limit));
+        setSearchParams(searchParams);
+    };
 
     return (
         <PaginationContainer>
@@ -46,12 +62,29 @@ const Pagination: React.FC<IPagination> = ({ totalEntries = 0 }) => {
                         navigate_before
                     </span>
                 </Button>
-                <input
-                    type="text"
-                    className="current-page-input"
-                    id="current-page"
-                    value={currentPage}
-                />
+                <div className="current-page-input-wrap">
+                    <input
+                        type="text"
+                        className="current-page-input"
+                        value={String(currentPage)}
+                        onChange={(e) => {
+                            const inputText = e.target.value;
+                            if (
+                                /^[1-9]\d*$/.test(inputText) ||
+                                inputText === ''
+                            ) {
+                                setCurrentPage(inputText);
+                            }
+                        }}
+                    />
+                    <Button
+                        className="outline"
+                        onClick={pageInputButtonClickHandler}
+                    >
+                        Go
+                    </Button>
+                </div>
+
                 <Button
                     className="icon-btn primary"
                     disabled={isLastPage}
