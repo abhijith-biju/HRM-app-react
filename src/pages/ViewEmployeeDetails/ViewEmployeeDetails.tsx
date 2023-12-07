@@ -115,15 +115,21 @@ const ViewEmployeeDetails = () => {
                             <div className="data-entry">
                                 <dt>Skills</dt>
                                 <dd>
-                                    <ul className="selected-skills-list flex-container">
-                                        {employeeDetails.skills?.map(
-                                            (skill) => (
-                                                <li key={skill.value}>
-                                                    <Chip>{skill.label}</Chip>
-                                                </li>
-                                            )
-                                        ) || noSkillsString}
-                                    </ul>
+                                    {employeeDetails.skills.length ? (
+                                        <ul className="selected-skills-list flex-container">
+                                            {employeeDetails.skills?.map(
+                                                (skill) => (
+                                                    <li key={skill.value}>
+                                                        <Chip>
+                                                            {skill.label}
+                                                        </Chip>
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    ) : (
+                                        noSkillsString
+                                    )}
                                 </dd>
                             </div>
                         </dl>

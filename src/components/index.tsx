@@ -1,4 +1,4 @@
-import Header from './Header';
+import Header from './Header/Header.tsx';
 import Footer from './Footer';
 import Button from './common/Button/Button';
 import Input from './common/Input/Input';
