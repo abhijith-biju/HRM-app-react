@@ -46,8 +46,13 @@ const Navbar = styled.nav`
             transition: color 250ms ease;
 
             &:hover,
-            &.active {
+            &.active,
+            &:focus-visible {
                 color: var(--primary-clr);
+            }
+
+            &:focus-visible {
+                outline-offset: 2px;
             }
 
             &::after {

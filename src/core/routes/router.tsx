@@ -26,15 +26,15 @@ const router = createBrowserRouter(
                     element: <AddEmployeeDetails />,
                 },
                 {
-                    path: 'edit-employee/',
-                    element: <SearchEmployee />,
+                    path: 'edit-employee',
+                    element: <Navigate to="/view-employee" replace={true} />,
                 },
                 {
                     path: 'edit-employee/:employeeId',
                     element: <EditEmployeeDetails />,
                 },
                 {
-                    path: 'view-employee/',
+                    path: 'view-employee',
                     element: <SearchEmployee />,
                 },
                 {

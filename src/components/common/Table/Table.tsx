@@ -37,6 +37,7 @@ const Table: React.FC<ITable> = ({
 
         if (tableHeaderValue && currentSortDirection) {
             buttonElement.setAttribute('data-sort-dir', nextSortDirection);
+            searchParams.set('offset', '0');
             searchParams.set('sortBy', tableHeaderValue);
             searchParams.set('sortDir', nextSortDirection);
             setSearchParams(searchParams);

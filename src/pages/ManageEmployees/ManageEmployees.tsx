@@ -153,6 +153,7 @@ const ManageEmployees: React.FC = () => {
                         {employeesList && !isSearchFilters() ? (
                             <Pagination
                                 totalEntries={employeesList.data.count}
+                                key={searchParams.get('offset')}
                             />
                         ) : null}
                     </StyledManageEmployeesWrap>
