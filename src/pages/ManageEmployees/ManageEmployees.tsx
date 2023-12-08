@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { empTableHeaders } from './constants';
+import { empTableHeaders, initQueryParams } from './constants';
 import {
     StyledManageEmployeesWrap,
     StyledEmployeesTable,
@@ -17,7 +17,7 @@ import { useAppContext } from '../../core/contexts/AppContext';
 import useApi, { API } from '../../core/api/useApi';
 import { IApiFetchEmployeesArray } from '../../interfaces/ApiDataInterface';
 import { IEmployeeListing, IDeleteEmployee } from '../../interfaces/common';
-import { getEmployeesListingData } from '../../utils/employees';
+import { getEmployeesListingData } from '../../utils';
 
 const ManageEmployees: React.FC = () => {
     const { appState } = useAppContext();
@@ -31,10 +31,10 @@ const ManageEmployees: React.FC = () => {
     });
 
     const getFetchURL = () => {
-        const limit = searchParams.get('limit') ?? '10';
-        const offset = searchParams.get('offset') ?? '0';
-        const sortBy = searchParams.get('sortBy') ?? 'id';
-        const sortDir = searchParams.get('sortDir') ?? 'desc';
+        const limit = searchParams.get('limit') ?? initQueryParams.limit;
+        const offset = searchParams.get('offset') ?? initQueryParams.offset;
+        const sortBy = searchParams.get('sortBy') ?? initQueryParams.sortBy;
+        const sortDir = searchParams.get('sortDir') ?? initQueryParams.sortDir;
         return `/employee?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortDir=${sortDir}`;
     };
 
@@ -50,7 +50,7 @@ const ManageEmployees: React.FC = () => {
                 url: `/employee/${deleteEmployee.empIdToDelete}`,
             });
             toast.success('Employee Added Successfully');
-            employeesFetchResponse.refresh();
+            refreshEmployeesList();
         } catch (error) {
             toast.error('Employee deletion failed');
             console.log('delete Failed!', error);
@@ -86,15 +86,32 @@ const ManageEmployees: React.FC = () => {
         });
     };
 
-    const employeesFetchResponse = useApi<IApiFetchEmployeesArray>(
-        'GET',
-        getFetchURL()
-    );
+    const isSearchFilters = () => {
+        if (
+            appState.employeeNameFilter === '' &&
+            appState.skillsFilter.length === 0
+        ) {
+            return false;
+        }
+        return true;
+    };
+
+    const {
+        response: employeesList,
+        loading,
+        refresh: refreshEmployeesList,
+        error: fetchError,
+    } = useApi<IApiFetchEmployeesArray>('GET', getFetchURL());
 
     useEffect(() => {
-        if (employeesFetchResponse.response) {
-            const EmployeesData =
-                employeesFetchResponse.response.data.employees;
+        if (fetchError) {
+            toast.error(
+                'Could not fetch employees List. Please try reloading the page.'
+            );
+        }
+
+        if (employeesList) {
+            const EmployeesData = employeesList.data.employees;
             setEmployees(
                 getEmployeesListingData(
                     EmployeesData,
@@ -103,7 +120,7 @@ const ManageEmployees: React.FC = () => {
                 )
             );
         }
-    }, [employeesFetchResponse.loading]);
+    }, [loading]);
 
     return (
         <>
@@ -131,13 +148,12 @@ const ManageEmployees: React.FC = () => {
                                     ? filterEmployeesList(employees)
                                     : []
                             }
-                            loading={employeesFetchResponse.loading}
+                            loading={loading}
                         />
-                        {employeesFetchResponse.response ? (
+                        {employeesList && !isSearchFilters() ? (
                             <Pagination
-                                totalEntries={
-                                    employeesFetchResponse.response.data.count
-                                }
+                                totalEntries={employeesList.data.count}
+                                key={searchParams.get('offset')}
                             />
                         ) : null}
                     </StyledManageEmployeesWrap>

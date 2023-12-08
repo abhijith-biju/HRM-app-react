@@ -1,4 +1,8 @@
-import { IEmployee, IReactSelectOption } from '../../interfaces/common';
+import {
+    IEmployee,
+    IReactSelectOption,
+    IInitQueryParams,
+} from '../../interfaces/common';
 
 export const empTableHeaders = [
     { value: 'id', label: 'Emp Id', isSortable: true, sortValue: 'id' },
@@ -8,7 +12,7 @@ export const empTableHeaders = [
         isSortable: true,
         sortValue: 'firstName',
     },
-    { value: 'email', label: 'Email', isSortable: false, sortValue: 'email' },
+    { value: 'email', label: 'Email', isSortable: true, sortValue: 'email' },
     { value: 'role', label: 'Role', isSortable: false, sortValue: 'role' },
     {
         value: 'department',
@@ -59,7 +63,7 @@ export const locations: IReactSelectOption[] = [
     },
 ];
 
-export const genders = [
+export const genders: IReactSelectOption[] = [
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
     { value: 'others', label: 'Others' },
@@ -84,4 +88,11 @@ export const prefillDataOnEmployeeAdd: IEmployee = {
     phone: '',
     salary: '',
     photoId: '',
+};
+
+export const initQueryParams: IInitQueryParams = {
+    offset: 0,
+    limit: 10,
+    sortBy: 'id',
+    sortDir: 'desc',
 };

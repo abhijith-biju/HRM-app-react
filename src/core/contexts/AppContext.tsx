@@ -10,7 +10,8 @@ import {
     IApiRole,
     IApiFetchSkill,
 } from '../../interfaces/ApiDataInterface';
-import { modifySelectOptionsArray } from '../../utils/employees';
+import { modifySelectOptionsArray } from '../../utils';
+import { toast } from 'react-toastify';
 
 const initialState: IAppContextState = {
     roles: [],
@@ -29,38 +30,64 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const [appState, setAppState] = useState(initialState);
 
     const handleAppState = (payload: IAppContextState) => setAppState(payload);
-
     const value = { appState, handleAppState };
 
-    const skillsFetchResponse = useApi<IApiFetchSkill>('GET', '/skills');
+    const {
+        response: skillsFetchResponse,
+        error: skillsFetchError,
+        loading: skillsFetchLoading,
+    } = useApi<IApiFetchSkill>('GET', '/skills');
     useEffect(() => {
-        if (skillsFetchResponse.response) {
-            const skillOptions = skillsFetchResponse.response.data;
+        if (skillsFetchError) {
+            toast.error(
+                'Could not fetch skills list. Please try reloading the page.'
+            );
+        }
+
+        if (skillsFetchResponse) {
+            const skillOptions = skillsFetchResponse.data;
             setAppState((appState) => ({
                 ...appState,
                 skills: modifySelectOptionsArray(skillOptions, 'skill'),
             }));
         }
-    }, [skillsFetchResponse.response]);
+    }, [skillsFetchLoading]);
 
-    const rolesFetchResponse = useApi<IApiRole>('GET', '/roles');
+    const {
+        response: rolesFetchResponse,
+        error: rolesFetchError,
+        loading: rolesFetchLoading,
+    } = useApi<IApiRole>('GET', '/roles');
     useEffect(() => {
-        if (rolesFetchResponse.response) {
-            const roleOptions = rolesFetchResponse.response;
+        if (rolesFetchError) {
+            toast.error(
+                'Could not fetch roles list. Please try reloading the page.'
+            );
+        }
+
+        if (rolesFetchResponse) {
+            const roleOptions = rolesFetchResponse;
             setAppState((appState) => ({
                 ...appState,
                 roles: modifySelectOptionsArray(roleOptions, 'role'),
             }));
         }
-    }, [rolesFetchResponse.response]);
+    }, [rolesFetchLoading]);
 
-    const departmentsFetchResponse = useApi<IApiDepartment>(
-        'GET',
-        '/departments'
-    );
+    const {
+        response: departmentsFetchResponse,
+        error: departmentsFetchError,
+        loading: departmentsFetchLoading,
+    } = useApi<IApiDepartment>('GET', '/departments');
     useEffect(() => {
-        if (departmentsFetchResponse.response) {
-            const departmentOptions = departmentsFetchResponse.response;
+        if (departmentsFetchError) {
+            toast.error(
+                'Could not fetch departments list. Please try reloading the page.'
+            );
+        }
+
+        if (departmentsFetchResponse) {
+            const departmentOptions = departmentsFetchResponse;
             setAppState((appState) => ({
                 ...appState,
                 departments: modifySelectOptionsArray(
@@ -69,7 +96,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
                 ),
             }));
         }
-    }, [departmentsFetchResponse.response]);
+    }, [departmentsFetchLoading]);
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

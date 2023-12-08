@@ -1,9 +1,9 @@
 import StyledEmpDetailsWrap from './ViewEmployeeDetails.style';
-import { modifyFetchedEmployeeData } from '../../utils/employees';
+import { modifyFetchedEmployeeData } from '../../utils';
 import { Loader, Chip, LinkButton, Button } from '../../components';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useApi from '../../core/api/useApi';
 import { IApiFetchEmployee } from '../../interfaces/ApiDataInterface';
 import { IEmployee } from '../../interfaces/common';
@@ -13,29 +13,35 @@ const ViewEmployeeDetails = () => {
     const { employeeId } = useParams();
     const navigate = useNavigate();
 
-    const [employeeDetails, setEmployeeDetails] = useState({} as IEmployee);
     const notAvailableString = 'N/A';
     const noSkillsString = 'No Skills Entered';
 
-    const { response } = useApi<IApiFetchEmployee>(
+    const { response, loading, error } = useApi<IApiFetchEmployee>(
         'GET',
         `/employee/${employeeId}`
     );
 
+    let employeeDetails = {} as IEmployee;
+    if (response && response.data) {
+        employeeDetails = modifyFetchedEmployeeData(response.data);
+    }
+
     useEffect(() => {
+        if (error) {
+            toast.error(`Could not fetch the requested employee's details`);
+            navigate('/', { replace: true });
+        }
+
         if (response && !response.data) {
             toast.error('Could not find the requested employee.');
-            navigate('/view-employee');
-        } else if (response && response.data) {
-            setEmployeeDetails(modifyFetchedEmployeeData(response.data));
+            navigate('/view-employee', { replace: true });
         }
-    }, [response]);
+    }, [loading]);
 
     return (
         <>
-            {!(response && response.data) ? (
-                <Loader className="full-screen-loader" />
-            ) : (
+            {loading && <Loader className="full-screen-loader" />}
+            {response && response.data && (
                 <StyledEmpDetailsWrap>
                     <div className="view-emp-card">
                         <div className="main-details">
@@ -109,15 +115,21 @@ const ViewEmployeeDetails = () => {
                             <div className="data-entry">
                                 <dt>Skills</dt>
                                 <dd>
-                                    <ul className="selected-skills-list flex-container">
-                                        {employeeDetails.skills?.map(
-                                            (skill) => (
-                                                <li key={skill.value}>
-                                                    <Chip>{skill.label}</Chip>
-                                                </li>
-                                            )
-                                        ) || noSkillsString}
-                                    </ul>
+                                    {employeeDetails.skills.length ? (
+                                        <ul className="selected-skills-list flex-container">
+                                            {employeeDetails.skills?.map(
+                                                (skill) => (
+                                                    <li key={skill.value}>
+                                                        <Chip>
+                                                            {skill.label}
+                                                        </Chip>
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    ) : (
+                                        noSkillsString
+                                    )}
                                 </dd>
                             </div>
                         </dl>

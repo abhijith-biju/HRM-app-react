@@ -20,7 +20,9 @@ export const CustomSelectStyles: StylesConfig<
         cursor: 'text',
         width: '100%',
         minWidth: '200px',
-        minHeight: '100%',
+        height: '100%',
+        maxHeight: '100px',
+        overflow: 'auto',
         borderRadius: '3px',
         borderColor: state.isFocused ? '#000' : '#7e7e7e',
         '&:hover': {

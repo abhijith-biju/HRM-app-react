@@ -20,23 +20,25 @@ const StyledTable = styled.table`
         & .emp-heading-wrap {
             display: flex;
             align-items: center;
+            gap: 7px;
         }
 
         & .sort-btn {
             padding: 0;
+            color: gray;
 
             &[data-sort-dir='desc'] {
                 rotate: 180deg;
             }
 
-            & span {
-                font-size: 30px;
-                display: block;
+            & img {
+                height: 18px;
+                width: auto;
                 pointer-events: none;
             }
 
-            &:hover span {
-                scale: 1.1;
+            &:hover img {
+                scale: 1.2;
                 font-variation-settings: 'wght' 450;
             }
         }

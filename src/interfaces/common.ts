@@ -49,3 +49,10 @@ export interface IDeleteEmployee {
     isDeleting: boolean;
     empIdToDelete: number | undefined;
 }
+
+export interface IInitQueryParams {
+    offset: number;
+    limit: number;
+    sortBy: keyof IEmployee;
+    sortDir: 'asc' | 'desc';
+}

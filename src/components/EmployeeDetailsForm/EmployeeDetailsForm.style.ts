@@ -93,6 +93,11 @@ const StyledFormWrap = styled.div`
         &:focus {
             scale: 1.1;
         }
+
+        &:focus-visible {
+            outline-color: var(--primary-clr);
+            outline-offset: 2px;
+        }
     }
 
     & input.invalid,
